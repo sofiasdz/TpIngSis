@@ -1,0 +1,3 @@
+rootProject.name = 'TpIngSis'
+
+include 'lexer','tokens','ast_node','syntactic_analyzer'
