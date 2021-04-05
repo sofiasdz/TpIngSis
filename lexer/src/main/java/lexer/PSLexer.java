@@ -27,16 +27,20 @@ public class PSLexer implements Lexer {
 
     private List<Token> lineToToken(List<String> line, int lineNumber) {
         String currentWord = "";
-        List<Token> list = new ArrayList<Token>();
-        for (int i = 0; i < line.size(); i++) {
+        List<Token> list = new ArrayList<>();
+        for (int i = 0; i <= line.size(); i++) {
             Optional<Token> token;
             if (currentWord.matches("\\d+")) {
                 //el regex es de  combinaciones de integer
                 String intNumber = "";
                 for (int j = i; j < line.size(); j++) {
-                    if (line.get(j).equals(";") | line.get(j).equals(" ")) {
+                    if (line.get(j).equals(";")) {
                         currentWord = intNumber;
-                        i = j;
+                        i = j-1; //Lo mismo que en los de abajo.
+                        break;
+                    } else if (line.get(j).equals(" ")){
+                        currentWord = intNumber;
+                        i=j;
                         break;
                     }
                     intNumber += line.get(j);
@@ -46,16 +50,20 @@ public class PSLexer implements Lexer {
                     //regex de float
                     token = Optional.of(Token.integer(lineNumber, i, currentWord));
                 } else  {
-
                     token = Optional.of(Token.floatingPoint(lineNumber, i, currentWord));
                 }
 
             } else if (!list.isEmpty() && list.get(list.size() - 1).getValue().equals("let")) {
                 String variableName = "";
                 for (int j = i; j < line.size(); j++) {
-                    if (line.get(j).equals(";") | line.get(j).equals(":") | line.get(j).equals(" ")) {
+                    if (line.get(j).equals(";") | line.get(j).equals(":")) {
                         currentWord = variableName;
-                        i = j;
+                        i = j-1; //Si hay un ; o : pegado queremos contemplarlo, por eso el -1 para no pisarlo y perderlo
+                        break;
+                    }
+                    else if(line.get(j).equals(" ")){
+                        currentWord = variableName;
+                        i = j; //Si hay un espacio no nos importa, y lo pisamos con el j para no cagar ningun token
                         break;
                     }
                     variableName += line.get(j);
@@ -64,13 +72,17 @@ public class PSLexer implements Lexer {
                 token = Optional.of(Token.identifier(currentWord, lineNumber, i));
             } else if (currentWord.length() > 1 && currentWord.charAt(0) == '"' && currentWord.charAt(currentWord.length() - 1) == '"') {
                 token = Optional.of(Token.string(i, lineNumber, currentWord));
+                //No sabemos porque, pero si después del "String" no hay un espacio antes del ;, se pierde el ;
+                //Por ejemplo "Sofi cute"; se guarda solo el "Sofi cute" y no el Semicolon
+                //Si pones "Sofi cute" ; se guardan ambos.
             } else {
                 token = tokenIdentifier(currentWord, lineNumber, i);
             }
             if (token.isPresent()) {
                 list.add(token.get());
                 currentWord = "";
-            } else currentWord += line.get(i);
+            }else if(i!=line.size())currentWord += line.get(i);
+            //Después hay que fixear el orden de la ronda, porque si no perdemos un caracter y por eso hicimos esta negrada
         }
 
         return list;

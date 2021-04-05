@@ -35,7 +35,7 @@ public class LexerTest {
     @Test
     public void test03_GivenAnIntegerDeclarationShouldReturnAValidTokenList() {
         final String testName = "LexerTest_test03_IntegerDeclaration";
-        String line1 = "let x : number = 12;";
+        String line1 = "let x : number = 12 ;";
         PSLexer psLexer= new PSLexer();
         List<Token> tokenList = psLexer.identifyTokens(List.of(line1));
         List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
