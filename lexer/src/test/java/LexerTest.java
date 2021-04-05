@@ -80,4 +80,20 @@ public class LexerTest {
         if(goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList,testName);
         else Assert.assertEquals(goldenFile,tokenList);
     }
+
+
+    @Test
+    public void test07_GivenMultipleOperationsShouldReturnAValidTokenList() {
+        final String testName = "LexerTest_test07_UsingOperationsToAssignValues";
+        String line1 = "let suma : number = 22 + 2;";
+        String line2 = "let resta : number = 26 - 2 ;";
+        String line3 = "let division : number = 48 / 2 ;";
+        String line4 = "let multiplicacion : number = 12 * 2;";
+        String line5 = "let concatenacion : string = \"holi\" + \"mundo\" ;";
+        PSLexer psLexer= new PSLexer();
+        List<Token> tokenList = psLexer.identifyTokens(List.of(line1, line2, line3, line4, line5));
+        List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+        if(goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList,testName);
+        else Assert.assertEquals(goldenFile,tokenList);
+    }
 }
