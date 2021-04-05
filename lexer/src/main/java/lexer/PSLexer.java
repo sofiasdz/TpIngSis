@@ -5,7 +5,7 @@ import token.Token;
 import java.util.*;
 
 public class PSLexer implements Lexer {
-    HashMap<String,Token> identifiersMap;
+    HashMap<String, Token> identifiersMap;
 
     @Override
     public List<Token> identifyTokens(List<String> text) {
@@ -36,11 +36,11 @@ public class PSLexer implements Lexer {
                 for (int j = i; j < line.size(); j++) {
                     if (line.get(j).equals(";")) {
                         currentWord = intNumber;
-                        i = j-1; //Lo mismo que en los de abajo.
+                        i = j - 1; //Lo mismo que en los de abajo.
                         break;
-                    } else if (line.get(j).equals(" ")){
+                    } else if (line.get(j).equals(" ")) {
                         currentWord = intNumber;
-                        i=j;
+                        i = j;
                         break;
                     }
                     intNumber += line.get(j);
@@ -49,7 +49,7 @@ public class PSLexer implements Lexer {
                 if (currentWord.matches("\\d+")) {
                     //regex de float
                     token = Optional.of(Token.integer(lineNumber, i, currentWord));
-                } else  {
+                } else {
                     token = Optional.of(Token.floatingPoint(lineNumber, i, currentWord));
                 }
 
@@ -58,10 +58,9 @@ public class PSLexer implements Lexer {
                 for (int j = i; j < line.size(); j++) {
                     if (line.get(j).equals(";") | line.get(j).equals(":")) {
                         currentWord = variableName;
-                        i = j-1; //Si hay un ; o : pegado queremos contemplarlo, por eso el -1 para no pisarlo y perderlo
+                        i = j - 1; //Si hay un ; o : pegado queremos contemplarlo, por eso el -1 para no pisarlo y perderlo
                         break;
-                    }
-                    else if(line.get(j).equals(" ")){
+                    } else if (line.get(j).equals(" ")) {
                         currentWord = variableName;
                         i = j; //Si hay un espacio no nos importa, y lo pisamos con el j para no cagar ningun token
                         break;
@@ -70,23 +69,23 @@ public class PSLexer implements Lexer {
                     i = j;
                 }
                 token = Optional.of(Token.identifier(currentWord, lineNumber, i));
-                identifiersMap.put(currentWord,token.get());
+                identifiersMap.put(currentWord, token.get());
             } else if (currentWord.length() > 1 && currentWord.charAt(0) == '"' && currentWord.charAt(currentWord.length() - 1) == '"') {
-                token = Optional.of(Token.string(lineNumber,i, currentWord));
+                token = Optional.of(Token.string(lineNumber, i, currentWord));
                 //No sabemos porque, pero si después del "String" no hay un espacio antes del ;, se pierde el ;
                 //Por ejemplo "Sofi cute"; se guarda solo el "Sofi cute" y no el Semicolon
                 //Si pones "Sofi cute" ; se guardan ambos.
             } else {
-                if(i==line.size()) token = tokenIdentifier(currentWord, lineNumber, i-1);
-                //La vuelta extra que le dabamos hacía que si el último (Osea, i<=Size)
-                //token no tenía un espacio onda "number = 2.04;" en vez de "2.04 ;"
-                //ese ; token tenía su columnNumber desfazado en 1, por eso el -1.
+                if (i == line.size()) token = tokenIdentifier(currentWord, lineNumber, i - 1);
+                    //La vuelta extra que le dabamos hacía que si el último (Osea, i<=Size)
+                    //token no tenía un espacio onda "number = 2.04;" en vez de "2.04 ;"
+                    //ese ; token tenía su columnNumber desfazado en 1, por eso el -1.
                 else token = tokenIdentifier(currentWord, lineNumber, i);
             }
             if (token.isPresent()) {
                 list.add(token.get());
                 currentWord = "";
-            }else if(i!=line.size())currentWord += line.get(i);
+            } else if (i != line.size()) currentWord += line.get(i);
             //Después hay que fixear el orden de la ronda, porque si no perdemos un caracter y por eso hicimos esta negrada
         }
 
@@ -97,35 +96,35 @@ public class PSLexer implements Lexer {
         String currentWord = "";
         List<Token> list = new ArrayList<>();
         for (int i = 0; i < line.size(); i++) {
-            currentWord+= line.get(i);
-            if(currentWord.equals(" ")){
-                currentWord ="";
+            currentWord += line.get(i);
+            if (currentWord.equals(" ")) {
+                currentWord = "";
                 continue;
             }
             Optional<Token> token = Optional.empty();
             //si detecta un número
-            if(currentWord.matches("\\d+")){
+            if (currentWord.matches("\\d+")) {
                 String number = currentWord;
-                for (int j = i+1; j <line.size() ; j++) {
-                    if(line.get(j).equals(" ") | line.get(j).equals(";")){
+                for (int j = i + 1; j < line.size(); j++) {
+                    if (line.get(j).equals(" ") | line.get(j).equals(";")) {
                         currentWord = number;
-                        i = j-1;
+                        i = j - 1;
                         break;
                     }
-                   number += line.get(j);
+                    number += line.get(j);
                 }
                 //Si es un integer se devuelve, sino, es que parseó un float y lo devuelve.
-                if(integerParse(currentWord)) token = Optional.of(Token.integer(lineNumber, i,currentWord));
-                else token = Optional.of(Token.floatingPoint(lineNumber,i,currentWord));
+                if (integerParse(currentWord)) token = Optional.of(Token.integer(lineNumber, i, currentWord));
+                else token = Optional.of(Token.floatingPoint(lineNumber, i, currentWord));
             }
             //si lo anterior fue un let registra un identifier
             else if (variableWasDeclared(list)) {
                 String variableName = "";
                 for (int j = i; j < line.size(); j++) {
                     //if (line.get(j).equals(";") | line.get(j).equals(":") | line.get(j).equals(" ")) {
-                    if (line.get(j).matches("[:; ]")){
+                    if (line.get(j).matches("[:; ]")) {
                         currentWord = variableName;
-                        i = j-1;
+                        i = j - 1;
                         break;
                     }
                     variableName += line.get(j);
@@ -133,11 +132,11 @@ public class PSLexer implements Lexer {
                 }
                 token = Optional.of(Token.identifier(currentWord, lineNumber, i));
                 //Agrega el identifier al Map para futuras referencias.
-                identifiersMap.put(currentWord,token.get());
+                identifiersMap.put(currentWord, token.get());
             }
             //si currentWord empieza y termina con "
             else if (isString(currentWord)) {
-                token = Optional.of(Token.string(lineNumber,i, currentWord));
+                token = Optional.of(Token.string(lineNumber, i, currentWord));
                 //Si ponés "hola"; o "hola" ; es lo mismo, ya no se pierde el ; si no hay un espacio.
             }
             //si no cumple nada va al genérico
@@ -161,11 +160,11 @@ public class PSLexer implements Lexer {
         return !list.isEmpty() && list.get(list.size() - 1).getValue().equals("let");
     }
 
-    private boolean integerParse(String string){
-        try{
+    private boolean integerParse(String string) {
+        try {
             Integer.parseInt(string);
             return true;
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
@@ -184,7 +183,7 @@ public class PSLexer implements Lexer {
             case "*" -> Optional.of(Token.multiplication(lineNumber, columnNumber));
             //Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
             //Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
-            default -> identifiersMap.containsKey(token)? Optional.of(Token.identifier(token, lineNumber, columnNumber)) : Optional.empty();
+            default -> identifiersMap.containsKey(token) ? Optional.of(Token.identifier(token, lineNumber, columnNumber)) : Optional.empty();
         };
     }
 }

@@ -136,3 +136,4 @@ hs_err_pid*
 /ast_node/build/
 /lexer/build/
 /tokens/build/
+/.idea/
