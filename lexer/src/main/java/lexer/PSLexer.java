@@ -144,6 +144,7 @@ public class PSLexer implements Lexer {
             else {
                 token = tokenIdentifier(currentWord, lineNumber, i);
             }
+            //si el token existe y es válido, se agrega y reinicia el string
             if (token.isPresent()) {
                 list.add(token.get());
                 currentWord = "";
@@ -181,6 +182,8 @@ public class PSLexer implements Lexer {
             case "+" -> Optional.of(Token.addition(lineNumber, columnNumber));
             case "/" -> Optional.of(Token.division(lineNumber, columnNumber));
             case "*" -> Optional.of(Token.multiplication(lineNumber, columnNumber));
+            //Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
+            //Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
             default -> identifiersMap.containsKey(token)? Optional.of(Token.identifier(token, lineNumber, columnNumber)) : Optional.empty();
         };
     }
