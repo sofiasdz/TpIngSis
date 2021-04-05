@@ -12,7 +12,7 @@ public class LexerTest {
     @Test
     public void test01_GivenAStringDeclarationShouldReturnAValidTokensList(){
         final String testName = "LexerTest_test01_StringDeclaration";
-        String line = "let variableName : string = \"olive\" ;";
+        String line = "let variableName : string = \"olive\";";
         PSLexer psLexer = new PSLexer();
         List<Token> tokenList = psLexer.identifyTokens(List.of(line));
         List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
@@ -49,6 +49,18 @@ public class LexerTest {
         String line1 = "let x : number = 12.04;";
         PSLexer psLexer= new PSLexer();
         List<Token> tokenList = psLexer.identifyTokens(List.of(line1));
+        List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+        if(goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList,testName);
+        else Assert.assertEquals(goldenFile,tokenList);
+    }
+
+    @Test
+    public void test05_GivenAVariableDeclarationAndLaterDefiningAValueShouldReturnAValidTokenList() {
+        final String testName = "LexerTest_test05_DeclarationAndLaterAssignation";
+        String line1 = "let x : number;";
+        String line2 = "x = 24;";
+        PSLexer psLexer= new PSLexer();
+        List<Token> tokenList = psLexer.identifyTokens(List.of(line1, line2));
         List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
         if(goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList,testName);
         else Assert.assertEquals(goldenFile,tokenList);

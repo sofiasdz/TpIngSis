@@ -1,0 +1,58 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "variableName",
+    "startingColumn": 4,
+    "endingColumn": 15,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 17,
+    "endingColumn": 17,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "STRING_TYPE",
+    "value": "string",
+    "startingColumn": 19,
+    "endingColumn": 24,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 26,
+    "endingColumn": 26,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "STRING",
+    "value": "\"olive\"",
+    "startingColumn": 28,
+    "endingColumn": 34,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 35,
+    "endingColumn": 35,
+    "startingLine": 0,
+    "endingLine": 0
+  }
+]
