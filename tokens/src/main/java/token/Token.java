@@ -1,5 +1,7 @@
 package token;
 
+import java.util.Objects;
+
 public class Token {
     TokenType type;
     String value;
@@ -17,10 +19,6 @@ public class Token {
         this.endingLine = endingLine;
     }
 
-    public TokenType getType() {
-        return type;
-    }
-
     public static Token let(int ln, int cn){
         return new Token(TokenType.LET,"let",cn,cn+2,ln,ln);
     }
@@ -32,6 +30,7 @@ public class Token {
     public static Token numberType(int ln, int cn) {
         return new Token(TokenType.NUMBER_TYPE,"number",cn,cn+6,ln,ln);
     }
+
     public static Token integer(int ln, int cn,String value){ return new Token(TokenType.INTEGER,value,cn,cn+value.length()-1,ln,ln);}
 
     public static Token floatingPoint(int ln, int cn,String value){ return new Token(TokenType.FLOATING_POINT,value,cn,cn+value.length()-1,ln,ln);}
@@ -54,23 +53,47 @@ public class Token {
         return new Token(TokenType.IDENTIFIER,value,cn,cn+value.length()-1,cn,cn);
     }
 
-    public String getValue() {
-        return value;
-    }
-
     public static Token addition(int ln, int cn){
         return new Token(TokenType.ADDITION,"+",cn,cn,ln,ln);
     }
+
     public static Token substraction(int ln, int cn){
         return new Token(TokenType.SUBSTRACTION,"-",cn,cn,ln,ln);
     }
+
     public static Token multiplication(int ln, int cn){
         return new Token(TokenType.MULTIPLICATION,"*",cn,cn,ln,ln);
     }
+
     public static Token division(int ln, int cn){
         return new Token(TokenType.DIVISION,"/",cn,cn,ln,ln);
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public TokenType getType() {
+        return type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Token token = (Token) o;
+        return startingColumn == token.startingColumn &&
+                endingColumn == token.endingColumn &&
+                startingLine == token.startingLine &&
+                endingLine == token.endingLine &&
+                type == token.type &&
+                value.equals(token.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, value, startingColumn, endingColumn, startingLine, endingLine);
+    }
 }
 
 enum TokenType {
