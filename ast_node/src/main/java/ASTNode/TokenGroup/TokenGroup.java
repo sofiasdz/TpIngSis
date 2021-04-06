@@ -16,7 +16,7 @@ public class TokenGroup {
         return tokenTypes;
     }
 
-    public boolean belongs(Token token){
+    public  boolean belongs(Token token){
         for (TokenType t : tokenTypes) {
             if(t.equals(token.getType())) return true;
         }
