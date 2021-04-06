@@ -1,0 +1,18 @@
+package token;
+
+public enum TokenType {
+    STRING_TYPE,
+    STRING,
+    NUMBER_TYPE,
+    INTEGER,
+    FLOATING_POINT,
+    ASSIGNATION,
+    IDENTIFIER,
+    COLON,
+    SEMICOLON,
+    LET,
+    ADDITION,
+    SUBSTRACTION,
+    MULTIPLICATION,
+    DIVISION
+}
