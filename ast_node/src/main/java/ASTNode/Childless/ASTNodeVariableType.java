@@ -1,9 +1,11 @@
 package ASTNode.Childless;
 
 import ASTNode.TokenGroup.TokenGroup;
+import token.Token;
 
 public class ASTNodeVariableType extends ASTNodeChildless{
-    public ASTNodeVariableType(TokenGroup tokenGroup) {
-        super(tokenGroup);
+
+    public ASTNodeVariableType(Token token) {
+        super(token);
     }
 }

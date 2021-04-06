@@ -1,5 +1,10 @@
+import ASTNode.ASTNode;
+import ASTNode.Childless.ASTNodeVariableType;
+import ASTNode.NotChildless.ASTNodeAssignation;
+import ASTNode.NotChildless.ASTNodeDeclaration;
 import org.junit.Assert;
 import org.junit.Test;
+import syntactic_analyzer.PSSyntacticAnalyzer;
 import token.Token;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,8 +18,10 @@ public class SyntacticAnalyzerTest {
 
         @Test
         public void test01_GivenStringDeclarationTokensShouldReturnValidTree(){
-            final String testName = "LexerTest_test01_StringDeclaration";
-            String line = "let variableName : string = \"olive\";";
+            PSSyntacticAnalyzer psSyntacticAnalyzer= new PSSyntacticAnalyzer();
+            ASTNode tree= psSyntacticAnalyzer.analize();
+            ASTNode expectedTree;
+            ASTNode rightChild=new ASTNodeDeclaration(new ASTNodeVariableType())
          /*   PSLexer psLexer = new PSLexer();
             List<Token> tokenList = psLexer.identifyTokens(List.of(line));
             List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
