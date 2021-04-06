@@ -3,7 +3,7 @@ package ASTNode.NotChildless;
 import ASTNode.ASTNode;
 import token.Token;
 
-public class ASTNodeNotChildless extends ASTNode {
+public  abstract class ASTNodeNotChildless extends ASTNode {
     ASTNode leftChild;
     ASTNode rightChild;
 
