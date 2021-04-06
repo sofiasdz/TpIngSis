@@ -33,4 +33,15 @@ public class SyntacticAnalyzerTest {
             expectedTree=new ASTNodeAssignation(leftChild,rightChild,Token.assignation(26,26));
            Assert.assertEquals(tree,expectedTree);
         }
+
+
+    /*@Test
+    public void test03_GivenIntegerDeclarationTokensShouldReturnAValidTokenList() {
+        final String testName = "LexerTest_test03_IntegerDeclaration";
+        String line1 = "let x : number = 12 ;";
+        List<Token> tokenList = psLexer.identifyTokens(List.of(line1));
+        List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+        if(goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList,testName);
+        else Assert.assertEquals(goldenFile,tokenList);
+    }*/
 }
