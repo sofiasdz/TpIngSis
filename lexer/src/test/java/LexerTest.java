@@ -1,11 +1,10 @@
 import lexer.PSLexer;
+import JSONWriter.JSONFileWriter;
 import org.junit.Assert;
 import org.junit.Test;
 import token.Token;
 
 import java.util.List;
-
-import JSONWriter.JSONFileWriter;
 
 public class LexerTest {
 

@@ -2,7 +2,6 @@ package JSONWriter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 import token.Token;
 
 import java.io.*;
