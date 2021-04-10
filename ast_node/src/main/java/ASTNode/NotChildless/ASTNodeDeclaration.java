@@ -10,7 +10,6 @@ import token.TokenType;
 import java.util.List;
 
 public class ASTNodeDeclaration extends ASTNodeNotChildless {
-    public static TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.LET));
 
     public ASTNodeDeclaration(ASTNode leftChild, ASTNode rightChild, Token token) {
         super(leftChild, rightChild, token);
