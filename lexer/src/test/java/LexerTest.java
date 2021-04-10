@@ -65,7 +65,6 @@ public class LexerTest {
         goldenFileAsserter(testName, List.of(line1, line2, line3, line4, line5));
     }
 
-
     @Test
     public void test07_GivenMultipleOperationsShouldReturnAValidTokenList() {
         final String testName = "LexerTest_test07_UsingOperationsToAssignValues";
