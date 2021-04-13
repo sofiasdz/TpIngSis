@@ -97,6 +97,7 @@ public class PSLexer implements Lexer {
             if(isNumber(currentWord)) i = numberVerification(currentWord,line,i,token);
             else if (variableWasDeclared(list)) i = identifierVerification(currentWord,line,i,token);
             else if (isString(currentWord)) token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
+            else if (isPrint(currentWord)) i = printVerification(currentWord,line,i,token);
             else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
             if (token.isPresent()) {
@@ -139,6 +140,25 @@ public class PSLexer implements Lexer {
             //Agrega el identifier al Map para futuras referencias.
             identifiersMap.put(currentWord, token.get());
             return i;
+    }
+
+    private boolean isPrint(String currentWord){
+        return currentWord.equals("printLn(");
+    }
+
+    private int printVerification(String currentWord, Line line, int i, Optional<Token> token){
+        StringBuilder variableName = new StringBuilder();
+        for (int j = i+1; j < line.size(); j++) {
+            if (line.get(j).matches("[)]")) {
+                currentWord = variableName.toString();
+                i = j;
+                break;
+            }
+            variableName.append(line.get(j));
+            i = j;
+        }
+        token.set(PrintScriptTokenFactory.println(currentWord, line.getLineNumber(), i));
+        return i;
     }
 
     private boolean isString(String currentWord) {

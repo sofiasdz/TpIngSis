@@ -54,4 +54,6 @@ public class PrintScriptTokenFactory {
         return new Token(TokenType.DIVISION,"/",cn,ln,ln);
     }
 
+    public static Token println(String value, int ln, int cn) { return new Token(TokenType.PRINTLN, value,cn, ln, ln); }
+
 }

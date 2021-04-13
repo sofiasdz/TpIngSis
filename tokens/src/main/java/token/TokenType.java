@@ -14,5 +14,6 @@ public enum TokenType {
     ADDITION,
     SUBSTRACTION,
     MULTIPLICATION,
-    DIVISION
+    DIVISION,
+    PRINTLN
 }
