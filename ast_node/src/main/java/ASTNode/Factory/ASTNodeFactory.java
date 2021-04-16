@@ -17,25 +17,25 @@ import java.util.List;
 
 public class ASTNodeFactory {
 
-    static ASTNodeIdentifier identifier(Token token){
+    public static ASTNodeIdentifier identifier(Token token){
         TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.IDENTIFIER));
         if(tokenGroup.belongs(token)) return new ASTNodeIdentifier(token);
         throw new IllegalArgumentException();
     }
 
-    static ASTNodeVariableType variableType(Token token){
+    public static ASTNodeVariableType variableType(Token token){
         TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.NUMBER_TYPE,TokenType.STRING_TYPE));
         if(tokenGroup.belongs(token)) return new ASTNodeVariableType(token);
         throw new IllegalArgumentException();
     }
 
-    static ASTNodeLiteral literal(Token token){
+    public static ASTNodeLiteral literal(Token token){
         TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.STRING,TokenType.INTEGER,TokenType.FLOATING_POINT));
         if(tokenGroup.belongs(token)) return new ASTNodeLiteral(token);
         throw new IllegalArgumentException();
     }
 
-    static ASTNodeAssignation assignation(Token token, ASTNode left, ASTNode right){
+    public static ASTNodeAssignation assignation(Token token, ASTNode left, ASTNode right){
         TokenGroup tGroup = new TokenGroup(List.of(TokenType.ASSIGNATION));
         TokenGroup lValid = new TokenGroup(List.of(TokenType.LET,TokenType.COLON));
         TokenGroup rValid = new TokenGroup(List.of(TokenType.INTEGER,TokenType.STRING, TokenType.FLOATING_POINT,TokenType.ADDITION,TokenType.SUBSTRACTION,TokenType.MULTIPLICATION,TokenType.DIVISION));
@@ -43,7 +43,7 @@ public class ASTNodeFactory {
         throw new IllegalArgumentException();
     }
 
-    static ASTNodeDeclaration declaration(Token token, ASTNode left, ASTNode right){
+    public static ASTNodeDeclaration declaration(Token token, ASTNode left, ASTNode right){
         TokenGroup tGroup = new TokenGroup(List.of(TokenType.LET,TokenType.COLON));
         TokenGroup lValid = new TokenGroup(List.of(TokenType.STRING_TYPE,TokenType.NUMBER_TYPE));
         TokenGroup rValid = new TokenGroup(List.of(TokenType.IDENTIFIER));
@@ -51,7 +51,7 @@ public class ASTNodeFactory {
         throw new IllegalArgumentException();
     }
 
-    static ASTNodeOperation operation(Token token, ASTNode left, ASTNode right){
+    public static ASTNodeOperation operation(Token token, ASTNode left, ASTNode right){
         TokenGroup tGroup = new TokenGroup(List.of(TokenType.LET,TokenType.COLON));
         TokenGroup cValid = new TokenGroup(List.of(TokenType.IDENTIFIER,TokenType.FLOATING_POINT,TokenType.INTEGER,TokenType.STRING));
         if(tGroup.belongs(token) && cValid.belongs(left.token) && cValid.belongs(right.token)) return new ASTNodeOperation(left,right,token);

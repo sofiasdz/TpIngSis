@@ -1,4 +1,5 @@
 package ASTNode.Childless;
+import ASTNode.NodeType;
 
 import ASTNode.ASTNode;
 import ASTNode.TokenGroup.TokenGroup;
@@ -11,5 +12,6 @@ public  abstract class ASTNodeChildless extends ASTNode {
 
     public ASTNodeChildless(Token token) {
        super.token=token;
+       super.nodeType= NodeType.CHILDLESS;
     }
 }

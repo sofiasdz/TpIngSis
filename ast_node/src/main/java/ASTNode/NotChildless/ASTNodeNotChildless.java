@@ -2,6 +2,7 @@ package ASTNode.NotChildless;
 
 import ASTNode.ASTNode;
 import token.Token;
+import ASTNode.NodeType;
 
 public  abstract class ASTNodeNotChildless extends ASTNode {
     ASTNode leftChild;
@@ -26,6 +27,7 @@ public  abstract class ASTNodeNotChildless extends ASTNode {
     public ASTNodeNotChildless(ASTNode leftChild, ASTNode rightChild, Token token) {
         this.leftChild = leftChild;
         this.token=token;
+        super.nodeType= NodeType.NOTCHILDLESS;
         this.rightChild = rightChild;
     }
 }

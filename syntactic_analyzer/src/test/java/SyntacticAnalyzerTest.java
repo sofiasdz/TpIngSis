@@ -20,19 +20,19 @@ import java.util.List;
 
 public class SyntacticAnalyzerTest {
 
-//        @Test
-//        public void test01_GivenStringDeclarationTokensShouldReturnValidTree(){
-//            final String testName = "LexerTest_test01_StringDeclaration";
-//            List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
-//            //  String line = "let variableName : string = \"olive\";";
-//            PSSyntacticAnalyzer psSyntacticAnalyzer= new PSSyntacticAnalyzer();
-//            ASTNode tree= psSyntacticAnalyzer.analize(goldenFile);
-//            ASTNode expectedTree;
-//            ASTNode rightChild=new ASTNodeDeclaration(new ASTNodeVariableType(PrintScriptTokenFactory.stringType(4,15)),
-//                    new ASTNodeIdentifier(PrintScriptTokenFactory.identifier("variableName",4,15)),PrintScriptTokenFactory.let(0,2));
-//            ASTNode leftChild=new ASTNodeLiteral(PrintScriptTokenFactory.string(28,34,"olive"));
-//            expectedTree=new ASTNodeAssignation(leftChild,rightChild,PrintScriptTokenFactory.assignation(26,26));
-//           Assert.assertEquals(tree,expectedTree);
-//        }
+       @Test
+       public void test01_GivenStringDeclarationTokensShouldReturnValidTree(){
+           final String testName = "LexerTest_test01_StringDeclaration";
+           List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+            String line = "let variableName : string = \"olive\";";
+          PSSyntacticAnalyzer psSyntacticAnalyzer= new PSSyntacticAnalyzer();
+           ASTNode tree= psSyntacticAnalyzer.analize(goldenFile);
+           ASTNode expectedTree;
+          ASTNode rightChild=new ASTNodeDeclaration(new ASTNodeVariableType(PrintScriptTokenFactory.stringType(4,15)),
+                 new ASTNodeIdentifier(PrintScriptTokenFactory.identifier("variableName",4,15)),PrintScriptTokenFactory.let(0,2));
+           ASTNode leftChild=new ASTNodeLiteral(PrintScriptTokenFactory.string(28,34,"olive"));
+            expectedTree=new ASTNodeAssignation(leftChild,rightChild,PrintScriptTokenFactory.assignation(26,26));
+         Assert.assertEquals(tree,expectedTree);
+       }
 
 }
