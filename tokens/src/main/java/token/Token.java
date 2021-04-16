@@ -44,5 +44,10 @@ public class Token {
     public int hashCode() {
         return Objects.hash(type, value, startingColumn, endingColumn, startingLine, endingLine);
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }
 

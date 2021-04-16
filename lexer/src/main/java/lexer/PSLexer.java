@@ -13,21 +13,18 @@ public class PSLexer implements Lexer {
         List<Token> tokens = new ArrayList<>();
         identifiersMap = new HashMap<>();
         for (int i = 0; i < text.size(); i++) {
-            //line to char
             Line currentLine = lineToChars(text.get(i),i);
-            //List<String> currentLine = lineToChars(text.get(i));
             tokens.addAll(lineToTokenRefactored(currentLine));
         }
         return tokens;
     }
-
 
     private Line lineToChars(String line, int i) {
         List<String> chars = Arrays.asList(line.split("(?!^)"));
         return new Line(chars,i);
     }
 
-    private List<Token> lineToToken(Line line) {
+    /*private List<Token> lineToToken(Line line) {
         String currentWord = "";
         List<Token> list = new ArrayList<>();
         for (int i = 0; i < line.size(); i++) {
@@ -49,7 +46,7 @@ public class PSLexer implements Lexer {
                     number += line.get(j);
                 }
                 //Si es un integer se devuelve, sino, es que parseó un float y lo devuelve.
-                if (integerParse(currentWord)) token = Optional.of(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
+                if (isNumber(currentWord)) token = Optional.of(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
                 else token = Optional.of(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
             }
             //si lo anterior fue un let registra un identifier
@@ -85,32 +82,24 @@ public class PSLexer implements Lexer {
             }
         }
         return list;
-    }
+    }*/
 
     private List<Token> lineToTokenRefactored(Line line) {
         String currentWord = "";
         List<Token> list = new ArrayList<>();
         for (int i = 0; i < line.size(); i++) {
             currentWord += line.get(i);
-            if (currentWord.equals(" ")) {
+            Optional<Token> token = Optional.empty();
+            if(currentWord.equals(" ")) {
                 currentWord = "";
                 continue;
             }
-            //si detecta un número
-            Optional<Token> token = numberVerification(currentWord,line,i);
-            if(token.isPresent());
-            //si lo anterior fue un let registra un identifier
-            else if (variableWasDeclared(list)) token = identifierVerification(currentWord,line,i);
-            //si currentWord empieza y termina con "
-            else if (isString(currentWord)) {
-                token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
-                //Si ponés "hola"; o "hola" ; es lo mismo, ya no se pierde el ; si no hay un espacio.
-            }
-            //si no cumple nada va al genérico
-            else {
-                token = tokenIdentifier(currentWord, line.getLineNumber(), i);
-            }
-            //si el token existe y es válido, se agrega y reinicia el string
+            if(isNumber(currentWord)) i = numberVerification(currentWord,line,i,token);
+            else if (variableWasDeclared(list)) i = identifierVerification(currentWord,line,i,token);
+            else if (isString(currentWord)) token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
+            else if (isPrint(currentWord)) i = printVerification(currentWord,line,i,token);
+            else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
+
             if (token.isPresent()) {
                 list.add(token.get());
                 currentWord = "";
@@ -119,42 +108,57 @@ public class PSLexer implements Lexer {
         return list;
     }
 
-    //Fix this methods, as Optional<Token> and int / integer are both inmutables.
-
-    private Optional<Token> numberVerification(String currentWord, Line line, int i){
-        Optional<Token> token = Optional.empty();
+    private int numberVerification(String currentWord, Line line, int i, Optional<Token> token){
         if (currentWord.matches("\\d+")) {
-            String number = currentWord;
+            StringBuilder number = new StringBuilder(currentWord);
             for (int j = i + 1; j < line.size(); j++) {
                 if (line.get(j).equals(" ") | line.get(j).equals(";")) {
-                    currentWord = number;
+                    currentWord = number.toString();
                     i = j - 1;
                     break;
                 }
-                number += line.get(j);
+                number.append(line.get(j));
             }
-            //Si es un integer se devuelve, sino, es que parseó un float y lo devuelve.
-            if (integerParse(currentWord)) token = Optional.of(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
-            else token = Optional.of(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
+            if (isNumber(currentWord)) token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
+            else token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
         }
-        return token;
+        return i;
     }
 
-    private Optional<Token> identifierVerification(String currentWord, Line line, int i){
-            String variableName = "";
+    private int identifierVerification(String currentWord, Line line, int i, Optional<Token> token){
+            StringBuilder variableName = new StringBuilder();
             for (int j = i; j < line.size(); j++) {
                 if (line.get(j).matches("[:; ]")) {
-                    currentWord = variableName;
+                    currentWord = variableName.toString();
                     i = j - 1;
                     break;
                 }
-                variableName += line.get(j);
+                variableName.append(line.get(j));
                 i = j;
             }
-            Optional<Token> token = Optional.of(PrintScriptTokenFactory.identifier(currentWord, line.getLineNumber(), i));
+            token.set(PrintScriptTokenFactory.identifier(currentWord, line.getLineNumber(), i));
             //Agrega el identifier al Map para futuras referencias.
             identifiersMap.put(currentWord, token.get());
-            return token;
+            return i;
+    }
+
+    private boolean isPrint(String currentWord){
+        return currentWord.equals("printLn(");
+    }
+
+    private int printVerification(String currentWord, Line line, int i, Optional<Token> token){
+        StringBuilder variableName = new StringBuilder();
+        for (int j = i+1; j < line.size(); j++) {
+            if (line.get(j).matches("[)]")) {
+                currentWord = variableName.toString();
+                i = j;
+                break;
+            }
+            variableName.append(line.get(j));
+            i = j;
+        }
+        token.set(PrintScriptTokenFactory.println(currentWord, line.getLineNumber(), i));
+        return i;
     }
 
     private boolean isString(String currentWord) {
@@ -165,7 +169,7 @@ public class PSLexer implements Lexer {
         return !list.isEmpty() && list.get(list.size() - 1).getValue().equals("let");
     }
 
-    private boolean integerParse(String string) {
+    private boolean isNumber(String string) {
         try {
             Integer.parseInt(string);
             return true;

@@ -75,4 +75,14 @@ public class LexerTest {
         String line5 = "let concatenacion : string = \"holi\" + \"mundo\" ;";
         goldenFileAsserter(testName, List.of(line1, line2, line3, line4, line5));
     }
+
+    @Test
+    public void test08_GivenPrintLnTokenShouldReturnAValidToken() {
+        final String testname = "LexerTest_test08_printLn";
+        String line1 = "printLn(123) ;";
+        String line2 = "printLn(\"holi\") ;";
+        String line3 = "let x : number = 32 ;";
+        String line4 = "printLn(x);";
+        goldenFileAsserter(testname, List.of(line1, line2, line3, line4));
+    }
 }
