@@ -9,6 +9,8 @@ import ASTNode.NodeType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Stack;
 
 public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
 
@@ -19,40 +21,65 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
     }
 
     @Override
-    public ASTNode analize(List<Token> tokens) {
-       /* List<ASTNode> list = new ArrayList();
-        if(list.isEmpty()){
-            list.add(ASTNodeIdentifier(tokens.get()))
-        }*/
-        return null;
+    public ASTNode analyze(List<Token> tokens) {
+        Stack<ASTNode> nodeStack = new Stack<>();
+        List<Token> tokenList = new ArrayList<>();
+        for (int i = tokens.size()-1; i >=0 ; i--) {
+            Optional<ASTNode> optionalASTNode = ASTNodeIdentifier(tokens.get(i));
+            if(optionalASTNode.isEmpty()) tokenList.add(tokens.get(i));
+            else nodeStack.push(optionalASTNode.get());
+            //Si el optional es un nodo, lo stackeo. Voy de atrás para adelante para no tener problema con los nodos
+        }
+        for (int i = tokenList.size()-1; i >= 0 ; i--) {
+            if(tokenList.get(i).getType().equals(TokenType.LET) | tokenList.get(i).getType().equals(TokenType.SEMICOLON)) tokenList.remove(i);
+        }
+        while(nodeStack.size()>1){
+            ASTNode right = nodeStack.pop();
+            ASTNode left = nodeStack.pop();
+            Optional<ASTNode> optionalASTNode = ASTNodeIdentifier(tokenList.get(tokenList.size()-1),left,right);
+            if(optionalASTNode.isPresent()) nodeStack.push(optionalASTNode.get());
+            else {
+                nodeStack.push(right);
+                nodeStack.push(left);
+                tokenList.remove(tokenList.size()-1);
+            }
+        }
+        return nodeStack.pop();
     }
 
 
-   ASTNode ASTNodeIdentifier(Token token){
+   Optional<ASTNode> ASTNodeIdentifier(Token token){
         if(token.getType().equals(TokenType.IDENTIFIER)){
-          return ASTNodeFactory.identifier(token);
+          return Optional.of(ASTNodeFactory.identifier(token));
         }
         else if(token.getType().equals(TokenType.NUMBER_TYPE)| token.getType().equals(TokenType.STRING_TYPE)){
-            return ASTNodeFactory.variableType(token);
+            return Optional.of(ASTNodeFactory.variableType(token));
        }
         else{
-            return ASTNodeFactory.literal(token);
+            try {
+                return Optional.of(ASTNodeFactory.literal(token));
+            }
+            catch (IllegalArgumentException e) {
+                return Optional.empty();
+            }
         }
 
    }
 
-   ASTNode ASTNodeIdentifier(Token token,ASTNode left,ASTNode right){
-        try{  return ASTNodeFactory.assignation(token,left,right);
+   Optional<ASTNode> ASTNodeIdentifier(Token token,ASTNode left,ASTNode right){
+        try{  return Optional.of(ASTNodeFactory.assignation(token,left,right));
         }
         catch (IllegalArgumentException e){
             try{
-                return ASTNodeFactory.declaration(token,left,right);
+                return Optional.of(ASTNodeFactory.declaration(token,left,right));
             }
             catch(IllegalArgumentException i){
                 try {
-                    return ASTNodeFactory.operation(token, left, right);
+                    return Optional.of(ASTNodeFactory.operation(token, left, right));
                 }
-                catch(IllegalArgumentException h){ throw new IllegalArgumentException();}
+                catch(IllegalArgumentException h){
+                    return Optional.empty();
+                }
             }
 
         }

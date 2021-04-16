@@ -10,9 +10,7 @@ import org.junit.Test;
 import syntactic_analyzer.PSSyntacticAnalyzer;
 import token.Token;
 import token.PrintScriptTokenFactory;
-import org.junit.Assert;
-import org.junit.Test;
-import token.Token;
+import token.TokenType;
 
 
 import java.util.List;
@@ -21,18 +19,23 @@ import java.util.List;
 public class SyntacticAnalyzerTest {
 
        @Test
-       public void test01_GivenStringDeclarationTokensShouldReturnValidTree(){
+       public void test001_GivenStringAndVariableNameShouldReturnDeclarationNode(){
            final String testName = "LexerTest_test01_StringDeclaration";
            List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
-            String line = "let variableName : string = \"olive\";";
-          PSSyntacticAnalyzer psSyntacticAnalyzer= new PSSyntacticAnalyzer();
-           ASTNode tree= psSyntacticAnalyzer.analize(goldenFile);
-           ASTNode expectedTree;
-          ASTNode rightChild=new ASTNodeDeclaration(new ASTNodeVariableType(PrintScriptTokenFactory.stringType(4,15)),
-                 new ASTNodeIdentifier(PrintScriptTokenFactory.identifier("variableName",4,15)),PrintScriptTokenFactory.let(0,2));
-           ASTNode leftChild=new ASTNodeLiteral(PrintScriptTokenFactory.string(28,34,"olive"));
-            expectedTree=new ASTNodeAssignation(leftChild,rightChild,PrintScriptTokenFactory.assignation(26,26));
-         Assert.assertEquals(tree,expectedTree);
+           String line = "let variableName : string ";
+           List<Token> tokens = List.of(goldenFile.get(0),goldenFile.get(1),goldenFile.get(2),goldenFile.get(3));
+           PSSyntacticAnalyzer psSyntacticAnalyzer= new PSSyntacticAnalyzer();
+           ASTNode tree = psSyntacticAnalyzer.analyze(tokens);
+           Assert.assertEquals(TokenType.COLON,tree.token.getType());
        }
 
+    @Test
+    public void test002_GivenStringAndVariableNameShouldReturnDeclarationNode(){
+        final String testName = "LexerTest_test01_StringDeclaration";
+        List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+        String line = "let variableName : string = \"olive\" ;";
+        PSSyntacticAnalyzer psSyntacticAnalyzer= new PSSyntacticAnalyzer();
+        ASTNode tree = psSyntacticAnalyzer.analyze(goldenFile);
+        Assert.assertEquals(TokenType.ASSIGNATION,tree.token.getType());
+    }
 }
