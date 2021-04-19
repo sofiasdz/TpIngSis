@@ -1,7 +1,7 @@
 package ASTNode.Childless;
-import ASTNode.NodeType;
 
 import ASTNode.ASTNode;
+import ASTNode.NodeType;
 import ASTNode.TokenGroup.TokenGroup;
 import token.Token;
 

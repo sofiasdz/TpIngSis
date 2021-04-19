@@ -1,9 +1,12 @@
 package lexer;
 
-import token.Token;
 import token.PrintScriptTokenFactory;
+import token.Token;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class PSLexer implements Lexer {
     HashMap<String, Token> identifiersMap;

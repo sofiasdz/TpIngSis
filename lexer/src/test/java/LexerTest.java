@@ -1,5 +1,5 @@
-import lexer.PSLexer;
 import JSONWriter.JSONFileWriter;
+import lexer.PSLexer;
 import org.junit.Assert;
 import org.junit.Test;
 import token.Token;

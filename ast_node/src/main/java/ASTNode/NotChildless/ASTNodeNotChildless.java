@@ -1,8 +1,8 @@
 package ASTNode.NotChildless;
 
 import ASTNode.ASTNode;
-import token.Token;
 import ASTNode.NodeType;
+import token.Token;
 
 public  abstract class ASTNodeNotChildless extends ASTNode {
     ASTNode leftChild;

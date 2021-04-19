@@ -1,17 +1,10 @@
 import ASTNode.ASTNode;
-import ASTNode.Childless.ASTNodeIdentifier;
-import ASTNode.Childless.ASTNodeLiteral;
-import ASTNode.Childless.ASTNodeVariableType;
-import ASTNode.NotChildless.ASTNodeAssignation;
-import ASTNode.NotChildless.ASTNodeDeclaration;
 import JSONWriter.JSONFileWriter;
 import org.junit.Assert;
 import org.junit.Test;
 import syntactic_analyzer.PSSyntacticAnalyzer;
 import token.Token;
-import token.PrintScriptTokenFactory;
 import token.TokenType;
-
 
 import java.util.List;
 
@@ -100,13 +93,12 @@ public class SyntacticAnalyzerTest {
     }
 
     @Test
-    public void test008_GivenOperationsAndDeclarationsShouldReturnAssignationNodes() {
-        final String testName = "LexerTest_test07_UsingOperationsToAssignValues";
+    public void test008_GivenPrintShouldReturnPrintNodes() {
+        final String testName = "LexerTest_test08_printLn";
         List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
         PSSyntacticAnalyzer psSyntacticAnalyzer = new PSSyntacticAnalyzer();
         List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
-        for (int i = 0; i <tree.size(); i++) {
-            Assert.assertEquals(TokenType.ASSIGNATION, tree.get(i).token.getType());
-        }
+        Assert.assertEquals(TokenType.PRINTLN, tree.get(0).token.getType());
+        Assert.assertEquals(TokenType.PRINTLN, tree.get(3).token.getType());
     }
 }

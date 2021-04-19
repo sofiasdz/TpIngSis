@@ -1,13 +1,11 @@
 package syntactic_analyzer;
 
 import ASTNode.ASTNode;
-import ASTNode.Childless.ASTNodeIdentifier;
 import ASTNode.Factory.ASTNodeFactory;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.TokenGroup.TokenGroup;
 import token.Token;
 import token.TokenType;
-import ASTNode.NodeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +100,12 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
                 return Optional.of(ASTNodeFactory.literal(token));
             }
             catch (IllegalArgumentException e) {
-                return Optional.empty();
+                try {
+                    return Optional.of(ASTNodeFactory.print(token));
+                }
+                catch (IllegalArgumentException j) {
+                    return Optional.empty();
+                }
             }
         }
 
@@ -120,7 +123,7 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
                     return Optional.of(ASTNodeFactory.operation(token, left, right));
                 }
                 catch(IllegalArgumentException h){
-                    return Optional.empty();
+                        return Optional.empty();
                 }
             }
 

@@ -2,14 +2,13 @@ package ASTNode.Factory;
 
 
 import ASTNode.ASTNode;
-import ASTNode.Childless.ASTNodeChildless;
 import ASTNode.Childless.ASTNodeIdentifier;
 import ASTNode.Childless.ASTNodeLiteral;
+import ASTNode.Childless.ASTNodePrint;
 import ASTNode.Childless.ASTNodeVariableType;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeOperation;
-import ASTNode.NotChildless.ASTNodePrint;
 import ASTNode.TokenGroup.TokenGroup;
 import token.Token;
 import token.TokenType;
@@ -59,10 +58,9 @@ public class ASTNodeFactory {
         throw new IllegalArgumentException();
     }
 
-    public static ASTNodePrint print(Token token, ASTNode left){
+    public static ASTNodePrint print(Token token){
         TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.PRINTLN));
-        TokenGroup cValid = new TokenGroup(List.of(TokenType.IDENTIFIER,TokenType.FLOATING_POINT,TokenType.INTEGER,TokenType.STRING,TokenType.ADDITION,TokenType.DIVISION,TokenType.SUBSTRACTION,TokenType.MULTIPLICATION));
-        if(tokenGroup.belongs(token) && cValid.belongs(left.token)) return new ASTNodePrint(left,token);
+        if(tokenGroup.belongs(token)) return new ASTNodePrint(token);
         throw new IllegalArgumentException();
     }
 
