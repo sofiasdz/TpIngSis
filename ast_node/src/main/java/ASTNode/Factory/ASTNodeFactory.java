@@ -37,7 +37,7 @@ public class ASTNodeFactory {
 
     public static ASTNodeAssignation assignation(Token token, ASTNode left, ASTNode right){
         TokenGroup tGroup = new TokenGroup(List.of(TokenType.ASSIGNATION));
-        TokenGroup lValid = new TokenGroup(List.of(TokenType.LET,TokenType.COLON));
+        TokenGroup lValid = new TokenGroup(List.of(TokenType.LET,TokenType.COLON,TokenType.IDENTIFIER));
         TokenGroup rValid = new TokenGroup(List.of(TokenType.INTEGER,TokenType.STRING, TokenType.FLOATING_POINT,TokenType.ADDITION,TokenType.SUBSTRACTION,TokenType.MULTIPLICATION,TokenType.DIVISION));
         if(tGroup.belongs(token) && lValid.belongs(left.token) && rValid.belongs(right.token)) return new ASTNodeAssignation(left,right,token);
         throw new IllegalArgumentException();

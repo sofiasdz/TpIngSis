@@ -17,11 +17,23 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
 
     public PSSyntacticAnalyzer() {
 
-
     }
 
     @Override
-    public ASTNode analyze(List<Token> tokens) {
+    public List<ASTNode> analyze(List<Token> tokens){
+        List<ASTNode> nodes = new ArrayList<>();
+        List<Token> tokenList = new ArrayList<>();
+        for (int i = 0; i < tokens.size() ; i++) {
+            tokenList.add(tokens.get(i));
+            if(tokens.get(i).getType().equals(TokenType.SEMICOLON)){
+                nodes.add(tokensToNode(tokenList));
+                tokenList = new ArrayList<>();
+            }
+        }
+        return nodes;
+    }
+
+    public ASTNode tokensToNode(List<Token> tokens) {
         Stack<ASTNode> nodeStack = new Stack<>();
         List<Token> tokenList = new ArrayList<>();
         for (int i = tokens.size()-1; i >=0 ; i--) {
@@ -33,15 +45,18 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
         for (int i = tokenList.size()-1; i >= 0 ; i--) {
             if(tokenList.get(i).getType().equals(TokenType.LET) | tokenList.get(i).getType().equals(TokenType.SEMICOLON)) tokenList.remove(i);
         }
+
         while(nodeStack.size()>1){
             ASTNode right = nodeStack.pop();
             ASTNode left = nodeStack.pop();
             Optional<ASTNode> optionalASTNode = ASTNodeIdentifier(tokenList.get(tokenList.size()-1),left,right);
-            if(optionalASTNode.isPresent()) nodeStack.push(optionalASTNode.get());
+            if(optionalASTNode.isPresent()) {
+                nodeStack.push(optionalASTNode.get());
+                tokenList.remove(tokenList.size()-1);
+            }
             else {
                 nodeStack.push(right);
                 nodeStack.push(left);
-                tokenList.remove(tokenList.size()-1);
             }
         }
         return nodeStack.pop();

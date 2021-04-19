@@ -1,0 +1,106 @@
+[
+  {
+    "type": "PRINTLN",
+    "value": "123",
+    "startingColumn": 9,
+    "endingColumn": 11,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 13,
+    "endingColumn": 13,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "PRINTLN",
+    "value": "\"holi\"",
+    "startingColumn": 9,
+    "endingColumn": 14,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 16,
+    "endingColumn": 16,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "INTEGER",
+    "value": "32",
+    "startingColumn": 17,
+    "endingColumn": 18,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 20,
+    "endingColumn": 20,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "PRINTLN",
+    "value": "x",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 3,
+    "endingLine": 3
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "suma",
+    "startingColumn": 4,
+    "endingColumn": 7,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 11,
+    "endingColumn": 16,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 18,
+    "endingColumn": 18,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "22",
+    "startingColumn": 20,
+    "endingColumn": 21,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ADDITION",
+    "value": "+",
+    "startingColumn": 23,
+    "endingColumn": 23,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 25,
+    "endingColumn": 25,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 26,
+    "endingColumn": 26,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "resta",
+    "startingColumn": 4,
+    "endingColumn": 8,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 12,
+    "endingColumn": 17,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 19,
+    "endingColumn": 19,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "INTEGER",
+    "value": "26",
+    "startingColumn": 21,
+    "endingColumn": 22,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SUBSTRACTION",
+    "value": "-",
+    "startingColumn": 24,
+    "endingColumn": 24,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 26,
+    "endingColumn": 26,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 28,
+    "endingColumn": 28,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "division",
+    "startingColumn": 4,
+    "endingColumn": 11,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 13,
+    "endingColumn": 13,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 15,
+    "endingColumn": 20,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 22,
+    "endingColumn": 22,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "INTEGER",
+    "value": "48",
+    "startingColumn": 24,
+    "endingColumn": 25,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "DIVISION",
+    "value": "/",
+    "startingColumn": 27,
+    "endingColumn": 27,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 29,
+    "endingColumn": 29,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 31,
+    "endingColumn": 31,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "multiplicacion",
+    "startingColumn": 4,
+    "endingColumn": 17,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 19,
+    "endingColumn": 19,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 21,
+    "endingColumn": 26,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 28,
+    "endingColumn": 28,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "INTEGER",
+    "value": "12",
+    "startingColumn": 30,
+    "endingColumn": 31,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 33,
+    "endingColumn": 33,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 35,
+    "endingColumn": 35,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 36,
+    "endingColumn": 36,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "concatenacion",
+    "startingColumn": 4,
+    "endingColumn": 16,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 18,
+    "endingColumn": 18,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "STRING_TYPE",
+    "value": "string",
+    "startingColumn": 20,
+    "endingColumn": 25,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 27,
+    "endingColumn": 27,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "STRING",
+    "value": "\"holi\"",
+    "startingColumn": 29,
+    "endingColumn": 34,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "ADDITION",
+    "value": "+",
+    "startingColumn": 36,
+    "endingColumn": 36,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "STRING",
+    "value": "\"mundo\"",
+    "startingColumn": 38,
+    "endingColumn": 44,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 46,
+    "endingColumn": 46,
+    "startingLine": 4,
+    "endingLine": 4
+  }
+]

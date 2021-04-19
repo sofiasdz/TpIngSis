@@ -6,5 +6,5 @@ import token.Token;
 import java.util.List;
 
 public interface SyntacticAnalyzer {
-    ASTNode analyze(List<Token> tokens);
+    List<ASTNode> analyze(List<Token> tokens);
 }
