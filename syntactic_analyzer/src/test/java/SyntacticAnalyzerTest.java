@@ -86,6 +86,27 @@ public class SyntacticAnalyzerTest {
         Assert.assertEquals(TokenType.COLON, tree.get(2).token.getType());
         Assert.assertEquals(TokenType.ASSIGNATION, tree.get(3).token.getType());
         Assert.assertEquals(TokenType.ASSIGNATION, tree.get(4).token.getType());
+    }
 
+    @Test
+    public void test007_GivenOperationsAndDeclarationsShouldReturnAssignationNodes() {
+        final String testName = "LexerTest_test07_UsingOperationsToAssignValues";
+        List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+        PSSyntacticAnalyzer psSyntacticAnalyzer = new PSSyntacticAnalyzer();
+        List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+        for (int i = 0; i <tree.size(); i++) {
+            Assert.assertEquals(TokenType.ASSIGNATION, tree.get(i).token.getType());
+        }
+    }
+
+    @Test
+    public void test008_GivenOperationsAndDeclarationsShouldReturnAssignationNodes() {
+        final String testName = "LexerTest_test07_UsingOperationsToAssignValues";
+        List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+        PSSyntacticAnalyzer psSyntacticAnalyzer = new PSSyntacticAnalyzer();
+        List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+        for (int i = 0; i <tree.size(); i++) {
+            Assert.assertEquals(TokenType.ASSIGNATION, tree.get(i).token.getType());
+        }
     }
 }

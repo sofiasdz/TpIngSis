@@ -3,6 +3,8 @@ package syntactic_analyzer;
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeIdentifier;
 import ASTNode.Factory.ASTNodeFactory;
+import ASTNode.NotChildless.ASTNodeAssignation;
+import ASTNode.TokenGroup.TokenGroup;
 import token.Token;
 import token.TokenType;
 import ASTNode.NodeType;
@@ -55,11 +57,36 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
                 tokenList.remove(tokenList.size()-1);
             }
             else {
-                nodeStack.push(right);
-                nodeStack.push(left);
+                optionalASTNode = ASTNodeIdentifier(tokenList.get(tokenList.size()-1),right,left);
+                if(optionalASTNode.isPresent()) {
+                    nodeStack.push(optionalASTNode.get());
+                    tokenList.remove(tokenList.size()-1);
+                }
+                else {
+                    nodeStack.push(right);
+                    nodeStack.push(left);
+                    nodeStack = operationCheck(nodeStack,tokenList);
+                }
             }
         }
         return nodeStack.pop();
+    }
+
+    Stack<ASTNode> operationCheck(Stack<ASTNode> nodeStack, List<Token> tokenList){
+        if(nodeStack.peek().token.getType().equals(TokenType.ASSIGNATION)){
+            TokenGroup group = new TokenGroup(List.of(TokenType.ADDITION,TokenType.SUBSTRACTION,TokenType.DIVISION,TokenType.MULTIPLICATION));
+            for (int i = 0; i < tokenList.size() ; i++) {
+                if(group.belongs(tokenList.get(i))){
+                    ASTNodeAssignation node1 = (ASTNodeAssignation)nodeStack.pop();
+                    ASTNode node2 = nodeStack.pop();
+                    Optional<ASTNode> operation = ASTNodeIdentifier(tokenList.get(i),node1.getRightChild(),node2);
+                    node1.setRightChild(operation.get());
+                    nodeStack.push(node1);
+                }
+            }
+
+        }
+        return nodeStack;
     }
 
 
