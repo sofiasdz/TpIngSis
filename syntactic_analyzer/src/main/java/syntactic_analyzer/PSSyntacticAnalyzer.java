@@ -47,8 +47,8 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer{
         }
 
         while(nodeStack.size()>1){
-            ASTNode right = nodeStack.pop();
             ASTNode left = nodeStack.pop();
+            ASTNode right = nodeStack.pop();
             Optional<ASTNode> optionalASTNode = ASTNodeIdentifier(tokenList.get(tokenList.size()-1),left,right);
             if(optionalASTNode.isPresent()) {
                 nodeStack.push(optionalASTNode.get());

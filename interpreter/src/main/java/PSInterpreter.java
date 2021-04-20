@@ -168,12 +168,13 @@ public class PSInterpreter implements Interpreter {
             String value;
             ASTNode currentChild = node.getLeftChild();
             if (currentChild.getNodeType().equals("identifier")) {
-                value = stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()) : numberVariables.get(currentChild.token.getValue()).toString();
+                value = stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()) : "\""+numberVariables.get(currentChild.token.getValue()).toString()+"\"";
             } else value = node.getLeftChild().token.getValue();
+            value = value.substring(0,value.length()-1);
             currentChild = node.getRightChild();
             if (currentChild.getNodeType().equals("identifier")) {
-                value += stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()) : numberVariables.get(currentChild.token.getValue()).toString();
-            } else value += currentChild.token.getValue();
+                value += stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()).substring(1) : numberVariables.get(currentChild.token.getValue()).toString()+"\"";
+            } else value += currentChild.token.getValue().substring(1);
             return value;
         } else throw new RuntimeException("Strings can only use + operator!");
     }

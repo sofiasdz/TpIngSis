@@ -8,18 +8,56 @@ import java.util.List;
 
 public class InterpreterTest {
 
-    @Test
-    public void test03_GivenAnIntegerDeclarationShouldReturnAValidTokenList() {
-        final String testName = "LexerTest_test03_IntegerDeclaration";
-        String line1 = "let x : number = 12 ;";
-        String line2 = "printLn(x) ;";
-        String line3 = "printLn(\"holi\") ;";
-        PSLexer lexer = new PSLexer();
-        PSSyntacticAnalyzer syntactic = new PSSyntacticAnalyzer();
-        List<ASTNode> tree = syntactic.analyze(lexer.identifyTokens(List.of(line1,line2,line3)));
+    private List<String> analyze(List<String> lines){
+        PSLexer lex = new PSLexer();
+        PSSyntacticAnalyzer syn = new PSSyntacticAnalyzer();
         PSInterpreter interpreter = new PSInterpreter();
-        List<String> prints = interpreter.analyze(tree);
-        Assert.assertEquals("12.0",prints.get(0));
-        Assert.assertEquals("holi",prints.get(1));
+        return interpreter.analyze(syn.analyze(lex.identifyTokens(lines)));
     }
+
+    @Test
+    public void test01_GivenAnIntegerDeclarationOperationAndPrintShouldReturnAValidPrintList() {
+        String line1 = "let x : number = 12 + 2 ;";
+        String line2 = "printLn(x) ;";
+        List<String> prints = analyze((List.of(line1,line2)));
+        Assert.assertEquals("14.0",prints.get(0));
+    }
+
+    @Test
+    public void test02_GivenAStringDeclarationOperationAndPrintShouldReturnAValidPrintList() {
+        String line1 = "let x : string = \"hello\" + \" world\" ;";
+        String line2 = "printLn(x) ;";
+        List<String> prints = analyze((List.of(line1,line2)));
+        Assert.assertEquals("\"hello world\"",prints.get(0));
+    }
+
+    @Test
+    public void test03_GivenMultipleStringDeclarationOperationAndPrintShouldReturnAValidPrintList() {
+        String line1 = "let x : string = \"hello\" ;";
+        String line2 = "let y : string = \" world\" ;";
+        String line3 = "let z : string = x + y ;";
+        String line4 = "printLn(z) ;";
+        List<String> prints = analyze((List.of(line1,line2,line3,line4)));
+        Assert.assertEquals("\"hello world\"",prints.get(0));
+    }
+
+    @Test
+    public void test04_GivenMultipleNumberDeclarationOperationAndPrintShouldReturnAValidPrintList() {
+        String line1 = "let x : number = 4 ;";
+        String line2 = "let y : number = 2 ;";
+        String line3 = "let suma : number = x + y ;";
+        String line4 = "let mult : number = x * y ;";
+        String line5 = "let rest : number = x - y ;";
+        String line6 = "let divi : number = x / y ;";
+        String line7 = "printLn(suma) ;";
+        String line8 = "printLn(mult) ;";
+        String line9 = "printLn(rest) ;";
+        String line10 = "printLn(divi) ;";
+        List<String> prints = analyze((List.of(line1,line2,line3,line4,line5,line6,line7,line8,line9,line10)));
+        Assert.assertEquals("6.0",prints.get(0));
+        Assert.assertEquals("8.0",prints.get(1));
+        Assert.assertEquals("2.0",prints.get(2));
+        Assert.assertEquals("2.0",prints.get(3));
+    }
+
 }
