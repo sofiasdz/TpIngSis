@@ -17,7 +17,7 @@ public class PSLexer implements Lexer {
         identifiersMap = new HashMap<>();
         for (int i = 0; i < text.size(); i++) {
             Line currentLine = lineToChars(text.get(i),i);
-            tokens.addAll(lineToTokenRefactored(currentLine));
+            tokens.addAll(lineToToken(currentLine));
         }
         return tokens;
     }
@@ -27,67 +27,7 @@ public class PSLexer implements Lexer {
         return new Line(chars,i);
     }
 
-    /*private List<Token> lineToToken(Line line) {
-        String currentWord = "";
-        List<Token> list = new ArrayList<>();
-        for (int i = 0; i < line.size(); i++) {
-            currentWord += line.get(i);
-            if (currentWord.equals(" ")) {
-                currentWord = "";
-                continue;
-            }
-            Optional<Token> token = Optional.empty();
-            //si detecta un número
-            if (currentWord.matches("\\d+")) {
-                String number = currentWord;
-                for (int j = i + 1; j < line.size(); j++) {
-                    if (line.get(j).equals(" ") | line.get(j).equals(";")) {
-                        currentWord = number;
-                        i = j - 1;
-                        break;
-                    }
-                    number += line.get(j);
-                }
-                //Si es un integer se devuelve, sino, es que parseó un float y lo devuelve.
-                if (isNumber(currentWord)) token = Optional.of(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
-                else token = Optional.of(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
-            }
-            //si lo anterior fue un let registra un identifier
-            else if (variableWasDeclared(list)) {
-                String variableName = "";
-                for (int j = i; j < line.size(); j++) {
-                    //if (line.get(j).equals(";") | line.get(j).equals(":") | line.get(j).equals(" ")) {
-                    if (line.get(j).matches("[:; ]")) {
-                        currentWord = variableName;
-                        i = j - 1;
-                        break;
-                    }
-                    variableName += line.get(j);
-                    i = j;
-                }
-                token = Optional.of(PrintScriptTokenFactory.identifier(currentWord, line.getLineNumber(), i));
-                //Agrega el identifier al Map para futuras referencias.
-                identifiersMap.put(currentWord, token.get());
-            }
-            //si currentWord empieza y termina con "
-            else if (isString(currentWord)) {
-                token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
-                //Si ponés "hola"; o "hola" ; es lo mismo, ya no se pierde el ; si no hay un espacio.
-            }
-            //si no cumple nada va al genérico
-            else {
-                token = tokenIdentifier(currentWord, line.getLineNumber(), i);
-            }
-            //si el token existe y es válido, se agrega y reinicia el string
-            if (token.isPresent()) {
-                list.add(token.get());
-                currentWord = "";
-            }
-        }
-        return list;
-    }*/
-
-    private List<Token> lineToTokenRefactored(Line line) {
+    private List<Token> lineToToken(Line line) {
         String currentWord = "";
         List<Token> list = new ArrayList<>();
         for (int i = 0; i < line.size(); i++) {

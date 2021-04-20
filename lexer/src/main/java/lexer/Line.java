@@ -11,10 +11,6 @@ public class Line {
         this.lineNumber = lineNumber;
     }
 
-    public List<String> getLine() {
-        return line;
-    }
-
     public int getLineNumber() {
         return lineNumber;
     }

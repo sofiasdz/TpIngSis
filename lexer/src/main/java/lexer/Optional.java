@@ -29,10 +29,6 @@ public class Optional<T>{
         return value != null;
     }
 
-    public boolean isEmpty() {
-        return value == null;
-    }
-
     public void set(T value){
         this.value = value;
     }
