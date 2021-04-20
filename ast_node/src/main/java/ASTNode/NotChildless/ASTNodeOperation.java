@@ -13,4 +13,9 @@ public class ASTNodeOperation extends ASTNodeNotChildless {
     public String toString() {
         return "Operation: ("+leftChild.toString() + ") " + token + " (" + rightChild.toString()+") ";
     }
+
+    @Override
+    public String getNodeType() {
+        return "operation";
+    }
 }

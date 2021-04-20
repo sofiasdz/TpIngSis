@@ -12,4 +12,9 @@ public class ASTNodeLiteral extends ASTNodeChildless {
     public String toString() {
         return "Literal: "+ token;
     }
+
+    @Override
+    public String getNodeType() {
+        return "literal";
+    }
 }

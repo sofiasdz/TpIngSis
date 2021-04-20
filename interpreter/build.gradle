@@ -12,7 +12,11 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation project (':syntactic_analyzer')
     implementation project (':tokens')
+    implementation project (':ast_node')
+    implementation project (':JSONReaderWriter')
+    implementation project (':lexer')
 }
 
 jacoco {

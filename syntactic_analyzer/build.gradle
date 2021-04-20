@@ -15,7 +15,6 @@ dependencies {
     implementation project (':tokens')
     implementation project (':ast_node')
     implementation project (':JSONReaderWriter')
-
 }
 
 jacoco {

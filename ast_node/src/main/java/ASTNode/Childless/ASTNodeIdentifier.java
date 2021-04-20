@@ -12,4 +12,9 @@ public class ASTNodeIdentifier extends ASTNodeChildless {
     public String toString() {
         return "Identifier: "+ token;
     }
+
+    @Override
+    public String getNodeType() {
+        return "identifier";
+    }
 }

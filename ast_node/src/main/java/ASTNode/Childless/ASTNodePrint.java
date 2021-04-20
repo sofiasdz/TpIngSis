@@ -12,4 +12,9 @@ public class ASTNodePrint extends ASTNodeChildless {
     public String toString() {
         return "PrintLn ( "+ token.getValue()+" )";
     }
+
+    @Override
+    public String getNodeType() {
+        return "print";
+    }
 }
