@@ -35,9 +35,10 @@ public class InterpreterTest {
     public void test03_GivenMultipleStringDeclarationOperationAndPrintShouldReturnAValidPrintList() {
         String line1 = "let x : string = \"hello\" ;";
         String line2 = "let y : string = \" world\" ;";
-        String line3 = "let z : string = x + y ;";
-        String line4 = "printLn(z) ;";
-        List<String> prints = analyze((List.of(line1,line2,line3,line4)));
+        String line3 = "let z : string ;";
+        String line4 = "z = x + y ;";
+        String line5 = "printLn(z) ;";
+        List<String> prints = analyze((List.of(line1,line2,line3,line4,line5)));
         Assert.assertEquals("\"hello world\"",prints.get(0));
     }
 

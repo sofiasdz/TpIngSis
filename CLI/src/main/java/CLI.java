@@ -19,14 +19,10 @@ public class CLI {
         System.out.println("4 - EXECUTE PRINTSCRIPT 1.1 CODE");
         System.out.println();
         int option = Scanner.getInt("ENTER YOUR OPTION: ");
-        switch (option){
-            case 1: validatePrintScript1Code();
-            break;
-            case 2: executePrintScript1Code();
-            break;
-            default:
-                System.out.println("I HAVE NO IDEA WHAT THAT MEANS.");
-                break;
+        switch (option) {
+            case 1 -> validatePrintScript1Code();
+            case 2 -> executePrintScript1Code();
+            default -> System.out.println("I HAVE NO IDEA WHAT THAT MEANS.");
         }
         System.out.println();
         System.out.println("HAVE A NICE DAY!");

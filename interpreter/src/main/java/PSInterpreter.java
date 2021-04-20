@@ -102,7 +102,7 @@ public class PSInterpreter implements Interpreter {
             String identifier = node.getLeftChild().token.getValue();
             if (!(stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier)))
                 throw new IllegalArgumentException("Variable not declared!");
-            if (node.getLeftChild().token.getType().equals(TokenType.STRING_TYPE)) {
+            if (stringVariables.containsKey(identifier)) {
                 String value = stringValueGetter(node.getRightChild());
                 stringVariables.put(identifier, value);
             } else {
