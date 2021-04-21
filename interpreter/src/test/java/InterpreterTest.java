@@ -61,4 +61,35 @@ public class InterpreterTest {
         Assert.assertEquals("2.0",prints.get(3));
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void test05_DeclaringSameVariableTwiceShouldThrowException() {
+        String line1 = "let x : string = \"hello\" ;";
+        String line2 = "let x : string = \" world\" ;";
+        List<String> prints = analyze((List.of(line1,line2)));
+    }
+
+    @Test
+    public void test06_AssigningValueToANonDeclaredVariableShouldThrowException() {
+        String line1 = "let x : number = 4 ;";
+        String line2 = "let y : number = 2 ;";
+        String line3 = "y = y + 2 ;";
+        String line4 = "printLn(y);";
+        List<String> prints = analyze((List.of(line1,line2,line3,line4)));
+        Assert.assertEquals("4.0",prints.get(0));
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void test07_AssigningNumberToStringShouldThrowException() {
+        String line1 = "let x : string;";
+        String line2 = "x = 324 ;";
+        List<String> prints = analyze((List.of(line1, line2)));
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void test08_AssigningStringToNumberShouldThrowException() {
+        String line1 = "let x : number;";
+        String line2 = "x = \"324\" ;";
+        List<String> prints = analyze((List.of(line1, line2)));
+    }
+
 }

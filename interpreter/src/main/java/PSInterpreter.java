@@ -41,13 +41,9 @@ public class PSInterpreter implements Interpreter {
             case "assignation":
                 nodeExecution((ASTNodeAssignation) node);
                 break;
-            case "operation":
             case "print":
                 nodeExecution((ASTNodePrint) node);
-            case "literal":
-            case "variableType":
-            case "identifier":
-            default:
+            default: break;
         }
     }
 
