@@ -119,12 +119,10 @@ public class PSInterpreter implements Interpreter {
 
     private Double numberLiteralValidator(ASTNodeLiteral node) {
         if (node.token.getType().equals(TokenType.STRING))
-            throw new RuntimeException("You are trying to assign a string to a non-string variable!");
+        throw new RuntimeException("You are trying to assign a string to a non-string variable!");
         String literal = node.token.getValue();
-        try {
-            return Double.parseDouble(literal);
-        } catch (NumberFormatException e){
-            throw new RuntimeException("You are trying to assign a string to a non-string variable!");
+        try { return Double.parseDouble(literal);
+        } catch (NumberFormatException e){ throw new RuntimeException("You are trying to assign a string to a non-string variable!");
         }
 
     }
