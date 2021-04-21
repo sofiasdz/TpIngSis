@@ -89,7 +89,7 @@ public class LexerTest {
     @Test
     public void test09_GivenTwoStringsConcatenationShouldReturnAValidToken() {
         final String testname = "LexerTest_test09_StringConcat";
-        String                   line1 = "let variableName : string = \"Khali\" ;";
+        String line1 = "let variableName : string = \"Khali\" ;";
         String line2 = "let variableLastName : string = \"Stessens\" ;";
         String line3 = "let fullName : string ;";
         String line4 = "fullName = variableName + variableLastName ;";
