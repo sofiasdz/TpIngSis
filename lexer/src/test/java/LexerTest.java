@@ -92,7 +92,7 @@ public class LexerTest {
         String line1 = "let variableName : string = \"Khali\" ;";
         String line2 = "let variableLastName : string = \"Stessens\" ;";
         String line3 = "let fullName : string ;";
-        String line4        = "fullName = variableName + variableLastName ;";
+        String line4 = "fullName = variableName + variableLastName ;";
         String line5 = "printLn(fullName);";
         goldenFileAsserter(testname, List.of(line1, line2, line3, line4, line5));
     }
