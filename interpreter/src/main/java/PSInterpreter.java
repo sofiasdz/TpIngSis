@@ -124,7 +124,7 @@ public class PSInterpreter implements Interpreter {
         try {
             return Double.parseDouble(literal);
         } catch (NumberFormatException e){
-            throw new RuntimeException("You are trying to assign a string to a non-string variable!");
+                throw new RuntimeException("You are trying to assign a string to a non-string variable!");
         }
 
     }
