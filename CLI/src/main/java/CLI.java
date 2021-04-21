@@ -6,7 +6,6 @@ import token.Token;
 import java.util.List;
 
 public class CLI {
-
     public static void main(String[] args) {
         System.out.println("******************************");
         System.out.println();
