@@ -147,7 +147,8 @@ public class PSInterpreter implements Interpreter {
             }
             throw new RuntimeException("Variable not declared!");
         }
-        return Double.parseDouble(node.token.getValue());
+        if (node.getNodeType().equals("literal")) return Double.parseDouble(node.token.getValue());
+        return numberOperation((ASTNodeOperation) node);
     }
 
     private String stringValueGetter(ASTNode rightChild) {
@@ -165,12 +166,16 @@ public class PSInterpreter implements Interpreter {
             ASTNode currentChild = node.getLeftChild();
             if (currentChild.getNodeType().equals("identifier")) {
                 value = stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()) : "\""+numberVariables.get(currentChild.token.getValue()).toString()+"\"";
-            } else value = node.getLeftChild().token.getValue();
+            } else if(currentChild.getNodeType().equals("literal")) value = node.getLeftChild().token.getValue();
+            else value = stringOperation((ASTNodeOperation)currentChild);
             value = value.substring(0,value.length()-1);
+
             currentChild = node.getRightChild();
             if (currentChild.getNodeType().equals("identifier")) {
                 value += stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()).substring(1) : numberVariables.get(currentChild.token.getValue()).toString()+"\"";
-            } else value += currentChild.token.getValue().substring(1);
+            } else if(currentChild.getNodeType().equals("literal")) value += currentChild.token.getValue().substring(1);
+            else value += stringOperation((ASTNodeOperation)currentChild).substring(1);
+
             return value;
         } else throw new RuntimeException("Strings can only use + operator!");
     }

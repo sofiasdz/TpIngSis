@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="InterpreterTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-04-21T15:21:29" hostname="MacBook-Pro.fibertel.com.ar" time="0.049">
+<testsuite name="InterpreterTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-04-22T16:01:52" hostname="PC-KUHA" time="0.077">
   <properties/>
-  <testcase name="test08_AssigningStringToNumberShouldThrowException" classname="InterpreterTest" time="0.027"/>
+  <testcase name="test08_AssigningStringToNumberShouldThrowException" classname="InterpreterTest" time="0.037"/>
   <testcase name="test02_GivenAStringDeclarationOperationAndPrintShouldReturnAValidPrintList" classname="InterpreterTest" time="0.004"/>
-  <testcase name="test01_GivenAnIntegerDeclarationOperationAndPrintShouldReturnAValidPrintList" classname="InterpreterTest" time="0.003"/>
-  <testcase name="test03_GivenMultipleStringDeclarationOperationAndPrintShouldReturnAValidPrintList" classname="InterpreterTest" time="0.004"/>
+  <testcase name="test01_GivenAnIntegerDeclarationOperationAndPrintShouldReturnAValidPrintList" classname="InterpreterTest" time="0.006"/>
+  <testcase name="test03_GivenMultipleStringDeclarationOperationAndPrintShouldReturnAValidPrintList" classname="InterpreterTest" time="0.007"/>
   <testcase name="test05_DeclaringSameVariableTwiceShouldThrowException" classname="InterpreterTest" time="0.002"/>
-  <testcase name="test04_GivenMultipleNumberDeclarationOperationAndPrintShouldReturnAValidPrintList" classname="InterpreterTest" time="0.006"/>
-  <testcase name="test06_AssigningValueToANonDeclaredVariableShouldThrowException" classname="InterpreterTest" time="0.001"/>
-  <testcase name="test07_AssigningNumberToStringShouldThrowException" classname="InterpreterTest" time="0.001"/>
+  <testcase name="test04_GivenMultipleNumberDeclarationOperationAndPrintShouldReturnAValidPrintList" classname="InterpreterTest" time="0.013"/>
+  <testcase name="test06_AssigningValueToANonDeclaredVariableShouldThrowException" classname="InterpreterTest" time="0.002"/>
+  <testcase name="test07_AssigningNumberToStringShouldThrowException" classname="InterpreterTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

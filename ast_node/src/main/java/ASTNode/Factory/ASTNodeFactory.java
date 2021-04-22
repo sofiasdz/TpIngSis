@@ -53,7 +53,7 @@ public class ASTNodeFactory {
 
     public static ASTNodeOperation operation(Token token, ASTNode left, ASTNode right){
         TokenGroup tGroup = new TokenGroup(List.of(TokenType.ADDITION,TokenType.DIVISION,TokenType.SUBSTRACTION,TokenType.MULTIPLICATION));
-        TokenGroup cValid = new TokenGroup(List.of(TokenType.IDENTIFIER,TokenType.FLOATING_POINT,TokenType.INTEGER,TokenType.STRING));
+        TokenGroup cValid = new TokenGroup(List.of(TokenType.IDENTIFIER,TokenType.FLOATING_POINT,TokenType.INTEGER,TokenType.STRING,TokenType.ADDITION,TokenType.DIVISION,TokenType.SUBSTRACTION,TokenType.MULTIPLICATION));
         if(tGroup.belongs(token) && cValid.belongs(left.token) && cValid.belongs(right.token)) return new ASTNodeOperation(left,right,token);
         throw new IllegalArgumentException();
     }
