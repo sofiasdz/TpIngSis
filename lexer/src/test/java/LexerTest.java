@@ -3,6 +3,7 @@ import lexer.PSLexer;
 import org.junit.Assert;
 import org.junit.Test;
 import token.Token;
+
 import java.util.List;
 
 public class LexerTest {
@@ -10,9 +11,9 @@ public class LexerTest {
   private void goldenFileAsserter(String testName, List<String> lines) {
     PSLexer psLexer = new PSLexer();
     List<Token> tokenList = psLexer.identifyTokens(lines);
-    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList("print1-0/"+testName);
     if (goldenFile.isEmpty())
-      JSONFileWriter.tokenListToJSON(tokenList, testName);
+      JSONFileWriter.tokenListToJSON(tokenList, "print1-0/"+testName);
     else
       Assert.assertEquals(goldenFile, tokenList);
   }
