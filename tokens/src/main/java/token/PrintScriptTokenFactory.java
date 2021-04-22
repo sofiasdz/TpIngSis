@@ -93,7 +93,7 @@ public class PrintScriptTokenFactory {
   }
 
   public static Token equalOrSmaller(int ln, int cn) {
-    return new Token(TokenType.EQUAL_OR_S, "=<", cn, ln, ln);
+    return new Token(TokenType.EQUAL_OR_S, "<=", cn, ln, ln);
   }
 
   public static Token ifKeyword(int ln, int cn) {
