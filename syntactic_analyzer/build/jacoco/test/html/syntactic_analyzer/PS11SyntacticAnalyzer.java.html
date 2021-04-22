@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css" />
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif" />
+    <title>PS11SyntacticAnalyzer.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css" />
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+  </head>
+  <body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+    <div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">syntactic_analyzer</a> &gt; <a href="index.source.html" class="el_package">syntactic_analyzer</a> &gt; <span class="el_source">PS11SyntacticAnalyzer.java</span></div>
+    <h1>PS11SyntacticAnalyzer.java</h1>
+    <pre class="source lang-java linenums">package syntactic_analyzer;
+
+import ASTNode.ASTNode;
+import ASTNode.Factory.ASTNodeFactory;
+import ASTNode.Factory.ASTNodeFactory11;
+import ASTNode.NotChildless.ASTNodeAssignation;
+import ASTNode.TokenGroup.TokenGroup;
+import syntactic_analyzer.SyntacticAnalyzer;
+import token.Token;
+import token.TokenType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Stack;
+
+public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
+
+
+<span class="fc" id="L19">  public PS11SyntacticAnalyzer() {</span>
+
+<span class="fc" id="L21">  }</span>
+
+  @Override
+  public List&lt;ASTNode&gt; analyze(List&lt;Token&gt; tokens) {
+<span class="fc" id="L25">    List&lt;ASTNode&gt; nodes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L26">    List&lt;Token&gt; tokenList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">    for (int i = 0; i &lt; tokens.size(); i++) {</span>
+<span class="fc" id="L28">      tokenList.add(tokens.get(i));</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">      if (tokens.get(i).getType().equals(TokenType.SEMICOLON)) {</span>
+<span class="fc" id="L30">        nodes.add(tokensToNode(tokenList));</span>
+<span class="fc" id="L31">        tokenList = new ArrayList&lt;&gt;();</span>
+      }
+    }
+<span class="fc" id="L34">    return nodes;</span>
+  }
+
+  public ASTNode tokensToNode(List&lt;Token&gt; tokens) {
+<span class="fc" id="L38">    Stack&lt;ASTNode&gt; nodeStack = new Stack&lt;&gt;();</span>
+<span class="fc" id="L39">    List&lt;Token&gt; tokenList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">    for (int i = tokens.size() - 1; i &gt;= 0; i--) {</span>
+<span class="fc" id="L41">      Optional&lt;ASTNode&gt; optionalASTNode = ASTNodeIdentifier(tokens.get(i));</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">      if (optionalASTNode.isEmpty())</span>
+<span class="fc" id="L43">        tokenList.add(tokens.get(i));</span>
+      else
+<span class="fc" id="L45">        nodeStack.push(optionalASTNode.get());</span>
+      // Si el optional es un nodo, lo stackeo. Voy de atrás para adelante para no tener problema
+      // con los nodos
+    }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">    for (int i = tokenList.size() - 1; i &gt;= 0; i--) {</span>
+<span class="fc" id="L50">      if (tokenList.get(i).getType().equals(TokenType.LET)</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">          | tokenList.get(i).getType().equals(TokenType.SEMICOLON))</span>
+<span class="fc" id="L52">        tokenList.remove(i);</span>
+    }
+
+<span class="fc bfc" id="L55" title="All 2 branches covered.">    while (nodeStack.size() &gt; 1) {</span>
+<span class="fc" id="L56">      ASTNode left = nodeStack.pop();</span>
+<span class="fc" id="L57">      ASTNode right = nodeStack.pop();</span>
+<span class="fc" id="L58">      Optional&lt;ASTNode&gt; optionalASTNode =</span>
+<span class="fc" id="L59">          ASTNodeIdentifier(tokenList.get(tokenList.size() - 1), left, right);</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">      if (optionalASTNode.isPresent()) {</span>
+<span class="nc" id="L61">        nodeStack.push(optionalASTNode.get());</span>
+<span class="nc" id="L62">        tokenList.remove(tokenList.size() - 1);</span>
+      } else {
+<span class="fc" id="L64">        optionalASTNode = ASTNodeIdentifier(tokenList.get(tokenList.size() - 1), right, left);</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (optionalASTNode.isPresent()) {</span>
+<span class="fc" id="L66">          nodeStack.push(optionalASTNode.get());</span>
+<span class="fc" id="L67">          tokenList.remove(tokenList.size() - 1);</span>
+        } else {
+<span class="nc" id="L69">          nodeStack.push(right);</span>
+<span class="nc" id="L70">          nodeStack.push(left);</span>
+<span class="nc" id="L71">          nodeStack = operationCheck(nodeStack, tokenList);</span>
+        }
+      }
+<span class="fc" id="L74">    }</span>
+<span class="fc" id="L75">    return nodeStack.pop();</span>
+  }
+
+  Stack&lt;ASTNode&gt; operationCheck(Stack&lt;ASTNode&gt; nodeStack, List&lt;Token&gt; tokenList) {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">    if (nodeStack.peek().token.getType().equals(TokenType.ASSIGNATION)) {</span>
+<span class="nc" id="L80">      TokenGroup group =</span>
+<span class="nc" id="L81">          new TokenGroup(List.of(TokenType.ADDITION, TokenType.SUBSTRACTION, TokenType.DIVISION,</span>
+              TokenType.MULTIPLICATION));
+<span class="nc bnc" id="L83" title="All 2 branches missed.">      for (int i = 0; i &lt; tokenList.size(); i++) {</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (group.belongs(tokenList.get(i))) {</span>
+<span class="nc" id="L85">          ASTNodeAssignation node1 = (ASTNodeAssignation) nodeStack.pop();</span>
+<span class="nc" id="L86">          ASTNode node2 = nodeStack.pop();</span>
+<span class="nc" id="L87">          Optional&lt;ASTNode&gt; operation =</span>
+<span class="nc" id="L88">              ASTNodeIdentifier(tokenList.get(i), node1.getRightChild(), node2);</span>
+<span class="nc" id="L89">          node1.setRightChild(operation.get());</span>
+<span class="nc" id="L90">          nodeStack.push(node1);</span>
+        }
+      }
+
+    }
+<span class="nc" id="L95">    return nodeStack;</span>
+  }
+
+
+  Optional&lt;ASTNode&gt; ASTNodeIdentifier(Token token) {
+<span class="fc bfc" id="L100" title="All 2 branches covered.">    if (token.getType().equals(TokenType.IDENTIFIER)) {</span>
+<span class="fc" id="L101">      return Optional.of(ASTNodeFactory11.identifier(token));</span>
+<span class="fc" id="L102">    } else if (token.getType().equals(TokenType.NUMBER_TYPE)</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        | token.getType().equals(TokenType.STRING_TYPE)) {</span>
+<span class="fc" id="L104">      return Optional.of(ASTNodeFactory11.variableType(token));</span>
+    } else {
+      try {
+<span class="nc" id="L107">        return Optional.of(ASTNodeFactory11.literal(token));</span>
+<span class="fc" id="L108">      } catch (IllegalArgumentException e) {</span>
+        try {
+<span class="nc" id="L110">          return Optional.of(ASTNodeFactory11.print(token));</span>
+<span class="fc" id="L111">        } catch (IllegalArgumentException j) {</span>
+<span class="fc" id="L112">          return Optional.empty();</span>
+        }
+      }
+    }
+
+  }
+
+  Optional&lt;ASTNode&gt; ASTNodeIdentifier(Token token, ASTNode left, ASTNode right) {
+    try {
+<span class="nc" id="L121">      return Optional.of(ASTNodeFactory11.assignation(token, left, right));</span>
+<span class="fc" id="L122">    } catch (IllegalArgumentException e) {</span>
+      try {
+<span class="fc" id="L124">        return Optional.of(ASTNodeFactory11.declaration(token, left, right));</span>
+<span class="fc" id="L125">      } catch (IllegalArgumentException i) {</span>
+        try {
+<span class="nc" id="L127">          return Optional.of(ASTNodeFactory11.operation(token, left, right));</span>
+<span class="fc" id="L128">        } catch (IllegalArgumentException h) {</span>
+<span class="fc" id="L129">          return Optional.empty();</span>
+        }
+      }
+
+    }
+  }
+
+
+}
+</pre>
+    <div class="footer">
+      <span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "test",
+    "startingColumn": 4,
+    "endingColumn": 7,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 8,
+    "endingColumn": 8,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "BOOLEAN_TYPE",
+    "value": "boolean",
+    "startingColumn": 10,
+    "endingColumn": 16,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 18,
+    "endingColumn": 18,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "TRUE",
+    "value": "true",
+    "startingColumn": 20,
+    "endingColumn": 23,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 24,
+    "endingColumn": 24,
+    "startingLine": 0,
+    "endingLine": 0
+  }
+]

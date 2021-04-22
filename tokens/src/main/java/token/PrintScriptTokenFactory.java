@@ -104,5 +104,20 @@ public class PrintScriptTokenFactory {
     return new Token(TokenType.ELSE, "else", cn, ln, ln);
   }
 
+  public static Token openingParenthesis(int ln, int cn) {
+    return new Token(TokenType.OPENING_PARENTHESIS, "else", cn, ln, ln);
+  }
+
+  public static Token closingParenthesis(int ln, int cn) {
+    return new Token(TokenType.CLOSING_PARENTHESIS, "else", cn, ln, ln);
+  }
+
+  public static Token openingBrackets(int ln, int cn) {
+    return new Token(TokenType.OPENING_BRACKETS, "else", cn, ln, ln);
+  }
+
+  public static Token closingBrackets(int ln, int cn) {
+    return new Token(TokenType.CLOSING_BRACKETS, "else", cn, ln, ln);
+  }
 
 }
