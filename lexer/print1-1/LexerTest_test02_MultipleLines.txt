@@ -1,0 +1,114 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "name",
+    "startingColumn": 4,
+    "endingColumn": 7,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "STRING_TYPE",
+    "value": "string",
+    "startingColumn": 11,
+    "endingColumn": 16,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 18,
+    "endingColumn": 18,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "STRING",
+    "value": "\"Khalil\"",
+    "startingColumn": 20,
+    "endingColumn": 27,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 29,
+    "endingColumn": 29,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "lastName",
+    "startingColumn": 4,
+    "endingColumn": 11,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 13,
+    "endingColumn": 13,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "STRING_TYPE",
+    "value": "string",
+    "startingColumn": 15,
+    "endingColumn": 20,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 22,
+    "endingColumn": 22,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "STRING",
+    "value": "\"Stessens\"",
+    "startingColumn": 24,
+    "endingColumn": 33,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 35,
+    "endingColumn": 35,
+    "startingLine": 1,
+    "endingLine": 1
+  }
+]

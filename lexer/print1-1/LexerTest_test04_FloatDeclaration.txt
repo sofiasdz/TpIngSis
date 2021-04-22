@@ -1,0 +1,58 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "FLOATING_POINT",
+    "value": "12.04",
+    "startingColumn": 17,
+    "endingColumn": 21,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 22,
+    "endingColumn": 22,
+    "startingLine": 0,
+    "endingLine": 0
+  }
+]

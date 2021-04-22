@@ -1,18 +1,18 @@
 import JSONWriter.JSONFileWriter;
+import lexer.PS11Lexer;
 import lexer.PSLexer;
 import org.junit.Assert;
 import org.junit.Test;
 import token.Token;
 import java.util.List;
 
-public class LexerTest {
-
+public class Lexer11Test {
   private void goldenFileAsserter(String testName, List<String> lines) {
-    PSLexer psLexer = new PSLexer();
+    PS11Lexer psLexer = new PS11Lexer();
     List<Token> tokenList = psLexer.identifyTokens(lines);
-    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testName);
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList("print1-1/" + testName);
     if (goldenFile.isEmpty())
-      JSONFileWriter.tokenListToJSON(tokenList, testName);
+      JSONFileWriter.tokenListToJSON(tokenList, "print1-1/" + testName);
     else
       Assert.assertEquals(goldenFile, tokenList);
   }
@@ -98,5 +98,10 @@ public class LexerTest {
     goldenFileAsserter(testname, List.of(line1, line2, line3, line4, line5));
   }
 
-
+  @Test
+  public void test010_GivenABooleanShouldReturnAValidToken() {
+    final String testname = "LexerTest_test10_boolean";
+    String line1 = "let test: boolean = true;";
+    goldenFileAsserter(testname, List.of(line1));
+  }
 }

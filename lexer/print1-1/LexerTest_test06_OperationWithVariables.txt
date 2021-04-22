@@ -1,0 +1,218 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 14,
+    "endingColumn": 14,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 2,
+    "endingColumn": 2,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "INTEGER",
+    "value": "24",
+    "startingColumn": 4,
+    "endingColumn": 5,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "y",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 7,
+    "endingColumn": 12,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 14,
+    "endingColumn": 14,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "y",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 2,
+    "endingColumn": 2,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "INTEGER",
+    "value": "16",
+    "startingColumn": 4,
+    "endingColumn": 5,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "z",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 17,
+    "endingColumn": 17,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "ADDITION",
+    "value": "+",
+    "startingColumn": 19,
+    "endingColumn": 19,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "y",
+    "startingColumn": 21,
+    "endingColumn": 21,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 23,
+    "endingColumn": 23,
+    "startingLine": 4,
+    "endingLine": 4
+  }
+]

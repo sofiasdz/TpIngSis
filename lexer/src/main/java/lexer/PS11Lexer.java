@@ -140,6 +140,13 @@ public class PS11Lexer implements Lexer {
             case "+" -> Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
             case "/" -> Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
             case "*" -> Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
+            case "true" -> Optional.of(PrintScriptTokenFactory.trueValue(lineNumber, columnNumber));
+            case "false" -> Optional.of(PrintScriptTokenFactory.falseValue(lineNumber, columnNumber));
+            case "boolean" -> Optional.of(PrintScriptTokenFactory.booleanType(lineNumber, columnNumber));
+            case ">" -> Optional.of(PrintScriptTokenFactory.greater(lineNumber, columnNumber));
+            case "<" -> Optional.of(PrintScriptTokenFactory.smaller(lineNumber, columnNumber));
+            case ">=" -> Optional.of(PrintScriptTokenFactory.equalOrGreater(lineNumber, columnNumber));
+            case "<=" -> Optional.of(PrintScriptTokenFactory.equalOrSmaller(lineNumber, columnNumber));
             //Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
             //Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
             default -> identifiersMap.containsKey(token) ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber)) : Optional.empty();

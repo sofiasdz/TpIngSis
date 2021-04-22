@@ -1,0 +1,218 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "variableName",
+    "startingColumn": 4,
+    "endingColumn": 15,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 17,
+    "endingColumn": 17,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "STRING_TYPE",
+    "value": "string",
+    "startingColumn": 19,
+    "endingColumn": 24,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 26,
+    "endingColumn": 26,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "STRING",
+    "value": "\"Khali\"",
+    "startingColumn": 28,
+    "endingColumn": 34,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 36,
+    "endingColumn": 36,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "variableLastName",
+    "startingColumn": 4,
+    "endingColumn": 19,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 21,
+    "endingColumn": 21,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "STRING_TYPE",
+    "value": "string",
+    "startingColumn": 23,
+    "endingColumn": 28,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 30,
+    "endingColumn": 30,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "STRING",
+    "value": "\"Stessens\"",
+    "startingColumn": 32,
+    "endingColumn": 41,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 43,
+    "endingColumn": 43,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "fullName",
+    "startingColumn": 4,
+    "endingColumn": 11,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 13,
+    "endingColumn": 13,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "STRING_TYPE",
+    "value": "string",
+    "startingColumn": 15,
+    "endingColumn": 20,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 22,
+    "endingColumn": 22,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "fullName",
+    "startingColumn": 0,
+    "endingColumn": 7,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "variableName",
+    "startingColumn": 11,
+    "endingColumn": 22,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "ADDITION",
+    "value": "+",
+    "startingColumn": 24,
+    "endingColumn": 24,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "variableLastName",
+    "startingColumn": 26,
+    "endingColumn": 41,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 43,
+    "endingColumn": 43,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "PRINTLN",
+    "value": "fullName",
+    "startingColumn": 9,
+    "endingColumn": 16,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 17,
+    "endingColumn": 17,
+    "startingLine": 4,
+    "endingLine": 4
+  }
+]
