@@ -119,7 +119,9 @@ public class PS11Lexer implements Lexer {
   }
 
   private boolean variableWasDeclared(List<Token> list) {
-    return !list.isEmpty() && list.get(list.size() - 1).getValue().equals("let");
+    return !list.isEmpty()
+        && (list.get(list.size() - 1).getValue().equals("let") | list.get(list.size() - 1)
+            .getValue().equals("const"));
   }
 
   private boolean isNumber(String string) {
@@ -150,6 +152,7 @@ public class PS11Lexer implements Lexer {
             case "boolean" -> Optional.of(PrintScriptTokenFactory.booleanType(lineNumber, columnNumber));
             case ">" -> Optional.of(PrintScriptTokenFactory.greater(lineNumber, columnNumber));
             case "<" -> Optional.of(PrintScriptTokenFactory.smaller(lineNumber, columnNumber));
+            case "const"-> Optional.of(PrintScriptTokenFactory.constKeyword(lineNumber, columnNumber));
 
             //Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
             //Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier

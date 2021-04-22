@@ -132,7 +132,7 @@ public class Lexer11Test {
 
   @Test
   public void test014_GivenASmallerOrEqualThanShouldReturnAValidToken() {
-    final String testname = "LexerTest_test13_smallerOrEqual";
+    final String testname = "LexerTest_test14_smallerOrEqual";
     String line1 = "let x: number = 2;";
     String line2 = "let y: number = 4;";
     String line3 = "let test: boolean = x<=y;";
@@ -141,10 +141,17 @@ public class Lexer11Test {
 
   @Test
   public void test015_GivenAGreaterOrEqualThanShouldReturnAValidToken() {
-    final String testname = "LexerTest_test13_greaterOrEqual";
+    final String testname = "LexerTest_test15_greaterOrEqual";
     String line1 = "let x: number = 2;";
     String line2 = "let y: number = 4;";
     String line3 = "let test: boolean = x>=y;";
     goldenFileAsserter(testname, List.of(line1, line2, line3));
+  }
+
+  @Test
+  public void test016_GivenAConstShouldReturnAValidToken() {
+    final String testname = "LexerTest_test16_const";
+    String line1 = "const gravity: number = 10 ;";
+    goldenFileAsserter(testname, List.of(line1));
   }
 }

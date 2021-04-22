@@ -1,0 +1,58 @@
+[
+  {
+    "type": "CONST",
+    "value": "const",
+    "startingColumn": 0,
+    "endingColumn": 4,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "gravity",
+    "startingColumn": 6,
+    "endingColumn": 12,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 13,
+    "endingColumn": 13,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 15,
+    "endingColumn": 20,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 22,
+    "endingColumn": 22,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "10",
+    "startingColumn": 24,
+    "endingColumn": 25,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 27,
+    "endingColumn": 27,
+    "startingLine": 0,
+    "endingLine": 0
+  }
+]
