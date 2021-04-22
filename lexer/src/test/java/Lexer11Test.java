@@ -154,4 +154,19 @@ public class Lexer11Test {
     String line1 = "const gravity: number = 10 ;";
     goldenFileAsserter(testname, List.of(line1));
   }
+
+  @Test
+  public void test017_GivenAnIfStatementShouldReturnAValidToken() {
+    final String testname = "LexerTest_test17_if";
+    String line1 = "if(true){ let x: number = 1;}";
+    goldenFileAsserter(testname, List.of(line1));
+  }
+
+  @Test
+  public void test018_GivenAnIfElseStatementReturnAValidToken() {
+    final String testname = "LexerTest_test18_ifElse";
+    String line1 = "if(true){ let x: number = 1;}";
+    String line2 = "else { let x: number = 2;}";
+    goldenFileAsserter(testname, List.of(line1, line2));
+  }
 }

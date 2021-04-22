@@ -153,6 +153,13 @@ public class PS11Lexer implements Lexer {
             case ">" -> Optional.of(PrintScriptTokenFactory.greater(lineNumber, columnNumber));
             case "<" -> Optional.of(PrintScriptTokenFactory.smaller(lineNumber, columnNumber));
             case "const"-> Optional.of(PrintScriptTokenFactory.constKeyword(lineNumber, columnNumber));
+            case "if"-> Optional.of(PrintScriptTokenFactory.ifKeyword(lineNumber, columnNumber));
+            case "else"-> Optional.of(PrintScriptTokenFactory.elseKeyword(lineNumber, columnNumber));
+            case "("-> Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber, columnNumber));
+            case ")"-> Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber, columnNumber));
+            case "{"-> Optional.of(PrintScriptTokenFactory.openingBrackets(lineNumber, columnNumber));
+            case "}"-> Optional.of(PrintScriptTokenFactory.closingBrackets(lineNumber, columnNumber));
+
 
             //Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
             //Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
