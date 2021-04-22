@@ -64,8 +64,8 @@ public class PrintScriptTokenFactory {
 
   // /PRINTSCRIPT 1.1
 
-  public static Token constType(int ln, int cn) {
-    return new Token(TokenType.CONST_TYPE, "const", cn, ln, ln);
+  public static Token constKeyword(int ln, int cn) {
+    return new Token(TokenType.CONST, "const", cn, ln, ln);
   }
 
   public static Token booleanType(int ln, int cn) {
