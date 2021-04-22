@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SyntacticAnalyzerTest11" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-04-22T17:31:26" hostname="MacBook-Pro.fibertel.com.ar" time="0.134">
+  <properties/>
+  <testcase name="test005_GivenDeclarationAndLaterValueShouldReturnDeclarationAndAssignationNode" classname="SyntacticAnalyzerTest11" time="0.11"/>
+  <testcase name="test007_GivenOperationsAndDeclarationsShouldReturnAssignationNodes" classname="SyntacticAnalyzerTest11" time="0.005"/>
+  <testcase name="test000_GivenStringAndVariableNameShouldReturnDeclarationNode" classname="SyntacticAnalyzerTest11" time="0.004"/>
+  <testcase name="test002_GivenMultipleVariablesAndValuesShouldReturnMultipleAssignationNodes" classname="SyntacticAnalyzerTest11" time="0.002"/>
+  <testcase name="test004_GivenFloatDeclarationAndValueShouldReturnAssignationNode" classname="SyntacticAnalyzerTest11" time="0.002"/>
+  <testcase name="test003_GivenIntegerDeclarationAndValueShouldReturnAssignationNode" classname="SyntacticAnalyzerTest11" time="0.002"/>
+  <testcase name="test009_GivenStringConcatShouldReturnValidString" classname="SyntacticAnalyzerTest11" time="0.002"/>
+  <testcase name="test001_GivenStringVariableAndValueShouldReturnAssignationNode" classname="SyntacticAnalyzerTest11" time="0.002"/>
+  <testcase name="test008_GivenPrintShouldReturnPrintNodes" classname="SyntacticAnalyzerTest11" time="0.002"/>
+  <testcase name="test006_GivenAnOperationAndDeclarationsShouldReturnAssignationNodes" classname="SyntacticAnalyzerTest11" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
