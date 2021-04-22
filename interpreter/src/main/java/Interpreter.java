@@ -1,2 +1,1 @@
-public interface Interpreter {
-}
+public interface Interpreter {}

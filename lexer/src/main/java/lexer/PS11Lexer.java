@@ -1,11 +1,11 @@
 package lexer;
 
-import token.PrintScriptTokenFactory;
-import token.Token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import token.PrintScriptTokenFactory;
+import token.Token;
 
 public class PS11Lexer implements Lexer {
   HashMap<String, Token> identifiersMap;
@@ -39,16 +39,12 @@ public class PS11Lexer implements Lexer {
       if (currentWord.equals("<") | currentWord.equals(">") && line.get(i + 1).equals("="))
         currentWord = currentWord + line.get(i + 1);
       token = tokenIdentifier(currentWord, line.getLineNumber(), i);
-      if (isNumber(currentWord))
-        i = numberVerification(currentWord, line, i, token);
-      else if (variableWasDeclared(list))
-        i = identifierVerification(currentWord, line, i, token);
+      if (isNumber(currentWord)) i = numberVerification(currentWord, line, i, token);
+      else if (variableWasDeclared(list)) i = identifierVerification(currentWord, line, i, token);
       else if (isString(currentWord))
         token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
-      else if (isPrint(currentWord))
-        i = printVerification(currentWord, line, i, token);
-      else
-        token = tokenIdentifier(currentWord, line.getLineNumber(), i);
+      else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
+      else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
       if (token.isPresent()) {
         list.add(token.get());
@@ -71,8 +67,7 @@ public class PS11Lexer implements Lexer {
       }
       if (isNumber(currentWord))
         token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
-      else
-        token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
+      else token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
     }
     return i;
   }
@@ -114,14 +109,15 @@ public class PS11Lexer implements Lexer {
   }
 
   private boolean isString(String currentWord) {
-    return currentWord.length() > 1 && currentWord.charAt(0) == '"'
+    return currentWord.length() > 1
+        && currentWord.charAt(0) == '"'
         && currentWord.charAt(currentWord.length() - 1) == '"';
   }
 
   private boolean variableWasDeclared(List<Token> list) {
     return !list.isEmpty()
-        && (list.get(list.size() - 1).getValue().equals("let") | list.get(list.size() - 1)
-            .getValue().equals("const"));
+        && (list.get(list.size() - 1).getValue().equals("let")
+            | list.get(list.size() - 1).getValue().equals("const"));
   }
 
   private boolean isNumber(String string) {
@@ -134,36 +130,37 @@ public class PS11Lexer implements Lexer {
   }
 
   private Optional<Token> tokenIdentifier(String token, int lineNumber, int columnNumber) {
-        return switch (token) {
-            case "let" -> Optional.of(PrintScriptTokenFactory.let(lineNumber, columnNumber));
-            case "string" -> Optional.of(PrintScriptTokenFactory.stringType(lineNumber, columnNumber));
-            case "number" -> Optional.of(PrintScriptTokenFactory.numberType(lineNumber, columnNumber));
-            case ">=" -> Optional.of(PrintScriptTokenFactory.equalOrGreater(lineNumber, columnNumber));
-            case "<=" -> Optional.of(PrintScriptTokenFactory.equalOrSmaller(lineNumber, columnNumber));
-            case "=" -> Optional.of(PrintScriptTokenFactory.assignation(lineNumber, columnNumber));
-            case ":" -> Optional.of(PrintScriptTokenFactory.colon(lineNumber, columnNumber));
-            case ";" -> Optional.of(PrintScriptTokenFactory.semicolon(lineNumber, columnNumber));
-            case "-" -> Optional.of(PrintScriptTokenFactory.substraction(lineNumber, columnNumber));
-            case "+" -> Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
-            case "/" -> Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
-            case "*" -> Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
-            case "true" -> Optional.of(PrintScriptTokenFactory.trueValue(lineNumber, columnNumber));
-            case "false" -> Optional.of(PrintScriptTokenFactory.falseValue(lineNumber, columnNumber));
-            case "boolean" -> Optional.of(PrintScriptTokenFactory.booleanType(lineNumber, columnNumber));
-            case ">" -> Optional.of(PrintScriptTokenFactory.greater(lineNumber, columnNumber));
-            case "<" -> Optional.of(PrintScriptTokenFactory.smaller(lineNumber, columnNumber));
-            case "const"-> Optional.of(PrintScriptTokenFactory.constKeyword(lineNumber, columnNumber));
-            case "if"-> Optional.of(PrintScriptTokenFactory.ifKeyword(lineNumber, columnNumber));
-            case "else"-> Optional.of(PrintScriptTokenFactory.elseKeyword(lineNumber, columnNumber));
-            case "("-> Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber, columnNumber));
-            case ")"-> Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber, columnNumber));
-            case "{"-> Optional.of(PrintScriptTokenFactory.openingBrackets(lineNumber, columnNumber));
-            case "}"-> Optional.of(PrintScriptTokenFactory.closingBrackets(lineNumber, columnNumber));
+    return switch (token) {
+      case "let" -> Optional.of(PrintScriptTokenFactory.let(lineNumber, columnNumber));
+      case "string" -> Optional.of(PrintScriptTokenFactory.stringType(lineNumber, columnNumber));
+      case "number" -> Optional.of(PrintScriptTokenFactory.numberType(lineNumber, columnNumber));
+      case ">=" -> Optional.of(PrintScriptTokenFactory.equalOrGreater(lineNumber, columnNumber));
+      case "<=" -> Optional.of(PrintScriptTokenFactory.equalOrSmaller(lineNumber, columnNumber));
+      case "=" -> Optional.of(PrintScriptTokenFactory.assignation(lineNumber, columnNumber));
+      case ":" -> Optional.of(PrintScriptTokenFactory.colon(lineNumber, columnNumber));
+      case ";" -> Optional.of(PrintScriptTokenFactory.semicolon(lineNumber, columnNumber));
+      case "-" -> Optional.of(PrintScriptTokenFactory.substraction(lineNumber, columnNumber));
+      case "+" -> Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
+      case "/" -> Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
+      case "*" -> Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
+      case "true" -> Optional.of(PrintScriptTokenFactory.trueValue(lineNumber, columnNumber));
+      case "false" -> Optional.of(PrintScriptTokenFactory.falseValue(lineNumber, columnNumber));
+      case "boolean" -> Optional.of(PrintScriptTokenFactory.booleanType(lineNumber, columnNumber));
+      case ">" -> Optional.of(PrintScriptTokenFactory.greater(lineNumber, columnNumber));
+      case "<" -> Optional.of(PrintScriptTokenFactory.smaller(lineNumber, columnNumber));
+      case "const" -> Optional.of(PrintScriptTokenFactory.constKeyword(lineNumber, columnNumber));
+      case "if" -> Optional.of(PrintScriptTokenFactory.ifKeyword(lineNumber, columnNumber));
+      case "else" -> Optional.of(PrintScriptTokenFactory.elseKeyword(lineNumber, columnNumber));
+      case "(" -> Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber, columnNumber));
+      case ")" -> Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber, columnNumber));
+      case "{" -> Optional.of(PrintScriptTokenFactory.openingBrackets(lineNumber, columnNumber));
+      case "}" -> Optional.of(PrintScriptTokenFactory.closingBrackets(lineNumber, columnNumber));
 
-
-            //Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
-            //Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
-            default -> identifiersMap.containsKey(token) ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber)) : Optional.empty();
-        };
-    }
+        // Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
+        // Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
+      default -> identifiersMap.containsKey(token)
+          ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber))
+          : Optional.empty();
+    };
+  }
 }

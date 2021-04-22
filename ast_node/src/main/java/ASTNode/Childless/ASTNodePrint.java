@@ -4,17 +4,17 @@ import token.Token;
 
 public class ASTNodePrint extends ASTNodeChildless {
 
-    public ASTNodePrint(Token token) {
-        super(token);
-    }
+  public ASTNodePrint(Token token) {
+    super(token);
+  }
 
-    @Override
-    public String toString() {
-        return "PrintLn ( "+ token.getValue()+" )";
-    }
+  @Override
+  public String toString() {
+    return "PrintLn ( " + token.getValue() + " )";
+  }
 
-    @Override
-    public String getNodeType() {
-        return "print";
-    }
+  @Override
+  public String getNodeType() {
+    return "print";
+  }
 }

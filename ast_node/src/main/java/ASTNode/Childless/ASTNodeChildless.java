@@ -3,32 +3,28 @@ package ASTNode.Childless;
 import ASTNode.ASTNode;
 import ASTNode.NodeType;
 import ASTNode.TokenGroup.TokenGroup;
+import java.util.Objects;
 import token.Token;
 
-import java.util.Objects;
+public abstract class ASTNodeChildless extends ASTNode {
+  TokenGroup tokenGroup;
 
-public  abstract class ASTNodeChildless extends ASTNode {
-   TokenGroup tokenGroup;
+  public ASTNodeChildless(Token token) {
+    super.token = token;
+    super.nodeType = NodeType.CHILDLESS;
+  }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof ASTNodeChildless)) return false;
+    if (!super.equals(o)) return false;
+    ASTNodeChildless that = (ASTNodeChildless) o;
+    return Objects.equals(getNodeType(), that.getNodeType()) && Objects.equals(token, that.token);
+  }
 
-
-    public ASTNodeChildless(Token token) {
-       super.token=token;
-       super.nodeType= NodeType.CHILDLESS;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ASTNodeChildless)) return false;
-        if (!super.equals(o)) return false;
-        ASTNodeChildless that = (ASTNodeChildless) o;
-        return Objects.equals(getNodeType(), that.getNodeType()) &&
-                Objects.equals(token, that.token);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getNodeType());
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getNodeType());
+  }
 }

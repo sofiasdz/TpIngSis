@@ -7,17 +7,16 @@ import java.util.List;
 
 public class FileToString {
 
-    public static List<String> fileReader(String path) {
-        List<String> list = new ArrayList<String>();
-        File file = new File(path);
-        if(file.exists()){
-            try {
-                list = Files.readAllLines(file.toPath(), Charset.defaultCharset());
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return list;
+  public static List<String> fileReader(String path) {
+    List<String> list = new ArrayList<String>();
+    File file = new File(path);
+    if (file.exists()) {
+      try {
+        list = Files.readAllLines(file.toPath(), Charset.defaultCharset());
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
     }
-
+    return list;
+  }
 }

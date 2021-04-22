@@ -1,20 +1,17 @@
 import JSONWriter.JSONFileWriter;
+import java.util.List;
 import lexer.PS11Lexer;
-import lexer.PSLexer;
 import org.junit.Assert;
 import org.junit.Test;
 import token.Token;
-import java.util.List;
 
 public class Lexer11Test {
   private void goldenFileAsserter(String testName, List<String> lines) {
     PS11Lexer psLexer = new PS11Lexer();
     List<Token> tokenList = psLexer.identifyTokens(lines);
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList("print1-1/" + testName);
-    if (goldenFile.isEmpty())
-      JSONFileWriter.tokenListToJSON(tokenList, "print1-1/" + testName);
-    else
-      Assert.assertEquals(goldenFile, tokenList);
+    if (goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList, "print1-1/" + testName);
+    else Assert.assertEquals(goldenFile, tokenList);
   }
 
   @Test
@@ -45,7 +42,6 @@ public class Lexer11Test {
     String line1 = "let x : number = 12.04;";
     goldenFileAsserter(testName, List.of(line1));
   }
-
 
   @Test
   public void test05_GivenAVariableDeclarationAndLaterDefiningAValueShouldReturnAValidTokenList() {

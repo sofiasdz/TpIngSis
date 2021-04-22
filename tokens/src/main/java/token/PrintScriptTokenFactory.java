@@ -119,5 +119,4 @@ public class PrintScriptTokenFactory {
   public static Token closingBrackets(int ln, int cn) {
     return new Token(TokenType.CLOSING_BRACKETS, "else", cn, ln, ln);
   }
-
 }

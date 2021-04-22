@@ -1,25 +1,24 @@
 package ASTNode.TokenGroup;
 
+import java.util.List;
 import token.Token;
 import token.TokenType;
 
-import java.util.List;
-
 public class TokenGroup {
-    List<TokenType> tokenTypes;
+  List<TokenType> tokenTypes;
 
-    public TokenGroup(List<TokenType> tokenTypes) {
-        this.tokenTypes = tokenTypes;
-    }
+  public TokenGroup(List<TokenType> tokenTypes) {
+    this.tokenTypes = tokenTypes;
+  }
 
-    public List<TokenType> getTokens() {
-        return tokenTypes;
-    }
+  public List<TokenType> getTokens() {
+    return tokenTypes;
+  }
 
-    public  boolean belongs(Token token){
-        for (TokenType t : tokenTypes) {
-            if(t.equals(token.getType())) return true;
-        }
-        return false;
+  public boolean belongs(Token token) {
+    for (TokenType t : tokenTypes) {
+      if (t.equals(token.getType())) return true;
     }
+    return false;
+  }
 }

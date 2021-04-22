@@ -1,24 +1,19 @@
 package syntactic_analyzer;
 
 import ASTNode.ASTNode;
-import ASTNode.Factory.ASTNodeFactory;
 import ASTNode.Factory.ASTNodeFactory11;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.TokenGroup.TokenGroup;
-import syntactic_analyzer.SyntacticAnalyzer;
-import token.Token;
-import token.TokenType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
+import token.Token;
+import token.TokenType;
 
 public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
 
-
-  public PS11SyntacticAnalyzer() {
-
-  }
+  public PS11SyntacticAnalyzer() {}
 
   @Override
   public List<ASTNode> analyze(List<Token> tokens) {
@@ -39,17 +34,14 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     List<Token> tokenList = new ArrayList<>();
     for (int i = tokens.size() - 1; i >= 0; i--) {
       Optional<ASTNode> optionalASTNode = ASTNodeIdentifier(tokens.get(i));
-      if (optionalASTNode.isEmpty())
-        tokenList.add(tokens.get(i));
-      else
-        nodeStack.push(optionalASTNode.get());
+      if (optionalASTNode.isEmpty()) tokenList.add(tokens.get(i));
+      else nodeStack.push(optionalASTNode.get());
       // Si el optional es un nodo, lo stackeo. Voy de atrás para adelante para no tener problema
       // con los nodos
     }
     for (int i = tokenList.size() - 1; i >= 0; i--) {
       if (tokenList.get(i).getType().equals(TokenType.LET)
-          | tokenList.get(i).getType().equals(TokenType.SEMICOLON))
-        tokenList.remove(i);
+          | tokenList.get(i).getType().equals(TokenType.SEMICOLON)) tokenList.remove(i);
     }
 
     while (nodeStack.size() > 1) {
@@ -78,8 +70,12 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
   Stack<ASTNode> operationCheck(Stack<ASTNode> nodeStack, List<Token> tokenList) {
     if (nodeStack.peek().token.getType().equals(TokenType.ASSIGNATION)) {
       TokenGroup group =
-          new TokenGroup(List.of(TokenType.ADDITION, TokenType.SUBSTRACTION, TokenType.DIVISION,
-              TokenType.MULTIPLICATION));
+          new TokenGroup(
+              List.of(
+                  TokenType.ADDITION,
+                  TokenType.SUBSTRACTION,
+                  TokenType.DIVISION,
+                  TokenType.MULTIPLICATION));
       for (int i = 0; i < tokenList.size(); i++) {
         if (group.belongs(tokenList.get(i))) {
           ASTNodeAssignation node1 = (ASTNodeAssignation) nodeStack.pop();
@@ -90,11 +86,9 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
           nodeStack.push(node1);
         }
       }
-
     }
     return nodeStack;
   }
-
 
   Optional<ASTNode> ASTNodeIdentifier(Token token) {
     if (token.getType().equals(TokenType.IDENTIFIER)) {
@@ -113,7 +107,6 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
         }
       }
     }
-
   }
 
   Optional<ASTNode> ASTNodeIdentifier(Token token, ASTNode left, ASTNode right) {
@@ -129,9 +122,6 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
           return Optional.empty();
         }
       }
-
     }
   }
-
-
 }

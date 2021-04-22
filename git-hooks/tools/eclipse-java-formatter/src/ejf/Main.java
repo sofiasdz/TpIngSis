@@ -1,5 +1,12 @@
 package ejf;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Properties;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jdt.internal.formatter.DefaultCodeFormatter;
 import org.eclipse.jface.text.BadLocationException;
@@ -10,15 +17,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.Normalizer;
-import java.util.Arrays;
-import java.util.Properties;
 
 public class Main {
 
@@ -37,8 +35,7 @@ public class Main {
           System.err.println(e.toString() + ": " + f);
           someFailed = true;
         }
-      if (someFailed)
-        System.exit(1);
+      if (someFailed) System.exit(1);
     } catch (Exception e) {
       System.err.println(e.toString());
       System.exit(2);
@@ -56,8 +53,8 @@ public class Main {
   private static class Formatter {
     private final CodeFormatter formatter;
 
-    public Formatter(final String xmlFile) throws IOException, SAXException,
-        ParserConfigurationException {
+    public Formatter(final String xmlFile)
+        throws IOException, SAXException, ParserConfigurationException {
       formatter = new DefaultCodeFormatter(props(xmlFile));
     }
 
@@ -65,16 +62,20 @@ public class Main {
       final IDocument doc = new Document();
       doc.set(input);
       final TextEdit edit =
-          formatter.format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS,
-              input, 0, input.length(), 0, "\n");
-      if (edit == null)
-        throw new RuntimeException("formatting failed");
+          formatter.format(
+              CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS,
+              input,
+              0,
+              input.length(),
+              0,
+              "\n");
+      if (edit == null) throw new RuntimeException("formatting failed");
       edit.apply(doc);
       return doc.get();
     }
 
-    private static Properties props(final String xmlFile) throws ParserConfigurationException,
-        IOException, SAXException {
+    private static Properties props(final String xmlFile)
+        throws ParserConfigurationException, IOException, SAXException {
       Properties r = new Properties();
 
       org.w3c.dom.Document doc =
@@ -101,5 +102,4 @@ public class Main {
       return r;
     }
   }
-
 }

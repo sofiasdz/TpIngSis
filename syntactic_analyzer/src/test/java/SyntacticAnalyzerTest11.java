@@ -1,13 +1,12 @@
 import ASTNode.ASTNode;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import JSONWriter.JSONFileWriter;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import syntactic_analyzer.PS11SyntacticAnalyzer;
 import syntactic_analyzer.PSSyntacticAnalyzer;
 import token.Token;
-import java.util.List;
-
 
 public class SyntacticAnalyzerTest11 {
   static String folder = "print1-1/";
@@ -110,8 +109,8 @@ public class SyntacticAnalyzerTest11 {
     PSSyntacticAnalyzer psSyntacticAnalyzer = new PSSyntacticAnalyzer();
     List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
     Assert.assertEquals("assignation", tree.get(3).getNodeType());
-    Assert.assertEquals("operation", ((ASTNodeAssignation) tree.get(3)).getRightChild()
-        .getNodeType());
+    Assert.assertEquals(
+        "operation", ((ASTNodeAssignation) tree.get(3)).getRightChild().getNodeType());
   }
 
   @Test
@@ -123,7 +122,4 @@ public class SyntacticAnalyzerTest11 {
         psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
     Assert.assertEquals("declaration", tree.get(0).getNodeType());
   }
-
-
-
 }
