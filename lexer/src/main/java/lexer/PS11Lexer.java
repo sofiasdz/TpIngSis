@@ -36,6 +36,9 @@ public class PS11Lexer implements Lexer {
         currentWord = "";
         continue;
       }
+      if (currentWord.equals("<") | currentWord.equals(">") && line.get(i + 1).equals("="))
+        currentWord = currentWord + line.get(i + 1);
+      token = tokenIdentifier(currentWord, line.getLineNumber(), i);
       if (isNumber(currentWord))
         i = numberVerification(currentWord, line, i, token);
       else if (variableWasDeclared(list))
@@ -133,6 +136,8 @@ public class PS11Lexer implements Lexer {
             case "let" -> Optional.of(PrintScriptTokenFactory.let(lineNumber, columnNumber));
             case "string" -> Optional.of(PrintScriptTokenFactory.stringType(lineNumber, columnNumber));
             case "number" -> Optional.of(PrintScriptTokenFactory.numberType(lineNumber, columnNumber));
+            case ">=" -> Optional.of(PrintScriptTokenFactory.equalOrGreater(lineNumber, columnNumber));
+            case "<=" -> Optional.of(PrintScriptTokenFactory.equalOrSmaller(lineNumber, columnNumber));
             case "=" -> Optional.of(PrintScriptTokenFactory.assignation(lineNumber, columnNumber));
             case ":" -> Optional.of(PrintScriptTokenFactory.colon(lineNumber, columnNumber));
             case ";" -> Optional.of(PrintScriptTokenFactory.semicolon(lineNumber, columnNumber));
@@ -145,8 +150,7 @@ public class PS11Lexer implements Lexer {
             case "boolean" -> Optional.of(PrintScriptTokenFactory.booleanType(lineNumber, columnNumber));
             case ">" -> Optional.of(PrintScriptTokenFactory.greater(lineNumber, columnNumber));
             case "<" -> Optional.of(PrintScriptTokenFactory.smaller(lineNumber, columnNumber));
-            case ">=" -> Optional.of(PrintScriptTokenFactory.equalOrGreater(lineNumber, columnNumber));
-            case "<=" -> Optional.of(PrintScriptTokenFactory.equalOrSmaller(lineNumber, columnNumber));
+
             //Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
             //Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
             default -> identifiersMap.containsKey(token) ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber)) : Optional.empty();

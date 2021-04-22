@@ -104,4 +104,47 @@ public class Lexer11Test {
     String line1 = "let test: boolean = true;";
     goldenFileAsserter(testname, List.of(line1));
   }
+
+  @Test
+  public void test011_GivenABooleanShouldReturnAValidToken() {
+    final String testname = "LexerTest_test11_boolean";
+    String line1 = "let test: boolean = false;";
+    goldenFileAsserter(testname, List.of(line1));
+  }
+
+  @Test
+  public void test012_GivenAGreaterThanShouldReturnAValidToken() {
+    final String testname = "LexerTest_test12_greater";
+    String line1 = "let x: number = 2;";
+    String line2 = "let y: number = 4;";
+    String line3 = "let test: boolean = x>y;";
+    goldenFileAsserter(testname, List.of(line1, line2, line3));
+  }
+
+  @Test
+  public void test013_GivenASmallerThanShouldReturnAValidToken() {
+    final String testname = "LexerTest_test13_smaller";
+    String line1 = "let x: number = 2;";
+    String line2 = "let y: number = 4;";
+    String line3 = "let test: boolean = x<y;";
+    goldenFileAsserter(testname, List.of(line1, line2, line3));
+  }
+
+  @Test
+  public void test014_GivenASmallerOrEqualThanShouldReturnAValidToken() {
+    final String testname = "LexerTest_test13_smallerOrEqual";
+    String line1 = "let x: number = 2;";
+    String line2 = "let y: number = 4;";
+    String line3 = "let test: boolean = x<=y;";
+    goldenFileAsserter(testname, List.of(line1, line2, line3));
+  }
+
+  @Test
+  public void test015_GivenAGreaterOrEqualThanShouldReturnAValidToken() {
+    final String testname = "LexerTest_test13_greaterOrEqual";
+    String line1 = "let x: number = 2;";
+    String line2 = "let y: number = 4;";
+    String line3 = "let test: boolean = x>=y;";
+    goldenFileAsserter(testname, List.of(line1, line2, line3));
+  }
 }
