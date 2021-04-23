@@ -2,7 +2,6 @@ package syntactic_analyzer;
 
 import ASTNode.ASTNode;
 import ASTNode.Factory.ASTNodeFactory;
-import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.TokenGroup.TokenGroup;
 import java.util.*;
 import token.Token;
@@ -26,8 +25,6 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
     return nodes;
   }
 
-
-
   public ASTNode tokensToNodeRefactored(List<Token> tokens) {
     if (tokens.get(tokens.size() - 1).getType().equals(TokenType.SEMICOLON)) {
       tokens.remove(tokens.size() - 1);
@@ -41,26 +38,22 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
         throw new RuntimeException("Invalid variable declaration");
       Optional<ASTNode> declaration =
           ASTNodeIdentifier(tokens.get(2), type.get(), identifier.get());
-      if (declaration.isEmpty())
-        throw new RuntimeException("Invalid variable declaration");
-      if (tokens.size() < 5)
-        return declaration.get();
+      if (declaration.isEmpty()) throw new RuntimeException("Invalid variable declaration");
+      if (tokens.size() < 5) return declaration.get();
       Token assignationToken = tokens.get(4);
       tokens.subList(0, 5).clear();
       ASTNode result = operationResolver(tokens);
       return (ASTNodeIdentifier(assignationToken, declaration.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.IDENTIFIER)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(0));
-      if (identifier.isEmpty())
-        throw new RuntimeException("Invalid variable declaration");
+      if (identifier.isEmpty()) throw new RuntimeException("Invalid variable declaration");
       Token assignationToken = tokens.get(1);
       tokens.subList(0, 2).clear();
       ASTNode result = operationResolver(tokens);
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
       Optional<ASTNode> print = ASTNodeIdentifier(tokens.get(0));
-      if (print.isEmpty())
-        throw new RuntimeException("Invalid printLn declaration");
+      if (print.isEmpty()) throw new RuntimeException("Invalid printLn declaration");
       return print.get();
     } else {
       throw new RuntimeException("Invalid line start!");
@@ -69,18 +62,30 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
 
   ASTNode operationResolver(List<Token> tokens) {
     TokenGroup literals =
-        new TokenGroup(List.of(TokenType.STRING, TokenType.FLOATING_POINT, TokenType.INTEGER,
-            TokenType.IDENTIFIER));
+        new TokenGroup(
+            List.of(
+                TokenType.STRING,
+                TokenType.FLOATING_POINT,
+                TokenType.INTEGER,
+                TokenType.IDENTIFIER));
     if (tokens.size() == 1 && literals.belongs(tokens.get(0)))
       return ASTNodeIdentifier(tokens.get(0)).get();
     Stack<Token> operatorStack = new Stack<>();
     Queue<Token> outputQueue = new ArrayDeque<>();
     TokenGroup operators =
-        new TokenGroup(List.of(TokenType.SUBSTRACTION, TokenType.ADDITION, TokenType.DIVISION,
-            TokenType.MULTIPLICATION));
+        new TokenGroup(
+            List.of(
+                TokenType.SUBSTRACTION,
+                TokenType.ADDITION,
+                TokenType.DIVISION,
+                TokenType.MULTIPLICATION));
     TokenGroup operands =
-        new TokenGroup(List.of(TokenType.STRING, TokenType.INTEGER, TokenType.FLOATING_POINT,
-            TokenType.IDENTIFIER));
+        new TokenGroup(
+            List.of(
+                TokenType.STRING,
+                TokenType.INTEGER,
+                TokenType.FLOATING_POINT,
+                TokenType.IDENTIFIER));
     for (int i = 0; i < tokens.size(); i++) {
       if (operands.belongs(tokens.get(i))) {
         outputQueue.add(tokens.get(i));
@@ -100,8 +105,7 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
         }
       }
     }
-    while (!operatorStack.isEmpty())
-      outputQueue.add(operatorStack.pop());
+    while (!operatorStack.isEmpty()) outputQueue.add(operatorStack.pop());
     Stack<ASTNode> nodeStack = new Stack<>();
     while (!outputQueue.isEmpty()) {
       if (operands.belongs(outputQueue.peek())) {
