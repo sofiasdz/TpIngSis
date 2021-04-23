@@ -1,186 +1,216 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSInterpreter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">interpreter</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">PSInterpreter.java</span></div><h1>PSInterpreter.java</h1><pre class="source lang-java linenums">import ASTNode.ASTNode;
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css" />
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif" />
+    <title>PSInterpreter.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css" />
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+  </head>
+  <body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+    <div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">interpreter</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">PSInterpreter.java</span></div>
+    <h1>PSInterpreter.java</h1>
+    <pre class="source lang-java linenums">import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeLiteral;
 import ASTNode.Childless.ASTNodePrint;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeOperation;
-import token.TokenType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import token.TokenType;
 
 public class PSInterpreter implements Interpreter {
 
-    HashMap&lt;String, String&gt; stringVariables;
-    HashMap&lt;String, Double&gt; numberVariables;
-    List&lt;String&gt; prints;
+  HashMap&lt;String, String&gt; stringVariables;
+  HashMap&lt;String, Double&gt; numberVariables;
+  List&lt;String&gt; prints;
 
-<span class="fc" id="L19">    public PSInterpreter() {</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L18">  public PSInterpreter() {}</span>
 
-    private void initialize() {
-<span class="fc" id="L23">        stringVariables = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L24">        numberVariables = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L25">        prints = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L26">    }</span>
+  private void initialize() {
+<span class="fc" id="L21">    stringVariables = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L22">    numberVariables = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L23">    prints = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">  }</span>
 
-    public List&lt;String&gt; analyze(List&lt;ASTNode&gt; nodes) {
-<span class="fc" id="L29">        initialize();</span>
-<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (int i = 0; i &lt; nodes.size(); i++) {</span>
-<span class="fc" id="L31">            nodeExecution(nodes.get(i));</span>
-        }
-<span class="fc" id="L33">        return prints;</span>
+  public List&lt;String&gt; analyze(List&lt;ASTNode&gt; nodes) {
+<span class="fc" id="L27">    initialize();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">    for (int i = 0; i &lt; nodes.size(); i++) {</span>
+<span class="fc" id="L29">      nodeExecution(nodes.get(i));</span>
     }
+<span class="fc" id="L31">    return prints;</span>
+  }
 
-    private void nodeExecution(ASTNode node) {
-<span class="pc bpc" id="L37" title="1 of 4 branches missed.">        switch (node.getNodeType()) {</span>
-            case &quot;declaration&quot;:
-<span class="fc" id="L39">                nodeExecution((ASTNodeDeclaration) node);</span>
-<span class="fc" id="L40">                break;</span>
-            case &quot;assignation&quot;:
-<span class="fc" id="L42">                nodeExecution((ASTNodeAssignation) node);</span>
-<span class="fc" id="L43">                break;</span>
-            case &quot;print&quot;:
-<span class="fc" id="L45">                nodeExecution((ASTNodePrint) node);</span>
-            default: break;
-        }
-<span class="fc" id="L48">    }</span>
-
-    private void nodeExecution(ASTNodePrint node) {
-<span class="fc" id="L51">        String val = node.token.getValue();</span>
-<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if (val.charAt(0) == '&quot;') prints.add(val.substring(1, val.length() - 1));</span>
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        else if (isNumber(val)) prints.add(val);</span>
-<span class="fc bfc" id="L54" title="All 2 branches covered.">        else if (numberVariables.containsKey(val)) prints.add((numberVariables.get(val)).toString());</span>
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));</span>
-<span class="nc" id="L56">        else throw new RuntimeException(&quot;Variable was not declared!&quot;);</span>
-<span class="fc" id="L57">    }</span>
-
-    private boolean isNumber(String string) {
-        try {
-<span class="nc" id="L61">            Integer.parseInt(string);</span>
-<span class="nc" id="L62">            return true;</span>
-<span class="fc" id="L63">        } catch (NumberFormatException e) {</span>
-            try {
-<span class="nc" id="L65">                Double.parseDouble(string);</span>
-<span class="fc" id="L66">            } catch (NumberFormatException f) {</span>
-<span class="fc" id="L67">                return false;</span>
-<span class="nc" id="L68">            }</span>
-        }
-<span class="nc" id="L70">        return false;</span>
+  private void nodeExecution(ASTNode node) {
+<span class="pc bpc" id="L35" title="1 of 4 branches missed.">    switch (node.getNodeType()) {</span>
+      case "declaration":
+<span class="fc" id="L37">        nodeExecution((ASTNodeDeclaration) node);</span>
+<span class="fc" id="L38">        break;</span>
+      case "assignation":
+<span class="fc" id="L40">        nodeExecution((ASTNodeAssignation) node);</span>
+<span class="fc" id="L41">        break;</span>
+      case "print":
+<span class="fc" id="L43">        nodeExecution((ASTNodePrint) node);</span>
+      default:
+        break;
     }
+<span class="fc" id="L47">  }</span>
 
-    private void nodeExecution(ASTNodeDeclaration node) {
-<span class="fc" id="L74">        String identifier = node.getRightChild().token.getValue();</span>
-<span class="pc bpc" id="L75" title="2 of 4 branches missed.">        if (stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier))</span>
-<span class="nc" id="L76">            throw new IllegalArgumentException(&quot;Variable already declared!&quot;);</span>
-<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (node.getLeftChild().token.getType().equals(TokenType.STRING_TYPE)) {</span>
-<span class="fc" id="L78">            stringVariables.put(identifier, &quot;&quot;);</span>
-        } else {
-<span class="fc" id="L80">            numberVariables.put(identifier, 0.0);</span>
-        }
-<span class="fc" id="L82">    }</span>
+  private void nodeExecution(ASTNodePrint node) {
+<span class="fc" id="L50">    String val = node.token.getValue();</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">    if (val.charAt(0) == '"') prints.add(val.substring(1, val.length() - 1));</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">    else if (isNumber(val)) prints.add(val);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">    else if (numberVariables.containsKey(val)) prints.add((numberVariables.get(val)).toString());</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">    else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));</span>
+<span class="nc" id="L55">    else throw new RuntimeException("Variable was not declared!");</span>
+<span class="fc" id="L56">  }</span>
 
-    private void nodeExecution(ASTNodeAssignation node) {
-<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (node.getLeftChild().getNodeType().equals(&quot;declaration&quot;)) {</span>
-<span class="fc" id="L86">            ASTNodeDeclaration dNode = (ASTNodeDeclaration) node.getLeftChild();</span>
-<span class="fc" id="L87">            String identifier = dNode.getRightChild().token.getValue();</span>
-<span class="pc bpc" id="L88" title="1 of 4 branches missed.">            if (stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier))</span>
-<span class="fc" id="L89">                throw new IllegalArgumentException(&quot;Variable already declared!&quot;);</span>
-<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (dNode.getLeftChild().token.getType().equals(TokenType.STRING_TYPE)) {</span>
-<span class="fc" id="L91">                String value = stringValueGetter(node.getRightChild());</span>
-<span class="fc" id="L92">                stringVariables.put(identifier, value);</span>
-<span class="fc" id="L93">            } else {</span>
-<span class="fc" id="L94">                Double value = numberValueGetter(node.getRightChild());</span>
-<span class="fc" id="L95">                numberVariables.put(identifier, value);</span>
-            }
-<span class="fc" id="L97">        } else {</span>
-<span class="fc" id="L98">            String identifier = node.getLeftChild().token.getValue();</span>
-<span class="pc bpc" id="L99" title="1 of 4 branches missed.">            if (!(stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier)))</span>
-<span class="nc" id="L100">                throw new IllegalArgumentException(&quot;Variable not declared!&quot;);</span>
-<span class="fc bfc" id="L101" title="All 2 branches covered.">            if (stringVariables.containsKey(identifier)) {</span>
-<span class="fc" id="L102">                String value = stringValueGetter(node.getRightChild());</span>
-<span class="fc" id="L103">                stringVariables.put(identifier, value);</span>
-<span class="fc" id="L104">            } else {</span>
-<span class="fc" id="L105">                Double value = numberValueGetter(node.getRightChild());</span>
-<span class="fc" id="L106">                numberVariables.put(identifier, value);</span>
-            }
-        }
-<span class="fc" id="L109">    }</span>
-
-    private Double numberValueGetter(ASTNode rightChild) {
-<span class="pc bpc" id="L112" title="2 of 4 branches missed.">        return switch (rightChild.getNodeType()) {</span>
-<span class="fc" id="L113">            case &quot;literal&quot; -&gt; numberLiteralValidator((ASTNodeLiteral) rightChild);</span>
-<span class="nc" id="L114">            case &quot;identifier&quot; -&gt; numberVariables.get(rightChild.token.getValue());</span>
-<span class="fc" id="L115">            case &quot;operation&quot; -&gt; numberOperation((ASTNodeOperation) rightChild);</span>
-<span class="nc" id="L116">            default -&gt; throw new RuntimeException(&quot;Strings can only use + operator!&quot;);</span>
-        };
+  private boolean isNumber(String string) {
+    try {
+<span class="nc" id="L60">      Integer.parseInt(string);</span>
+<span class="nc" id="L61">      return true;</span>
+<span class="fc" id="L62">    } catch (NumberFormatException e) {</span>
+      try {
+<span class="nc" id="L64">        Double.parseDouble(string);</span>
+<span class="fc" id="L65">      } catch (NumberFormatException f) {</span>
+<span class="fc" id="L66">        return false;</span>
+<span class="nc" id="L67">      }</span>
     }
+<span class="nc" id="L69">    return false;</span>
+  }
 
-    private Double numberLiteralValidator(ASTNodeLiteral node) {
-<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (node.token.getType().equals(TokenType.STRING))</span>
-<span class="fc" id="L122">            throw new RuntimeException(&quot;You are trying to assign a string to a non-string variable!&quot;);</span>
-<span class="fc" id="L123">        String literal = node.token.getValue();</span>
-        try {
-<span class="fc" id="L125">            return Double.parseDouble(literal);</span>
-<span class="nc" id="L126">        } catch (NumberFormatException e){</span>
-<span class="nc" id="L127">            throw new RuntimeException(&quot;You are trying to assign a string to a non-string variable!&quot;);</span>
-        }
-
+  private void nodeExecution(ASTNodeDeclaration node) {
+<span class="fc" id="L73">    String identifier = node.getRightChild().token.getValue();</span>
+<span class="pc bpc" id="L74" title="2 of 4 branches missed.">    if (stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier))</span>
+<span class="nc" id="L75">      throw new IllegalArgumentException("Variable already declared!");</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">    if (node.getLeftChild().token.getType().equals(TokenType.STRING_TYPE)) {</span>
+<span class="fc" id="L77">      stringVariables.put(identifier, "");</span>
+    } else {
+<span class="fc" id="L79">      numberVariables.put(identifier, 0.0);</span>
     }
+<span class="fc" id="L81">  }</span>
 
-    private Double numberOperation(ASTNodeOperation node) {
-<span class="fc" id="L133">        Double leftVal = fetcher(node.getLeftChild());</span>
-<span class="fc" id="L134">        Double rightVal = fetcher(node.getRightChild());</span>
-<span class="fc bfc" id="L135" title="All 4 branches covered.">        return switch (node.token.getType()) {</span>
-<span class="fc" id="L136">            case ADDITION -&gt; (leftVal + rightVal);</span>
-<span class="fc" id="L137">            case SUBSTRACTION -&gt; (leftVal - rightVal);</span>
-<span class="fc" id="L138">            case MULTIPLICATION -&gt; (leftVal * rightVal);</span>
-<span class="fc" id="L139">            default -&gt; (leftVal / rightVal);</span>
-        };
+  private void nodeExecution(ASTNodeAssignation node) {
+<span class="fc bfc" id="L84" title="All 2 branches covered.">    if (node.getLeftChild().getNodeType().equals("declaration")) {</span>
+<span class="fc" id="L85">      ASTNodeDeclaration dNode = (ASTNodeDeclaration) node.getLeftChild();</span>
+<span class="fc" id="L86">      String identifier = dNode.getRightChild().token.getValue();</span>
+<span class="pc bpc" id="L87" title="1 of 4 branches missed.">      if (stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier))</span>
+<span class="fc" id="L88">        throw new IllegalArgumentException("Variable already declared!");</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">      if (dNode.getLeftChild().token.getType().equals(TokenType.STRING_TYPE)) {</span>
+<span class="fc" id="L90">        String value = stringValueGetter(node.getRightChild());</span>
+<span class="fc" id="L91">        stringVariables.put(identifier, value);</span>
+<span class="fc" id="L92">      } else {</span>
+<span class="fc" id="L93">        Double value = numberValueGetter(node.getRightChild());</span>
+<span class="fc" id="L94">        numberVariables.put(identifier, value);</span>
+      }
+<span class="fc" id="L96">    } else {</span>
+<span class="fc" id="L97">      String identifier = node.getLeftChild().token.getValue();</span>
+<span class="pc bpc" id="L98" title="1 of 4 branches missed.">      if (!(stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier)))</span>
+<span class="nc" id="L99">        throw new IllegalArgumentException("Variable not declared!");</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">      if (stringVariables.containsKey(identifier)) {</span>
+<span class="fc" id="L101">        String value = stringValueGetter(node.getRightChild());</span>
+<span class="fc" id="L102">        stringVariables.put(identifier, value);</span>
+<span class="fc" id="L103">      } else {</span>
+<span class="fc" id="L104">        Double value = numberValueGetter(node.getRightChild());</span>
+<span class="fc" id="L105">        numberVariables.put(identifier, value);</span>
+      }
     }
+<span class="fc" id="L108">  }</span>
 
-    private Double fetcher(ASTNode node) {
-<span class="fc bfc" id="L144" title="All 2 branches covered.">        if (node.getNodeType().equals(&quot;identifier&quot;)) {</span>
-<span class="pc bpc" id="L145" title="1 of 2 branches missed.">            if (numberVariables.containsKey(node.token.getValue())) {</span>
-<span class="fc" id="L146">                return numberVariables.get(node.token.getValue());</span>
-            }
-<span class="nc" id="L148">            throw new RuntimeException(&quot;Variable not declared!&quot;);</span>
-        }
-<span class="fc" id="L150">        return Double.parseDouble(node.token.getValue());</span>
-    }
+  private Double numberValueGetter(ASTNode rightChild) {
+<span class="pc bpc" id="L111" title="2 of 4 branches missed.">    return switch (rightChild.getNodeType()) {</span>
+<span class="fc" id="L112">      case "literal" -&gt; numberLiteralValidator((ASTNodeLiteral) rightChild);</span>
+<span class="nc" id="L113">      case "identifier" -&gt; numberVariables.get(rightChild.token.getValue());</span>
+<span class="fc" id="L114">      case "operation" -&gt; numberOperation((ASTNodeOperation) rightChild);</span>
+<span class="nc" id="L115">      default -&gt; throw new RuntimeException("Strings can only use + operator!");</span>
+    };
+  }
 
-    private String stringValueGetter(ASTNode rightChild) {
-<span class="pc bpc" id="L154" title="2 of 4 branches missed.">        return switch (rightChild.getNodeType()) {</span>
-<span class="fc" id="L155">            case &quot;literal&quot; -&gt; stringLiteralValidator((ASTNodeLiteral) rightChild);</span>
-<span class="nc" id="L156">            case &quot;identifier&quot; -&gt; stringVariables.get(rightChild.token.getValue());</span>
-<span class="fc" id="L157">            case &quot;operation&quot; -&gt; stringOperation((ASTNodeOperation) rightChild);</span>
-<span class="nc" id="L158">            default -&gt; throw new RuntimeException(&quot;Strings can only use + operator!&quot;);</span>
-        };
+  private Double numberLiteralValidator(ASTNodeLiteral node) {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">    if (node.token.getType().equals(TokenType.STRING))</span>
+<span class="fc" id="L121">      throw new RuntimeException("You are trying to assign a string to a non-string variable!");</span>
+<span class="fc" id="L122">    String literal = node.token.getValue();</span>
+    try {
+<span class="fc" id="L124">      return Double.parseDouble(literal);</span>
+<span class="nc" id="L125">    } catch (NumberFormatException e) {</span>
+<span class="nc" id="L126">      throw new RuntimeException("You are trying to assign a string to a non-string variable!");</span>
     }
+  }
 
-    private String stringOperation(ASTNodeOperation node) {
-<span class="pc bpc" id="L163" title="1 of 2 branches missed.">        if (node.token.getType().equals(TokenType.ADDITION)) {</span>
-            String value;
-<span class="fc" id="L165">            ASTNode currentChild = node.getLeftChild();</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">            if (currentChild.getNodeType().equals(&quot;identifier&quot;)) {</span>
-<span class="pc bpc" id="L167" title="1 of 2 branches missed.">                value = stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()) : &quot;\&quot;&quot;+numberVariables.get(currentChild.token.getValue()).toString()+&quot;\&quot;&quot;;</span>
-<span class="fc" id="L168">            } else value = node.getLeftChild().token.getValue();</span>
-<span class="fc" id="L169">            value = value.substring(0,value.length()-1);</span>
-<span class="fc" id="L170">            currentChild = node.getRightChild();</span>
-<span class="fc bfc" id="L171" title="All 2 branches covered.">            if (currentChild.getNodeType().equals(&quot;identifier&quot;)) {</span>
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">                value += stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(currentChild.token.getValue()).substring(1) : numberVariables.get(currentChild.token.getValue()).toString()+&quot;\&quot;&quot;;</span>
-<span class="fc" id="L173">            } else value += currentChild.token.getValue().substring(1);</span>
-<span class="fc" id="L174">            return value;</span>
-<span class="nc" id="L175">        } else throw new RuntimeException(&quot;Strings can only use + operator!&quot;);</span>
-    }
+  private Double numberOperation(ASTNodeOperation node) {
+<span class="fc" id="L131">    Double leftVal = fetcher(node.getLeftChild());</span>
+<span class="fc" id="L132">    Double rightVal = fetcher(node.getRightChild());</span>
+<span class="fc bfc" id="L133" title="All 4 branches covered.">    return switch (node.token.getType()) {</span>
+<span class="fc" id="L134">      case ADDITION -&gt; (leftVal + rightVal);</span>
+<span class="fc" id="L135">      case SUBSTRACTION -&gt; (leftVal - rightVal);</span>
+<span class="fc" id="L136">      case MULTIPLICATION -&gt; (leftVal * rightVal);</span>
+<span class="fc" id="L137">      default -&gt; (leftVal / rightVal);</span>
+    };
+  }
 
-    private String stringLiteralValidator(ASTNodeLiteral node) {
-<span class="fc bfc" id="L179" title="All 2 branches covered.">        if (!node.token.getType().equals(TokenType.STRING))</span>
-<span class="fc" id="L180">            throw new RuntimeException(&quot;You are trying to assign a non-string to a string variable!&quot;);</span>
-<span class="fc" id="L181">        String literal = node.token.getValue();</span>
-<span class="pc bpc" id="L182" title="2 of 4 branches missed.">        if (literal.charAt(0) == '&quot;' &amp;&amp; literal.charAt(literal.length() - 1) == '&quot;') return literal;</span>
-<span class="nc" id="L183">        throw new RuntimeException(&quot;You are trying to assign a non-string to a string variable!&quot;);</span>
+  private Double fetcher(ASTNode node) {
+<span class="fc bfc" id="L142" title="All 2 branches covered.">    if (node.getNodeType().equals("identifier")) {</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">      if (numberVariables.containsKey(node.token.getValue())) {</span>
+<span class="fc" id="L144">        return numberVariables.get(node.token.getValue());</span>
+      }
+<span class="nc" id="L146">      throw new RuntimeException("Variable not declared!");</span>
     }
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">    if (node.getNodeType().equals("literal")) return Double.parseDouble(node.token.getValue());</span>
+<span class="nc" id="L149">    return numberOperation((ASTNodeOperation) node);</span>
+  }
+
+  private String stringValueGetter(ASTNode rightChild) {
+<span class="pc bpc" id="L153" title="2 of 4 branches missed.">    return switch (rightChild.getNodeType()) {</span>
+<span class="fc" id="L154">      case "literal" -&gt; stringLiteralValidator((ASTNodeLiteral) rightChild);</span>
+<span class="nc" id="L155">      case "identifier" -&gt; stringVariables.get(rightChild.token.getValue());</span>
+<span class="fc" id="L156">      case "operation" -&gt; stringOperation((ASTNodeOperation) rightChild);</span>
+<span class="nc" id="L157">      default -&gt; throw new RuntimeException("Strings can only use + operator!");</span>
+    };
+  }
+
+  private String stringOperation(ASTNodeOperation node) {
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">    if (node.token.getType().equals(TokenType.ADDITION)) {</span>
+      String value;
+<span class="fc" id="L164">      ASTNode currentChild = node.getLeftChild();</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">      if (currentChild.getNodeType().equals("identifier")) {</span>
+        value =
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">            stringVariables.containsKey(currentChild.token.getValue())</span>
+<span class="fc" id="L168">                ? stringVariables.get(currentChild.token.getValue())</span>
+<span class="pc" id="L169">                : "\"" + numberVariables.get(currentChild.token.getValue()).toString() + "\"";</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">      } else if (currentChild.getNodeType().equals("literal"))</span>
+<span class="fc" id="L171">        value = node.getLeftChild().token.getValue();</span>
+<span class="nc" id="L172">      else value = stringOperation((ASTNodeOperation) currentChild);</span>
+<span class="fc" id="L173">      value = value.substring(0, value.length() - 1);</span>
+
+<span class="fc" id="L175">      currentChild = node.getRightChild();</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">      if (currentChild.getNodeType().equals("identifier")) {</span>
+<span class="fc" id="L177">        value +=</span>
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">            stringVariables.containsKey(currentChild.token.getValue())</span>
+<span class="fc" id="L179">                ? stringVariables.get(currentChild.token.getValue()).substring(1)</span>
+<span class="pc" id="L180">                : numberVariables.get(currentChild.token.getValue()).toString() + "\"";</span>
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">      } else if (currentChild.getNodeType().equals("literal"))</span>
+<span class="fc" id="L182">        value += currentChild.token.getValue().substring(1);</span>
+<span class="nc" id="L183">      else value += stringOperation((ASTNodeOperation) currentChild).substring(1);</span>
+
+<span class="fc" id="L185">      return value;</span>
+<span class="nc" id="L186">    } else throw new RuntimeException("Strings can only use + operator!");</span>
+  }
+
+  private String stringLiteralValidator(ASTNodeLiteral node) {
+<span class="fc bfc" id="L190" title="All 2 branches covered.">    if (!node.token.getType().equals(TokenType.STRING))</span>
+<span class="fc" id="L191">      throw new RuntimeException("You are trying to assign a non-string to a string variable!");</span>
+<span class="fc" id="L192">    String literal = node.token.getValue();</span>
+<span class="pc bpc" id="L193" title="2 of 4 branches missed.">    if (literal.charAt(0) == '"' &amp;&amp; literal.charAt(literal.length() - 1) == '"') return literal;</span>
+<span class="nc" id="L194">    throw new RuntimeException("You are trying to assign a non-string to a string variable!");</span>
+  }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
+</pre>
+    <div class="footer">
+      <span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>
+    </div>
+  </body>
+</html>
