@@ -62,7 +62,7 @@ public class PrintScriptTokenFactory {
     return new Token(TokenType.PRINTLN, value, cn, ln, ln);
   }
 
-  // /PRINTSCRIPT 1.1
+  // PRINTSCRIPT 1.1
 
   public static Token constKeyword(int ln, int cn) {
     return new Token(TokenType.CONST, "const", cn, ln, ln);
@@ -105,18 +105,18 @@ public class PrintScriptTokenFactory {
   }
 
   public static Token openingParenthesis(int ln, int cn) {
-    return new Token(TokenType.OPENING_PARENTHESIS, "else", cn, ln, ln);
+    return new Token(TokenType.OPENING_PARENTHESIS, "(", cn, ln, ln);
   }
 
   public static Token closingParenthesis(int ln, int cn) {
-    return new Token(TokenType.CLOSING_PARENTHESIS, "else", cn, ln, ln);
+    return new Token(TokenType.CLOSING_PARENTHESIS, ")", cn, ln, ln);
   }
 
   public static Token openingBrackets(int ln, int cn) {
-    return new Token(TokenType.OPENING_BRACKETS, "else", cn, ln, ln);
+    return new Token(TokenType.OPENING_BRACKETS, "{", cn, ln, ln);
   }
 
   public static Token closingBrackets(int ln, int cn) {
-    return new Token(TokenType.CLOSING_BRACKETS, "else", cn, ln, ln);
+    return new Token(TokenType.CLOSING_BRACKETS, "}", cn, ln, ln);
   }
 }
