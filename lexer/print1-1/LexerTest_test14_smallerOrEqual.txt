@@ -162,15 +162,7 @@
   {
     "type": "EQUAL_OR_S",
     "value": "\u003c\u003d",
-    "startingColumn": 20,
-    "endingColumn": 21,
-    "startingLine": 2,
-    "endingLine": 2
-  },
-  {
-    "type": "ASSIGNATION",
-    "value": "\u003d",
-    "startingColumn": 22,
+    "startingColumn": 21,
     "endingColumn": 22,
     "startingLine": 2,
     "endingLine": 2

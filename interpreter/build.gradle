@@ -25,6 +25,7 @@ jacoco {
 }
 
 test {
+    jvmArgs(['--enable-preview'])
     finalizedBy jacocoTestReport
 }
 jacocoTestReport {
@@ -54,3 +55,7 @@ jacocoTestCoverageVerification {
 }
 
 check.dependsOn jacocoTestCoverageVerification
+
+tasks.withType(JavaCompile).each {
+    it.options.compilerArgs.add('--enable-preview')
+}

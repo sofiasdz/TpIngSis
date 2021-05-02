@@ -27,8 +27,13 @@ jacoco {
 }
 
 test {
+    jvmArgs(['--enable-preview'])
     finalizedBy jacocoTestReport
 }
 jacocoTestReport {
     dependsOn test
+}
+
+tasks.withType(JavaCompile).each {
+    it.options.compilerArgs.add('--enable-preview')
 }
