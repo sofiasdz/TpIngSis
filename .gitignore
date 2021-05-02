@@ -221,3 +221,6 @@ hs_err_pid*
 /interpreter/build/jacoco/test/html/jacoco-resources/up.gif
 /syntactic_analyzer/build/jacoco/test/html/jacoco-resources/up.gif
 /interpreter/build/
+/**/build/jacoco/
+/interpreter/build/jacoco/
+/build/tmp/jar/MANIFEST.MF
