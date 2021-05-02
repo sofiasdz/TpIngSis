@@ -224,3 +224,5 @@ hs_err_pid*
 /**/build/jacoco/
 /interpreter/build/jacoco/
 /build/tmp/jar/MANIFEST.MF
+/syntactic_analyzer/build/reports/tests/test/classes/SyntacticAnalyzerTest11.html
+/syntactic_analyzer/build/test-results/test/TEST-SyntacticAnalyzerTest11.xml
