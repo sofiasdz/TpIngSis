@@ -1,5 +1,6 @@
 package ASTNode;
 
 public enum NodeType {
-  CHILDLESS, NOTCHILDLESS
+  CHILDLESS,
+  NOTCHILDLESS
 }

@@ -16,12 +16,9 @@ public abstract class ASTNodeChildless extends ASTNode {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof ASTNodeChildless))
-      return false;
-    if (!super.equals(o))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof ASTNodeChildless)) return false;
+    if (!super.equals(o)) return false;
     ASTNodeChildless that = (ASTNodeChildless) o;
     return Objects.equals(getNodeType(), that.getNodeType()) && Objects.equals(token, that.token);
   }
