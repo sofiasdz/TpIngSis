@@ -114,4 +114,23 @@ public class InterpreterTest {
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
     Assert.assertEquals("\"hello 5.0\"",prints.get(0));
   }
+
+  @Test
+  public void test10_AddingMultipleStrings(){
+    String line1 = "let x : string = \"hello \";";
+    String line2 = "let y : string = \"world \";";
+    String line3 = "let z : string = x + y + \"que tal?\";";
+    String line4 = "printLn(z);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("\"hello world que tal?\"",prints.get(0));
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test11_SubstractingStringsShouldThrowException(){
+    String line1 = "let x : string = \"hello \";";
+    String line2 = "let y : string = \"world \";";
+    String line3 = "let z : string = x - y;";
+    String line4 = "let w : string = \"hola\" - \"que tul\";";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+  }
 }

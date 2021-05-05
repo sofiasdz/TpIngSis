@@ -4,10 +4,11 @@ import ASTNode.Childless.ASTNodePrint;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeOperation;
+import token.TokenType;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import token.TokenType;
 
 public class PSInterpreter implements Interpreter {
 
@@ -128,13 +129,7 @@ public class PSInterpreter implements Interpreter {
     return switch (rightChild.getNodeType()) {
       case "literal" -> numberLiteralValidator((ASTNodeLiteral) rightChild);
       case "identifier" -> numberVariables.get(rightChild.token.getValue());
-      case "operation" -> numberOperation((ASTNodeOperation) rightChild);
-      default -> throw new RuntimeException(
-          "on token: "
-              + rightChild.token.getValue()
-              + " line: "
-              + rightChild.token.getStartingLine()
-              + " Strings can only use + operator!");
+      default -> numberOperation((ASTNodeOperation) rightChild);
     };
   }
 
