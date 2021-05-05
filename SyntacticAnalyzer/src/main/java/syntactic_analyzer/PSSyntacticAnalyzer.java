@@ -3,10 +3,9 @@ package syntactic_analyzer;
 import ASTNode.ASTNode;
 import ASTNode.Factory.ASTNodeFactory;
 import ASTNode.TokenGroup.TokenGroup;
+import java.util.*;
 import token.Token;
 import token.TokenType;
-
-import java.util.*;
 
 public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
 
@@ -30,16 +29,20 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
     if (tokens.get(tokens.size() - 1).getType().equals(TokenType.SEMICOLON)) {
       tokens.remove(tokens.size() - 1);
     } else {
-      throw new RuntimeException("Error at line "+tokens.get(0).getStartingLine()+": missing ;");
+      throw new RuntimeException(
+          "Error at line " + tokens.get(0).getStartingLine() + ": missing ;");
     }
     if (tokens.get(0).getType().equals(TokenType.LET)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(1));
       Optional<ASTNode> type = ASTNodeIdentifier(tokens.get(3));
       if (identifier.isEmpty() || type.isEmpty())
-        throw new RuntimeException("Error at line "+tokens.get(0).getStartingLine()+": Invalid variable declaration");
+        throw new RuntimeException(
+            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
       Optional<ASTNode> declaration =
           ASTNodeIdentifier(tokens.get(2), type.get(), identifier.get());
-      if (declaration.isEmpty()) throw new RuntimeException("Error at line "+tokens.get(0).getStartingLine()+": Invalid variable declaration");
+      if (declaration.isEmpty())
+        throw new RuntimeException(
+            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
       if (tokens.size() < 5) return declaration.get();
       Token assignationToken = tokens.get(4);
       tokens.subList(0, 5).clear();
@@ -47,17 +50,22 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
       return (ASTNodeIdentifier(assignationToken, declaration.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.IDENTIFIER)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(0));
-      if (identifier.isEmpty()) throw new RuntimeException("Error at line "+tokens.get(0).getStartingLine()+": Invalid variable declaration");
+      if (identifier.isEmpty())
+        throw new RuntimeException(
+            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
       Token assignationToken = tokens.get(1);
       tokens.subList(0, 2).clear();
       ASTNode result = operationResolver(tokens);
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
       Optional<ASTNode> print = ASTNodeIdentifier(tokens.get(0));
-      if (print.isEmpty()) throw new RuntimeException("Error at line "+tokens.get(0).getStartingLine()+": Invalid print declaration");
+      if (print.isEmpty())
+        throw new RuntimeException(
+            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid print declaration");
       return print.get();
     } else {
-      throw new RuntimeException("Error at line "+tokens.get(0).getStartingLine()+": Invalid line start");
+      throw new RuntimeException(
+          "Error at line " + tokens.get(0).getStartingLine() + ": Invalid line start");
     }
   }
 

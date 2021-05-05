@@ -3,10 +3,9 @@ package syntactic_analyzer;
 import ASTNode.ASTNode;
 import ASTNode.Factory.ASTNodeFactory;
 import ASTNode.TokenGroup.TokenGroup;
+import java.util.*;
 import token.Token;
 import token.TokenType;
-
-import java.util.*;
 
 public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
 
@@ -30,16 +29,19 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     if (tokens.get(tokens.size() - 1).getType().equals(TokenType.SEMICOLON)) {
       tokens.remove(tokens.size() - 1);
     } else {
-      throw new RuntimeException("; expected at line: " +tokens.get(0).getStartingLine());
+      throw new RuntimeException("; expected at line: " + tokens.get(0).getStartingLine());
     }
     if (tokens.get(0).getType().equals(TokenType.LET)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(1));
       Optional<ASTNode> type = ASTNodeIdentifier(tokens.get(3));
       if (identifier.isEmpty() || type.isEmpty())
-        throw new RuntimeException("Invalid variable declaration at line: "+tokens.get(0).getStartingLine());
+        throw new RuntimeException(
+            "Invalid variable declaration at line: " + tokens.get(0).getStartingLine());
       Optional<ASTNode> declaration =
-              ASTNodeIdentifier(tokens.get(2), type.get(), identifier.get());
-      if (declaration.isEmpty()) throw new RuntimeException("Invalid variable declaration at line: "+tokens.get(0).getStartingLine());
+          ASTNodeIdentifier(tokens.get(2), type.get(), identifier.get());
+      if (declaration.isEmpty())
+        throw new RuntimeException(
+            "Invalid variable declaration at line: " + tokens.get(0).getStartingLine());
       if (tokens.size() < 5) return declaration.get();
       Token assignationToken = tokens.get(4);
       tokens.subList(0, 5).clear();
@@ -47,46 +49,51 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       return (ASTNodeIdentifier(assignationToken, declaration.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.IDENTIFIER)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(0));
-      if (identifier.isEmpty()) throw new RuntimeException("Invalid variable declaration at line: "+tokens.get(0).getStartingLine());
+      if (identifier.isEmpty())
+        throw new RuntimeException(
+            "Invalid variable declaration at line: " + tokens.get(0).getStartingLine());
       Token assignationToken = tokens.get(1);
       tokens.subList(0, 2).clear();
       ASTNode result = operationResolver(tokens);
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
       Optional<ASTNode> print = ASTNodeIdentifier(tokens.get(0));
-      if (print.isEmpty()) throw new RuntimeException("Invalid printLn declaration at line: "+tokens.get(0).getStartingLine());
+      if (print.isEmpty())
+        throw new RuntimeException(
+            "Invalid printLn declaration at line: " + tokens.get(0).getStartingLine());
       return print.get();
     } else {
-      throw new RuntimeException("Invalid line start at line: "+ tokens.get(0).getStartingLine() +" !");
+      throw new RuntimeException(
+          "Invalid line start at line: " + tokens.get(0).getStartingLine() + " !");
     }
   }
 
   ASTNode operationResolver(List<Token> tokens) {
     TokenGroup literals =
-            new TokenGroup(
-                    List.of(
-                            TokenType.STRING,
-                            TokenType.FLOATING_POINT,
-                            TokenType.INTEGER,
-                            TokenType.IDENTIFIER));
+        new TokenGroup(
+            List.of(
+                TokenType.STRING,
+                TokenType.FLOATING_POINT,
+                TokenType.INTEGER,
+                TokenType.IDENTIFIER));
     if (tokens.size() == 1 && literals.belongs(tokens.get(0)))
       return ASTNodeIdentifier(tokens.get(0)).get();
     Stack<Token> operatorStack = new Stack<>();
     Queue<Token> outputQueue = new ArrayDeque<>();
     TokenGroup operators =
-            new TokenGroup(
-                    List.of(
-                            TokenType.SUBSTRACTION,
-                            TokenType.ADDITION,
-                            TokenType.DIVISION,
-                            TokenType.MULTIPLICATION));
+        new TokenGroup(
+            List.of(
+                TokenType.SUBSTRACTION,
+                TokenType.ADDITION,
+                TokenType.DIVISION,
+                TokenType.MULTIPLICATION));
     TokenGroup operands =
-            new TokenGroup(
-                    List.of(
-                            TokenType.STRING,
-                            TokenType.INTEGER,
-                            TokenType.FLOATING_POINT,
-                            TokenType.IDENTIFIER));
+        new TokenGroup(
+            List.of(
+                TokenType.STRING,
+                TokenType.INTEGER,
+                TokenType.FLOATING_POINT,
+                TokenType.IDENTIFIER));
     for (int i = 0; i < tokens.size(); i++) {
       if (operands.belongs(tokens.get(i))) {
         outputQueue.add(tokens.get(i));
@@ -98,7 +105,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
             operatorStack.push(tokens.get(i));
           } else {
             while (!operatorStack.isEmpty()
-                    && operatorPrecedence(operatorStack.peek()) >= operatorPrecedence(tokens.get(i))) {
+                && operatorPrecedence(operatorStack.peek()) >= operatorPrecedence(tokens.get(i))) {
               outputQueue.add(operatorStack.pop());
             }
             operatorStack.push(tokens.get(i));
@@ -132,7 +139,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     if (token.getType().equals(TokenType.IDENTIFIER)) {
       return Optional.of(ASTNodeFactory.identifier(token));
     } else if (token.getType().equals(TokenType.NUMBER_TYPE)
-            | token.getType().equals(TokenType.STRING_TYPE)) {
+        | token.getType().equals(TokenType.STRING_TYPE)) {
       return Optional.of(ASTNodeFactory.variableType(token));
     } else {
       try {
