@@ -4,11 +4,10 @@ import ASTNode.Childless.ASTNodePrint;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeOperation;
-import token.TokenType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import token.TokenType;
 
 public class PSInterpreter implements Interpreter {
 
