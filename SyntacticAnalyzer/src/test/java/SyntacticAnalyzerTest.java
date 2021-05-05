@@ -111,4 +111,13 @@ public class SyntacticAnalyzerTest {
     Assert.assertEquals(
         "operation", ((ASTNodeAssignation) tree.get(3)).getRightChild().getNodeType());
   }
+
+  @Test
+  public void test010_MultipleNumberOperations(){
+    final String testname = folder + "LexerTest_test10_MultipleNumberOperations";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PSSyntacticAnalyzer psSyntacticAnalyzer = new PSSyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+    Assert.assertEquals("assignation", tree.get(0).getNodeType());
+  }
 }

@@ -1,0 +1,82 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 5,
+    "endingColumn": 5,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 7,
+    "endingColumn": 12,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 14,
+    "endingColumn": 14,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SUBSTRACTION",
+    "value": "-",
+    "startingColumn": 16,
+    "endingColumn": 16,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "5",
+    "startingColumn": 17,
+    "endingColumn": 17,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 18,
+    "endingColumn": 18,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "PRINTLN",
+    "value": "a",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 1,
+    "endingLine": 1
+  }
+]
