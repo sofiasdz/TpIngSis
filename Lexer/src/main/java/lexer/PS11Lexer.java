@@ -1,11 +1,12 @@
 package lexer;
 
+import token.PrintScriptTokenFactory;
+import token.Token;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import token.PrintScriptTokenFactory;
-import token.Token;
 
 public class PS11Lexer implements Lexer {
   HashMap<String, Token> identifiersMap;
@@ -51,6 +52,7 @@ public class PS11Lexer implements Lexer {
         currentWord = "";
       }
     }
+    if(!currentWord.isEmpty()) throw new RuntimeException("Error at line "+line.getLineNumber()+": I couldn't proccess that one. Did you correctly declare all variables?");
     return list;
   }
 

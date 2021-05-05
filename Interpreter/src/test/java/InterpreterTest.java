@@ -1,8 +1,9 @@
-import java.util.List;
 import lexer.PSLexer;
 import org.junit.Assert;
 import org.junit.Test;
 import syntactic_analyzer.PSSyntacticAnalyzer;
+
+import java.util.List;
 
 public class InterpreterTest {
 
@@ -89,5 +90,28 @@ public class InterpreterTest {
     String line1 = "let x : number;";
     String line2 = "x = \"324\" ;";
     List<String> prints = analyze((List.of(line1, line2)));
+  }
+
+  @Test
+  public void test09_AssigningAnotherVariablesValueToANewOne(){
+    String line1 = "let x : number = 3;";
+    String line2 = "let y : number = x;";
+    String line3 = "printLn(y);";
+    String line4 = "let z : string = \"hello\";";
+    String line5 = "let w : string = z;";
+    String line6 = "printLn(w);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4, line5, line6)));
+    Assert.assertEquals("3.0",prints.get(0));
+    Assert.assertEquals("\"hello\"",prints.get(1));
+  }
+
+  @Test
+  public void test10_AddingStringWithNumber(){
+    String line1 = "let x : string = \"hello \";";
+    String line2 = "let y : number = 5;";
+    String line3 = "let z : string = x + y;";
+    String line4 = "printLn(z);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("\"hello 5.0\"",prints.get(0));
   }
 }
