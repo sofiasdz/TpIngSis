@@ -1,0 +1,74 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "cuenta",
+    "startingColumn": 4,
+    "endingColumn": 9,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 12,
+    "endingColumn": 17,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 19,
+    "endingColumn": 19,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "FLOATING_POINT",
+    "value": "5*5-8/4+2",
+    "startingColumn": 21,
+    "endingColumn": 29,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 30,
+    "endingColumn": 30,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "PRINTLN",
+    "value": "cuenta",
+    "startingColumn": 9,
+    "endingColumn": 14,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 1,
+    "endingLine": 1
+  }
+]
