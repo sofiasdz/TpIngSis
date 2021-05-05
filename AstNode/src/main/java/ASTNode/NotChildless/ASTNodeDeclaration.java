@@ -11,7 +11,12 @@ public class ASTNodeDeclaration extends ASTNodeNotChildless {
 
   @Override
   public String toString() {
-    return "Declaration: (" + leftChild.toString() + ") " + token + " (" + rightChild.toString()
+    return "Declaration: ("
+        + leftChild.toString()
+        + ") "
+        + token
+        + " ("
+        + rightChild.toString()
         + ") ";
   }
 

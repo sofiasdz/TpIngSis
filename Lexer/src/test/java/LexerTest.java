@@ -11,10 +11,8 @@ public class LexerTest {
     PSLexer psLexer = new PSLexer();
     List<Token> tokenList = psLexer.identifyTokens(lines);
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList("print1-0/" + testName);
-    if (goldenFile.isEmpty())
-      JSONFileWriter.tokenListToJSON(tokenList, "print1-0/" + testName);
-    else
-      Assert.assertEquals(goldenFile, tokenList);
+    if (goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList, "print1-0/" + testName);
+    else Assert.assertEquals(goldenFile, tokenList);
   }
 
   @Test

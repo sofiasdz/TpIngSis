@@ -11,7 +11,12 @@ public class ASTNodeOperation extends ASTNodeNotChildless {
 
   @Override
   public String toString() {
-    return "Operation: (" + leftChild.toString() + ") " + token + " (" + rightChild.toString()
+    return "Operation: ("
+        + leftChild.toString()
+        + ") "
+        + token
+        + " ("
+        + rightChild.toString()
         + ") ";
   }
 
