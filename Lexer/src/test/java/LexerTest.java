@@ -96,18 +96,18 @@ public class LexerTest {
   }
 
   @Test
-  public void test10_MultipleNumberOperations(){
+  public void test10_MultipleNumberOperations() {
     final String testname = "LexerTest_test10_MultipleNumberOperations";
     String line1 = "let cuenta: number = 5*5-8/4+2;";
     String line2 = "printLn(cuenta);";
-    goldenFileAsserter(testname, List.of(line1,line2));
+    goldenFileAsserter(testname, List.of(line1, line2));
   }
 
   @Test
-  public void test11_NegativeNumber(){
+  public void test11_NegativeNumber() {
     final String testname = "LexerTest_test11_NegativeNumber";
     String line1 = "let a: number = -5;";
     String line2 = "printLn(a);";
-    goldenFileAsserter(testname, List.of(line1,line2));
+    goldenFileAsserter(testname, List.of(line1, line2));
   }
 }

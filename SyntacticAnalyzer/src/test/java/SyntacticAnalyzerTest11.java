@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import syntactic_analyzer.PS11SyntacticAnalyzer;
-import syntactic_analyzer.PSSyntacticAnalyzer;
 import token.Token;
 
 public class SyntacticAnalyzerTest11 {
@@ -114,7 +113,7 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test
-  public void test019_MultipleNumberOperations(){
+  public void test019_MultipleNumberOperations() {
     final String testname = folder + "LexerTest_test19_MultipleNumberOperations";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();

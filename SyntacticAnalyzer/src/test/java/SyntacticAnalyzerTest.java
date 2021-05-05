@@ -113,7 +113,7 @@ public class SyntacticAnalyzerTest {
   }
 
   @Test
-  public void test010_MultipleNumberOperations(){
+  public void test010_MultipleNumberOperations() {
     final String testname = folder + "LexerTest_test10_MultipleNumberOperations";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PSSyntacticAnalyzer psSyntacticAnalyzer = new PSSyntacticAnalyzer();
