@@ -48,4 +48,20 @@ public class Token {
   public String toString() {
     return value;
   }
+
+  public int getStartingColumn() {
+    return startingColumn;
+  }
+
+  public int getEndingColumn() {
+    return endingColumn;
+  }
+
+  public int getStartingLine() {
+    return startingLine;
+  }
+
+  public int getEndingLine() {
+    return endingLine;
+  }
 }
