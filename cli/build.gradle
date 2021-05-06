@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'org.example'
@@ -19,4 +20,21 @@ dependencies {
 
 tasks.withType(JavaCompile).each {
     it.options.compilerArgs.add('--enable-preview')
+}
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/sofiasdz/TpIngSis")
+            credentials {
+                username = project.findProperty("gpr.user") ?: "sofiasdz"
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        libraryJar(MavenPublication) {
+            from(components.java)
+        }
+    }
 }

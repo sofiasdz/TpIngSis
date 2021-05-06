@@ -21,4 +21,16 @@ public class FileToString {
     }
     return list;
   }
+
+  public static List<String> fileReader(File file) {
+    List<String> list = new ArrayList<String>();
+    if (file.exists()) {
+      try {
+        list = Files.readAllLines(file.toPath(), Charset.defaultCharset());
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+    }
+    return list;
+  }
 }

@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'org.example'
@@ -12,4 +13,21 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation project (':token')
+}
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/sofiasdz/TpIngSis")
+            credentials {
+                username = project.findProperty("gpr.user") ?: "sofiasdz"
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        libraryJar(MavenPublication) {
+            from(components.java)
+        }
+    }
 }

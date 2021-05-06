@@ -41,3 +41,31 @@ jobs:
       run: ./gradlew :tokens:publish
       env:
         TOKEN: ${{ secrets.TOKEN }}
+    - name: Publish ASTNode
+      run: ./gradlew :astnode:publish
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+    - name: Publish CLI
+        run: ./gradlew :cli:publish
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+    - name: Publish Interpreter
+        run: ./gradlew :interpreter:publish
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+    - name: Publish JSONReaderWriter
+      run: ./gradlew :jsonreaderwriter:publish
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+    - name: Publish Lexer
+        run: ./gradlew :lexer:publish
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+    - name: Publish Parser
+        run: ./gradlew :parser:publish
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+    - name: Publish SyntacticAnalyzer
+        run: ./gradlew :syntacticanalyzer:publish
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
