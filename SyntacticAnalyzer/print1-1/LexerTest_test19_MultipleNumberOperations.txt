@@ -40,9 +40,73 @@
     "endingLine": 0
   },
   {
-    "type": "FLOATING_POINT",
-    "value": "5*5-8/4+2",
+    "type": "INTEGER",
+    "value": "5",
     "startingColumn": 21,
+    "endingColumn": 21,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 22,
+    "endingColumn": 22,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "5",
+    "startingColumn": 23,
+    "endingColumn": 23,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SUBSTRACTION",
+    "value": "-",
+    "startingColumn": 24,
+    "endingColumn": 24,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "8",
+    "startingColumn": 25,
+    "endingColumn": 25,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "DIVISION",
+    "value": "/",
+    "startingColumn": 26,
+    "endingColumn": 26,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "4",
+    "startingColumn": 27,
+    "endingColumn": 27,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ADDITION",
+    "value": "+",
+    "startingColumn": 28,
+    "endingColumn": 28,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 29,
     "endingColumn": 29,
     "startingLine": 0,
     "endingLine": 0

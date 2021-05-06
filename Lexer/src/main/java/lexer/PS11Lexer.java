@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import token.PrintScriptTokenFactory;
 import token.Token;
+import token.TokenType;
 
 public class PS11Lexer implements Lexer {
   HashMap<String, Token> identifiersMap;
@@ -37,12 +38,11 @@ public class PS11Lexer implements Lexer {
         continue;
       }
       token = tokenIdentifier(currentWord, line.getLineNumber(), i);
-      if (isGrEqualSmaEqual(currentWord, line, i))
-        i = grEqualsmEqualVerification(currentWord, line, i, token);
+      if (isNegativeNumber(list)) i = negativeNumberVerification(currentWord, line, i, token, list);
+      else if (isGrEqualSmaEqual(currentWord, line, i)) i = grEqualsmEqualVerification(currentWord, line, i, token);
       else if (isNumber(currentWord)) i = numberVerification(currentWord, line, i, token);
       else if (variableWasDeclared(list)) i = identifierVerification(currentWord, line, i, token);
-      else if (isString(currentWord))
-        token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
+      else if (isString(currentWord)) token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
       else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
       else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
@@ -70,11 +70,40 @@ public class PS11Lexer implements Lexer {
     return i + 1;
   }
 
+  private int negativeNumberVerification(
+          String currentWord, Line line, int i, Optional<Token> token, List<Token> list) {
+    if (currentWord.matches("\\d+")) {
+      list.remove(list.size() - 1);
+      StringBuilder number = new StringBuilder(currentWord);
+      for (int j = i + 1; j < line.size(); j++) {
+        if (line.get(j).equals(" ") | line.get(j).equals(";")) {
+          currentWord = number.toString();
+          i = j - 1;
+          break;
+        }
+        number.append(line.get(j));
+      }
+      if (isNumber(currentWord))
+        token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, "-" + currentWord));
+      else
+        token.set(
+                PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, "-" + currentWord));
+    }
+    return i;
+  }
+
+  private boolean isNegativeNumber(List<Token> list) {
+    return (list.size() > 1
+            && list.get(list.size() - 1).getType().equals(TokenType.SUBSTRACTION)
+            && list.get(list.size() - 2).getType().equals(TokenType.ASSIGNATION));
+  }
+
+
   private int numberVerification(String currentWord, Line line, int i, Optional<Token> token) {
     if (currentWord.matches("\\d+")) {
       StringBuilder number = new StringBuilder(currentWord);
       for (int j = i + 1; j < line.size(); j++) {
-        if (line.get(j).equals(" ") | line.get(j).equals(";")) {
+        if(line.get(j).matches("[ ;)*/+-]")){
           currentWord = number.toString();
           i = j - 1;
           break;

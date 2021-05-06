@@ -41,7 +41,7 @@ public class ASTNodeFactory11 {
   public static ASTNodeAssignation assignation(Token token, ASTNode left, ASTNode right) {
     TokenGroup tGroup = new TokenGroup(List.of(TokenType.ASSIGNATION));
     TokenGroup lValid =
-        new TokenGroup(List.of(TokenType.LET, TokenType.COLON, TokenType.IDENTIFIER));
+        new TokenGroup(List.of(TokenType.LET, TokenType.CONST, TokenType.IDENTIFIER));
     TokenGroup rValid =
         new TokenGroup(
             List.of(
