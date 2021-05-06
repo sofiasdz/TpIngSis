@@ -1,7 +1,13 @@
 package syntactic_analyzer;
 
 import ASTNode.ASTNode;
+import ASTNode.Childless.ASTNodeIdentifier;
+import ASTNode.Childless.ASTNodeLiteral;
 import ASTNode.Factory.ASTNodeFactory;
+import ASTNode.Factory.ASTNodeFactory11;
+import ASTNode.MultiChilds.ASTNodeIf;
+import ASTNode.NotChildless.ASTNodeBooleanOperation;
+import ASTNode.NotChildless.ASTNodeOperation;
 import ASTNode.TokenGroup.TokenGroup;
 import java.util.*;
 import token.Token;
@@ -17,6 +23,26 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     List<Token> tokenList = new ArrayList<>();
     for (int i = 0; i < tokens.size(); i++) {
       tokenList.add(tokens.get(i));
+      if(tokens.get(i).getType().equals(TokenType.IF)){
+        for (int j = i+1; j < tokens.size() ; j++) {
+          if(!tokens.get(j).getType().equals(TokenType.OPENING_BRACKETS)){
+            tokenList.add(tokens.get(j));
+          } else {
+            ArrayList<Token> branch = new ArrayList<>();
+            for (int k = j+1; k < tokens.size(); k++) {
+              if(!tokens.get(k).getType().equals(TokenType.CLOSING_BRACKETS)){
+                branch.add(tokens.get(k));
+              } else {
+                nodes.add(ifNodeBuilder(tokenList,branch));
+                tokenList = new ArrayList<>();
+                i=k;
+                k=tokens.size();
+                j=tokens.size();
+              }
+            }
+          }
+        }
+      }
       if (tokens.get(i).getType().equals(TokenType.SEMICOLON)) {
         nodes.add(tokensToNodeRefactored(tokenList));
         tokenList = new ArrayList<>();
@@ -25,7 +51,42 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     return nodes;
   }
 
-  public ASTNode tokensToNodeRefactored(List<Token> tokens) {
+  private ASTNode ifNodeBuilder(List<Token> ifList, List<Token> branch){
+    try{
+      for (int i = ifList.size()-1; i > 0; i--) {
+        if(ifList.get(i).getType().equals(TokenType.OPENING_PARENTHESIS) || ifList.get(i).getType().equals(TokenType.CLOSING_PARENTHESIS)){
+          ifList.remove(i);
+        }
+      }
+      ASTNode leftChild;
+      if(ifList.size() == 2) {
+        leftChild = ASTNodeIdentifier(ifList.get(1)).get();
+//      if(ifList.get(1).getType().equals(TokenType.IDENTIFIER)){
+//        leftChild = new ASTNodeIdentifier(ifList.get(1));
+//      } else leftChild = new ASTNodeLiteral(ifList.get(1));
+      } else {
+        leftChild = booleanOperationNodeBuilder(ifList);
+      }
+      List<ASTNode> branchCode = this.analyze(branch);
+      return ASTNodeIdentifier(ifList.get(0),leftChild,branchCode).get();
+//    ASTNodeIf ifNode = new ASTNodeIf(leftChild,branchCode,ifList.get(0));
+    } catch (NoSuchElementException e){
+      throw new RuntimeException("Error at line "+ifList.get(0).getStartingLine()+": Invalid if declaration");
+    }
+  }
+
+  private ASTNodeBooleanOperation booleanOperationNodeBuilder(List<Token> list){
+    try {
+      Token opToken = list.get(2);
+      ASTNode left = ASTNodeIdentifier(list.get(1)).get();
+      ASTNode right = ASTNodeIdentifier(list.get(3)).get();
+      return new ASTNodeBooleanOperation(left, right, opToken);
+    } catch (NoSuchElementException e){
+      throw new RuntimeException("Error at line "+list.get(0).getStartingLine()+": Invalid boolean operation");
+    }
+  }
+
+  private ASTNode tokensToNodeRefactored(List<Token> tokens) {
     if (tokens.get(tokens.size() - 1).getType().equals(TokenType.SEMICOLON)) {
       tokens.remove(tokens.size() - 1);
     } else {
@@ -63,7 +124,13 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
         throw new RuntimeException(
                 "Error at line " + tokens.get(0).getStartingLine() + ": Invalid print declaration");
       return print.get();
-    } else {
+    }
+//    else if (tokens.get(0).getType().equals(TokenType.IF)){
+//      System.out.println("");
+//    } else if (tokens.get(0).getType().equals(TokenType.ELSE)){
+//      System.out.println("");
+//    }
+    else {
       throw new RuntimeException(
               "Error at line " + tokens.get(0).getStartingLine() + ": Invalid line start");
     }
@@ -140,7 +207,8 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     if (token.getType().equals(TokenType.IDENTIFIER)) {
       return Optional.of(ASTNodeFactory.identifier(token));
     } else if (token.getType().equals(TokenType.NUMBER_TYPE)
-        | token.getType().equals(TokenType.STRING_TYPE)) {
+        | token.getType().equals(TokenType.STRING_TYPE)
+        | token.getType().equals(TokenType.BOOLEAN_TYPE)) {
       return Optional.of(ASTNodeFactory.variableType(token));
     } else {
       try {
@@ -167,6 +235,18 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
         } catch (IllegalArgumentException h) {
           return Optional.empty();
         }
+      }
+    }
+  }
+
+  Optional<ASTNode> ASTNodeIdentifier(Token token, ASTNode left, List<ASTNode> right){
+    try{
+      return Optional.of(ASTNodeFactory11.ifNode(token,left,right));
+    } catch (IllegalArgumentException e){
+      try{
+        return Optional.of(ASTNodeFactory11.ifElseNode(token,left,right));
+      } catch (IllegalArgumentException f){
+        return Optional.empty();
       }
     }
   }

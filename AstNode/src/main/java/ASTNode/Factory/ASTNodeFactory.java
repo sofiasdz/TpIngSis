@@ -22,14 +22,14 @@ public class ASTNodeFactory {
   }
 
   public static ASTNodeVariableType variableType(Token token) {
-    TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.NUMBER_TYPE, TokenType.STRING_TYPE));
+    TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.NUMBER_TYPE, TokenType.STRING_TYPE, TokenType.BOOLEAN_TYPE));
     if (tokenGroup.belongs(token)) return new ASTNodeVariableType(token);
     throw new IllegalArgumentException();
   }
 
   public static ASTNodeLiteral literal(Token token) {
     TokenGroup tokenGroup =
-        new TokenGroup(List.of(TokenType.STRING, TokenType.INTEGER, TokenType.FLOATING_POINT));
+        new TokenGroup(List.of(TokenType.STRING, TokenType.INTEGER, TokenType.FLOATING_POINT, TokenType.TRUE, TokenType.FALSE));
     if (tokenGroup.belongs(token)) return new ASTNodeLiteral(token);
     throw new IllegalArgumentException();
   }
