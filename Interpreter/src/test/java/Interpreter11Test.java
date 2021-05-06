@@ -1,13 +1,11 @@
-import java.util.List;
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeChildless;
 import ASTNode.NotChildless.ASTNodeNotChildless;
+import java.util.List;
 import lexer.PS11Lexer;
-import lexer.PSLexer;
 import org.junit.Assert;
 import org.junit.Test;
 import syntactic_analyzer.PS11SyntacticAnalyzer;
-import syntactic_analyzer.PSSyntacticAnalyzer;
 
 public class Interpreter11Test {
 
@@ -44,8 +42,6 @@ public class Interpreter11Test {
     List<String> prints = analyze((List.of(line1, line2)));
     Assert.assertEquals("\"hello world\"", prints.get(0));
   }
-
-
 
   @Test
   public void test03_GivenMultipleStringDeclarationOperationAndPrintShouldReturnAValidPrintList() {
@@ -154,7 +150,7 @@ public class Interpreter11Test {
   @Test(expected = RuntimeException.class)
   public void test12_AssigningNumberToStringShouldThrowException() {
     String line1 = "let x : number = 20;";
-    String line2 = "x=4;";// cambiar a y
+    String line2 = "x=4;"; // cambiar a y
     List<ASTNode> nodes = getASTNode((List.of(line1, line2)));
     ASTNodeNotChildless node = (ASTNodeNotChildless) nodes.get(1);
     ASTNodeChildless leftChild = (ASTNodeChildless) node.getLeftChild();
@@ -162,7 +158,6 @@ public class Interpreter11Test {
     node.setLeftChild(leftChild);
     nodes.set(1, node);
     List<String> prints = analyzeFromNode(nodes);
-
   }
 
   @Test(expected = RuntimeException.class)
@@ -171,7 +166,6 @@ public class Interpreter11Test {
     String line2 = "printLn(x);";
     List<ASTNode> nodes = getASTNode((List.of(line1, line2)));
     List<String> prints = analyzeFromNode(List.of(nodes.get(1)));
-
   }
 
   @Test(expected = RuntimeException.class)
@@ -180,7 +174,6 @@ public class Interpreter11Test {
     String line2 = "let y: number = 3;";
     List<ASTNode> nodes = getASTNode((List.of(line1, line2)));
     List<String> prints = analyzeFromNode(List.of(nodes.get(1), nodes.get(1)));
-
   }
 
   @Test(expected = RuntimeException.class)
@@ -188,9 +181,7 @@ public class Interpreter11Test {
     String line1 = "let x:number;";
     List<ASTNode> nodes = getASTNode((List.of(line1)));
     List<String> prints = analyzeFromNode(List.of(nodes.get(0), nodes.get(0)));
-
   }
-
 
   // @Test
   // public void test12_BooleanShouldReturnTrue() {
