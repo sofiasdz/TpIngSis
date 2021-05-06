@@ -1,5 +1,3 @@
-FileToString.java
- FileToString
 CLI.java
  CLI
 Scanner.java
