@@ -40,17 +40,9 @@
     "endingLine": 0
   },
   {
-    "type": "SUBSTRACTION",
-    "value": "-",
-    "startingColumn": 16,
-    "endingColumn": 16,
-    "startingLine": 0,
-    "endingLine": 0
-  },
-  {
     "type": "INTEGER",
-    "value": "5",
-    "startingColumn": 17,
+    "value": "-5",
+    "startingColumn": 16,
     "endingColumn": 17,
     "startingLine": 0,
     "endingLine": 0

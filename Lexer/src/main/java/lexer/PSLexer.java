@@ -40,8 +40,7 @@ public class PSLexer implements Lexer {
       if (isNegativeNumber(list)) i = negativeNumberVerification(currentWord, line, i, token, list);
       else if (isNumber(currentWord)) i = numberVerification(currentWord, line, i, token);
       else if (variableWasDeclared(list)) i = identifierVerification(currentWord, line, i, token);
-      else if (isString(currentWord))
-        token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
+      else if (isString(currentWord)) token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
       else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
       else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
