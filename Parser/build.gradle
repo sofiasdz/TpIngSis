@@ -17,7 +17,6 @@ dependencies {
     implementation project (':SyntacticAnalyzer')
     implementation project (':Interpreter')
     implementation project (':AstNode')
-    implementation project (':Parser')
 }
 
 
