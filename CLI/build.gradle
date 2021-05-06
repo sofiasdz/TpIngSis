@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'jacoco'
 }
 
 group 'org.example'
@@ -21,18 +20,6 @@ dependencies {
     implementation project (':AstNode')
 }
 
-jacoco {
-    toolVersion = "0.8.6"
-    reportsDir = file("$buildDir/jacoco")
-}
-
-test {
-    jvmArgs(['--enable-preview'])
-    finalizedBy jacocoTestReport
-}
-jacocoTestReport {
-    dependsOn test
-}
 
 tasks.withType(JavaCompile).each {
     it.options.compilerArgs.add('--enable-preview')
