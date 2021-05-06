@@ -34,25 +34,25 @@ public class CLI {
     System.out.println("******************************");
   }
 
-  private static void validatePS(){
+  private static void validatePS() {
     PS10Parser parser = new PS10Parser();
     String path = Scanner.getString("ENTER THE FILE'S PATH: ");
     System.out.println(parser.validate(path));
   }
 
-  private static void executePS(){
+  private static void executePS() {
     PS10Parser parser = new PS10Parser();
     String path = Scanner.getString("ENTER THE FILE'S PATH: ");
     parser.execute(path).forEach(System.out::println);
   }
 
-  private static void validatePS11(){
+  private static void validatePS11() {
     PS11Parser parser = new PS11Parser();
     String path = Scanner.getString("ENTER THE FILE'S PATH: ");
     System.out.println(parser.validate(path));
   }
 
-  private static void executePS11(){
+  private static void executePS11() {
     PS11Parser parser = new PS11Parser();
     String path = Scanner.getString("ENTER THE FILE'S PATH: ");
     parser.execute(path).forEach(System.out::println);
