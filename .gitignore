@@ -227,3 +227,5 @@ hs_err_pid*
 /syntactic_analyzer/build/reports/tests/test/classes/SyntacticAnalyzerTest11.html
 /syntactic_analyzer/build/test-results/test/TEST-SyntacticAnalyzerTest11.xml
 /SyntacticAnalyzer/build/
+/syntactic_analyzer/
+/ast_node/
