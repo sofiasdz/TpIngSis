@@ -1,0 +1,186 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 17,
+    "endingColumn": 17,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 19,
+    "endingColumn": 19,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "4",
+    "startingColumn": 21,
+    "endingColumn": 21,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ADDITION",
+    "value": "+",
+    "startingColumn": 23,
+    "endingColumn": 23,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "4",
+    "startingColumn": 25,
+    "endingColumn": 25,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 27,
+    "endingColumn": 27,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "3",
+    "startingColumn": 29,
+    "endingColumn": 29,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "DIVISION",
+    "value": "/",
+    "startingColumn": 31,
+    "endingColumn": 31,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 33,
+    "endingColumn": 33,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 35,
+    "endingColumn": 35,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "4",
+    "startingColumn": 37,
+    "endingColumn": 37,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ADDITION",
+    "value": "+",
+    "startingColumn": 39,
+    "endingColumn": 39,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "3",
+    "startingColumn": 41,
+    "endingColumn": 41,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "DIVISION",
+    "value": "/",
+    "startingColumn": 43,
+    "endingColumn": 43,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "6",
+    "startingColumn": 45,
+    "endingColumn": 45,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 47,
+    "endingColumn": 47,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 49,
+    "endingColumn": 49,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 51,
+    "endingColumn": 51,
+    "startingLine": 0,
+    "endingLine": 0
+  }
+]

@@ -113,6 +113,16 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test
+  public void test016_GivenConstVariableShouldReturnDeclarationNode() {
+    final String testName = folder + "LexerTest_test16_const";
+    List<Token> gF = JSONFileWriter.fileJSONToTokenList(testName);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree =
+            psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
+    Assert.assertEquals("declaration", tree.get(0).getNodeType());
+  }
+
+  @Test
   public void test019_MultipleNumberOperations() {
     final String testname = folder + "LexerTest_test19_MultipleNumberOperations";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
@@ -149,12 +159,52 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test
-  public void test016_GivenConstVariableShouldReturnDeclarationNode() {
-    final String testName = folder + "LexerTest_test16_const";
-    List<Token> gF = JSONFileWriter.fileJSONToTokenList(testName);
+  public void test023_NumericalOperatorsPrecedenceTest(){
+    final String testname = folder + "LexerTest_test25_NumericalOperators";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
-    List<ASTNode> tree =
-        psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
-    Assert.assertEquals("declaration", tree.get(0).getNodeType());
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+    Assert.assertEquals("assignation", tree.get(0).getNodeType());
   }
+
+  @Test(expected = RuntimeException.class)
+  public void test024_MissingSemiColon(){
+    final String testname = folder + "LexerTest_test26_BadSyntax";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test025_IfElseBadSyntax(){
+    final String testname = folder + "LexerTest_test27_ifElseBadSyntax";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test026_IfWithoutClosingBracket(){
+    final String testname = folder + "LexerTest_test28_ifWithoutClosingBracket";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test027_ElseWithoutIf(){
+    final String testname = folder + "LexerTest_test29_ElseWithoutIf";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test028_StartingWithElse(){
+    final String testname = folder + "LexerTest_test30_StartingWithElse";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+  }
+
 }

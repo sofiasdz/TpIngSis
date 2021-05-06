@@ -77,7 +77,7 @@ public class PrintScriptTokenFactory {
   }
 
   public static Token falseValue(int ln, int cn) {
-    return new Token(TokenType.FALSE, "False", cn, ln, ln);
+    return new Token(TokenType.FALSE, "false", cn, ln, ln);
   }
 
   public static Token greater(int ln, int cn) {

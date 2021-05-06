@@ -1,0 +1,98 @@
+[
+  {
+    "type": "IF",
+    "value": "if",
+    "startingColumn": 0,
+    "endingColumn": 1,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "else",
+    "startingColumn": -1,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "TRUE",
+    "value": "true",
+    "startingColumn": 3,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": "else",
+    "startingColumn": 4,
+    "endingColumn": 7,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "OPENING_BRACKETS",
+    "value": "else",
+    "startingColumn": 5,
+    "endingColumn": 8,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 10,
+    "endingColumn": 12,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 14,
+    "endingColumn": 14,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 17,
+    "endingColumn": 22,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 24,
+    "endingColumn": 24,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "1",
+    "startingColumn": 26,
+    "endingColumn": 26,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 27,
+    "endingColumn": 27,
+    "startingLine": 0,
+    "endingLine": 0
+  }
+]
