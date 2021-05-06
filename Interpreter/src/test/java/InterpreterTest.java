@@ -1,4 +1,9 @@
 import java.util.List;
+import ASTNode.ASTNode;
+import ASTNode.Childless.ASTNodeChildless;
+import ASTNode.NotChildless.ASTNodeAssignation;
+import ASTNode.NotChildless.ASTNodeDeclaration;
+import ASTNode.NotChildless.ASTNodeNotChildless;
 import lexer.PSLexer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +17,19 @@ public class InterpreterTest {
     PSInterpreter interpreter = new PSInterpreter();
     return interpreter.analyze(syn.analyze(lex.identifyTokens(lines)));
   }
+
+  private List<ASTNode> getASTNode(List<String> lines) {
+    PSLexer lex = new PSLexer();
+    PSSyntacticAnalyzer syn = new PSSyntacticAnalyzer();
+    return syn.analyze(lex.identifyTokens(lines));
+  }
+
+  private List<String> analyzeFromNode(List<ASTNode> list) {
+    PSInterpreter interpreter = new PSInterpreter();
+    return interpreter.analyze(list);
+  }
+
+
 
   @Test
   public void test01_GivenAnIntegerDeclarationOperationAndPrintShouldReturnAValidPrintList() {
@@ -132,4 +150,46 @@ public class InterpreterTest {
     String line4 = "let w : string = \"hola\" - \"que tul\";";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
   }
+
+
+  @Test(expected = RuntimeException.class)
+  public void test12_AssigningNumberToStringShouldThrowException() {
+    String line1 = "let x : number = 20;";
+    String line2 = "x=4;";// cambiar a y
+    List<ASTNode> nodes = getASTNode((List.of(line1, line2)));
+    ASTNodeNotChildless node = (ASTNodeNotChildless) nodes.get(1);
+    ASTNodeChildless leftChild = (ASTNodeChildless) node.getLeftChild();
+    leftChild.token.setValue("y");
+    node.setLeftChild(leftChild);
+    nodes.set(1, node);
+    List<String> prints = analyzeFromNode(nodes);
+
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test13_AssigningNumberToStringShouldThrowException() {
+    String line1 = "let x : number = 20;";
+    String line2 = "printLn(x);";
+    List<ASTNode> nodes = getASTNode((List.of(line1, line2)));
+    List<String> prints = analyzeFromNode(List.of(nodes.get(1)));
+
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test14_AssigningVariableTwiceShouldThrowException() {
+    String line1 = "let x : number = 20;";
+    String line2 = "let y: number = 3;";
+    List<ASTNode> nodes = getASTNode((List.of(line1, line2)));
+    List<String> prints = analyzeFromNode(List.of(nodes.get(1), nodes.get(1)));
+
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test15_DeclaringVariableTwiceShouldThrowException() {
+    String line1 = "let x:number;";
+    List<ASTNode> nodes = getASTNode((List.of(line1)));
+    List<String> prints = analyzeFromNode(List.of(nodes.get(0), nodes.get(0)));
+
+  }
+
 }
