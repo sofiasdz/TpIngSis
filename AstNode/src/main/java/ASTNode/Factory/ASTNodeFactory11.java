@@ -60,7 +60,7 @@ public class ASTNodeFactory11 {
     }
 
     public static ASTNodeDeclaration declaration(Token token, ASTNode left, ASTNode right) {
-        TokenGroup tGroup = new TokenGroup(List.of(TokenType.LET, TokenType.COLON, TokenType.CONST));
+        TokenGroup tGroup = new TokenGroup(List.of(TokenType.LET, TokenType.CONST));
         TokenGroup lValid = new TokenGroup(List.of(TokenType.STRING_TYPE, TokenType.NUMBER_TYPE, TokenType.BOOLEAN_TYPE));
         TokenGroup rValid = new TokenGroup(List.of(TokenType.IDENTIFIER));
         if (tGroup.belongs(token) && lValid.belongs(left.token) && rValid.belongs(right.token))

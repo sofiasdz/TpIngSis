@@ -138,7 +138,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
         throw new RuntimeException(
                 "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
       Optional<ASTNode> declaration =
-              ASTNodeIdentifier(tokens.get(2), type.get(), identifier.get());
+              ASTNodeIdentifier(tokens.get(0), type.get(), identifier.get());
       if (declaration.isEmpty())
         throw new RuntimeException(
                 "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
