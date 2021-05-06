@@ -1,0 +1,138 @@
+[
+{
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 7,
+    "endingColumn": 9,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 11,
+    "endingColumn": 11,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 12,
+    "endingColumn": 12,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 14,
+    "endingColumn": 19,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 21,
+    "endingColumn": 21,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 23,
+    "endingColumn": 23,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 24,
+    "endingColumn": 24,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ELSE",
+    "value": "else",
+    "startingColumn": 0,
+    "endingColumn": 3,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "OPENING_BRACKETS",
+    "value": "else",
+    "startingColumn": 2,
+    "endingColumn": 5,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 7,
+    "endingColumn": 9,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "x",
+    "startingColumn": 11,
+    "endingColumn": 11,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 12,
+    "endingColumn": 12,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 14,
+    "endingColumn": 19,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 21,
+    "endingColumn": 21,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 23,
+    "endingColumn": 23,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 24,
+    "endingColumn": 24,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "CLOSING_BRACKETS",
+    "value": "else",
+    "startingColumn": 22,
+    "endingColumn": 25,
+    "startingLine": 1,
+    "endingLine": 1
+  }
+]

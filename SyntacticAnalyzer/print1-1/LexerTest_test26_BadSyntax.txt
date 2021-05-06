@@ -41,17 +41,9 @@
   },
   {
     "type": "FALSE",
-    "value": "false",
+    "value": "False",
     "startingColumn": 20,
     "endingColumn": 24,
-    "startingLine": 0,
-    "endingLine": 0
-  },
-  {
-    "type": "SEMICOLON",
-    "value": ";",
-    "startingColumn": 25,
-    "endingColumn": 25,
     "startingLine": 0,
     "endingLine": 0
   }

@@ -235,4 +235,11 @@ public class Lexer11Test {
     String line8 = "printLn(a);";
     goldenFileAsserter(testname, List.of(line1, line2, line3, line4, line5, line6, line7, line8));
   }
+
+  @Test
+  public void test25_NumericalOperators(){
+    final String testname = "LexerTest_test25_NumericalOperators";
+    String line1 = "let a : number = 2 * 4 + 4 * 3 / 2 * 4 + 3 / 6 * 2 ;";
+    goldenFileAsserter(testname, List.of(line1));
+  }
 }

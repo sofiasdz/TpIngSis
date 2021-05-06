@@ -27,24 +27,12 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
             i = bracketResolver(tokens, tokenList, nodes, j);
             j = tokens.size();
             tokenList = new ArrayList<>();
-            //            ArrayList<Token> branch = new ArrayList<>();
-            //            for (int k = j+1; k < tokens.size(); k++) {
-            //              if(!tokens.get(k).getType().equals(TokenType.CLOSING_BRACKETS)){
-            //                branch.add(tokens.get(k));
-            //              } else {
-            //                nodes.add(ifNodeBuilder(tokenList,branch));
-            //                tokenList = new ArrayList<>();
-            //                i=k;
-            //                k=tokens.size();
-            //                j=tokens.size();
-            //              }
-            //            }
           }
         }
       } else if (tokens.get(i).getType().equals(TokenType.ELSE)) {
         for (int j = i + 1; j < tokens.size(); j++) {
           if (!tokens.get(j).getType().equals(TokenType.OPENING_BRACKETS)) {
-            tokenList.add(tokens.get(j));
+            throw new RuntimeException("Error at line "+tokens.get(j).getStartingLine()+": a brackets block must be created after an else");
           } else {
             i = bracketResolver(tokens, tokenList, nodes, j);
             j = tokens.size();
@@ -56,6 +44,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
         tokenList = new ArrayList<>();
       }
     }
+    if(!tokenList.isEmpty()) throw new RuntimeException("Error at line "+tokenList.get(0).getStartingLine()+": missing ;");
     return nodes;
   }
 
@@ -69,6 +58,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
         if (tokenList.get(0).getType().equals(TokenType.IF)) {
           nodes.add(ifNodeBuilder(tokenList, branch));
         } else {
+          if(nodes.isEmpty()) throw new RuntimeException("Error at line "+tokenList.get(0).getStartingLine()+": code can't start with an else");
           nodes.set(
               nodes.size() - 1, elseNodeBuilder(tokenList, branch, nodes.get(nodes.size() - 1)));
         }
@@ -127,12 +117,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
   }
 
   private ASTNode tokensToNodeRefactored(List<Token> tokens) {
-    if (tokens.get(tokens.size() - 1).getType().equals(TokenType.SEMICOLON)) {
       tokens.remove(tokens.size() - 1);
-    } else {
-      throw new RuntimeException(
-          "Error at line " + tokens.get(0).getStartingLine() + ": missing ;");
-    }
     if (tokens.get(0).getType().equals(TokenType.LET)
         || tokens.get(0).getType().equals(TokenType.CONST)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(1));
