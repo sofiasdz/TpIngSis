@@ -330,11 +330,31 @@ public class Interpreter11Test {
    Assert.assertEquals("-5.0", prints.get(0));
    }
 
-  // @Test
-  // public void test26_NegativeNumberAsAResult() {
-  // String line1 = "let a: number = 3-5;";
-  // String line2 = "printLn(a);";
-  // List<String> prints = analyze((List.of(line1, line2)));
-  // Assert.assertEquals("\"-2\"", prints.get(0));
-  // }
+   @Test
+   public void test26_NegativeNumberAsAResult() {
+   String line1 = "let a: number = 3-5;";
+   String line2 = "printLn(a);";
+   List<String> prints = analyze((List.of(line1, line2)));
+   Assert.assertEquals("-2.0", prints.get(0));
+   }
+
+    @Test
+    public void test27_ConcatenatingStringAndBoolean() {
+        String line1 = "let x: string = \"true is: \";";
+        String line2 = "let y: boolean = true;";
+        String line3 = "let z: string = x + y;";
+        String line4 = "printLn(z);";
+        List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+        Assert.assertEquals("\"true is: true\"", prints.get(0));
+    }
+
+    @Test
+    public void test28_ConcatenatingConstVariables() {
+        String line1 = "const x: number = 3;";
+        String line2 = "const y: boolean = true;";
+        String line3 = "const z: string = x + y;";
+        String line4 = "printLn(z);";
+        List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+        Assert.assertEquals("\"3.0true\"", prints.get(0));
+    }
 }
