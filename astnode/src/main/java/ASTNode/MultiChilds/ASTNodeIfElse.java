@@ -16,7 +16,12 @@ public class ASTNodeIfElse extends ASTNodeMultiChilds {
 
   @Override
   public String toString() {
-    return "IfElseNode: (" + leftChild.toString() + ") " + token + " (" + rightChild.toString()
+    return "IfElseNode: ("
+        + leftChild.toString()
+        + ") "
+        + token
+        + " ("
+        + rightChild.toString()
         + ") ";
   }
 

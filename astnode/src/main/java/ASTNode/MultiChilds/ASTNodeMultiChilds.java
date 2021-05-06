@@ -48,15 +48,14 @@ public abstract class ASTNodeMultiChilds extends ASTNode {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof ASTNodeMultiChilds))
-      return false;
-    if (!super.equals(o))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof ASTNodeMultiChilds)) return false;
+    if (!super.equals(o)) return false;
     ASTNodeMultiChilds that = (ASTNodeMultiChilds) o;
-    return Objects.equals(leftChild, that.leftChild) && Objects.equals(rightChild, that.rightChild)
-        && Objects.equals(getNodeType(), that.getNodeType()) && Objects.equals(token, that.token);
+    return Objects.equals(leftChild, that.leftChild)
+        && Objects.equals(rightChild, that.rightChild)
+        && Objects.equals(getNodeType(), that.getNodeType())
+        && Objects.equals(token, that.token);
   }
 
   @Override

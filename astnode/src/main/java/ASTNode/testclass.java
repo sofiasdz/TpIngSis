@@ -2,8 +2,7 @@ package ASTNode;
 
 public class testclass {
   int test() {
-    if (true)
-      return 1;
+    if (true) return 1;
     return 0;
   }
 
@@ -12,15 +11,12 @@ public class testclass {
   }
 
   int test3() {
-    if (false)
-      return 0;
-    else
-      return 1;
+    if (false) return 0;
+    else return 1;
   }
 
   int test5() {
-    if (true)
-      return 9;
+    if (true) return 9;
     return 10;
   }
 }

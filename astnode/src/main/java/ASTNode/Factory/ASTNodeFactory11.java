@@ -13,8 +13,7 @@ public class ASTNodeFactory11 {
 
   public static ASTNodeIdentifier identifier(Token token) {
     TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.IDENTIFIER));
-    if (tokenGroup.belongs(token))
-      return new ASTNodeIdentifier(token);
+    if (tokenGroup.belongs(token)) return new ASTNodeIdentifier(token);
     throw new IllegalArgumentException();
   }
 
@@ -22,17 +21,20 @@ public class ASTNodeFactory11 {
     TokenGroup tokenGroup =
         new TokenGroup(
             List.of(TokenType.NUMBER_TYPE, TokenType.STRING_TYPE, TokenType.BOOLEAN_TYPE));
-    if (tokenGroup.belongs(token))
-      return new ASTNodeVariableType(token);
+    if (tokenGroup.belongs(token)) return new ASTNodeVariableType(token);
     throw new IllegalArgumentException();
   }
 
   public static ASTNodeLiteral literal(Token token) {
     TokenGroup tokenGroup =
-        new TokenGroup(List.of(TokenType.STRING, TokenType.INTEGER, TokenType.FLOATING_POINT,
-            TokenType.TRUE, TokenType.FALSE));
-    if (tokenGroup.belongs(token))
-      return new ASTNodeLiteral(token);
+        new TokenGroup(
+            List.of(
+                TokenType.STRING,
+                TokenType.INTEGER,
+                TokenType.FLOATING_POINT,
+                TokenType.TRUE,
+                TokenType.FALSE));
+    if (tokenGroup.belongs(token)) return new ASTNodeLiteral(token);
     throw new IllegalArgumentException();
   }
 
@@ -41,11 +43,23 @@ public class ASTNodeFactory11 {
     TokenGroup lValid =
         new TokenGroup(List.of(TokenType.LET, TokenType.CONST, TokenType.IDENTIFIER));
     TokenGroup rValid =
-        new TokenGroup(List.of(TokenType.INTEGER, TokenType.STRING, TokenType.FLOATING_POINT,
-            TokenType.BOOLEAN_TYPE, TokenType.TRUE, TokenType.FALSE, TokenType.ADDITION,
-            TokenType.SUBSTRACTION, TokenType.MULTIPLICATION, TokenType.DIVISION,
-            TokenType.IDENTIFIER, TokenType.EQUAL_OR_S, TokenType.EQUAL_OR_G, TokenType.GREATER,
-            TokenType.SMALLER));
+        new TokenGroup(
+            List.of(
+                TokenType.INTEGER,
+                TokenType.STRING,
+                TokenType.FLOATING_POINT,
+                TokenType.BOOLEAN_TYPE,
+                TokenType.TRUE,
+                TokenType.FALSE,
+                TokenType.ADDITION,
+                TokenType.SUBSTRACTION,
+                TokenType.MULTIPLICATION,
+                TokenType.DIVISION,
+                TokenType.IDENTIFIER,
+                TokenType.EQUAL_OR_S,
+                TokenType.EQUAL_OR_G,
+                TokenType.GREATER,
+                TokenType.SMALLER));
     if (tGroup.belongs(token) && lValid.belongs(left.token) && rValid.belongs(right.token))
       return new ASTNodeAssignation(left, right, token);
     throw new IllegalArgumentException();
@@ -64,12 +78,23 @@ public class ASTNodeFactory11 {
 
   public static ASTNodeOperation operation(Token token, ASTNode left, ASTNode right) {
     TokenGroup tGroup =
-        new TokenGroup(List.of(TokenType.ADDITION, TokenType.DIVISION, TokenType.SUBSTRACTION,
-            TokenType.MULTIPLICATION));
+        new TokenGroup(
+            List.of(
+                TokenType.ADDITION,
+                TokenType.DIVISION,
+                TokenType.SUBSTRACTION,
+                TokenType.MULTIPLICATION));
     TokenGroup cValid =
-        new TokenGroup(List.of(TokenType.IDENTIFIER, TokenType.FLOATING_POINT, TokenType.INTEGER,
-            TokenType.STRING, TokenType.ADDITION, TokenType.SUBSTRACTION, TokenType.MULTIPLICATION,
-            TokenType.DIVISION));
+        new TokenGroup(
+            List.of(
+                TokenType.IDENTIFIER,
+                TokenType.FLOATING_POINT,
+                TokenType.INTEGER,
+                TokenType.STRING,
+                TokenType.ADDITION,
+                TokenType.SUBSTRACTION,
+                TokenType.MULTIPLICATION,
+                TokenType.DIVISION));
     if (tGroup.belongs(token) && cValid.belongs(left.token) && cValid.belongs(right.token))
       return new ASTNodeOperation(left, right, token);
     throw new IllegalArgumentException();
@@ -77,15 +102,15 @@ public class ASTNodeFactory11 {
 
   public static ASTNodePrint print(Token token) {
     TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.PRINTLN));
-    if (tokenGroup.belongs(token))
-      return new ASTNodePrint(token);
+    if (tokenGroup.belongs(token)) return new ASTNodePrint(token);
     throw new IllegalArgumentException();
   }
 
   public static ASTNodeBooleanOperation booleanOperation(Token token, ASTNode left, ASTNode right) {
     TokenGroup tGroup =
-        new TokenGroup(List.of(TokenType.GREATER, TokenType.EQUAL_OR_G, TokenType.SMALLER,
-            TokenType.EQUAL_OR_S));
+        new TokenGroup(
+            List.of(
+                TokenType.GREATER, TokenType.EQUAL_OR_G, TokenType.SMALLER, TokenType.EQUAL_OR_S));
     TokenGroup cValid =
         new TokenGroup(List.of(TokenType.IDENTIFIER, TokenType.FLOATING_POINT, TokenType.INTEGER));
     if (tGroup.belongs(token) && cValid.belongs(left.token) && cValid.belongs(right.token))
@@ -110,8 +135,15 @@ public class ASTNodeFactory11 {
   public static boolean isValidIf(Token token, ASTNode left) {
     TokenGroup tGroup = new TokenGroup(List.of(TokenType.IF));
     TokenGroup lGroup =
-        new TokenGroup(List.of(TokenType.GREATER, TokenType.EQUAL_OR_S, TokenType.EQUAL_OR_G,
-            TokenType.SMALLER, TokenType.TRUE, TokenType.FALSE, TokenType.BOOLEAN_TYPE));
+        new TokenGroup(
+            List.of(
+                TokenType.GREATER,
+                TokenType.EQUAL_OR_S,
+                TokenType.EQUAL_OR_G,
+                TokenType.SMALLER,
+                TokenType.TRUE,
+                TokenType.FALSE,
+                TokenType.BOOLEAN_TYPE));
     return (tGroup.belongs(token) && lGroup.belongs(left.token));
   }
 

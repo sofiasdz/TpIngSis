@@ -11,7 +11,12 @@ public class ASTNodeAssignation extends ASTNodeNotChildless {
 
   @Override
   public String toString() {
-    return "Assignation: (" + leftChild.toString() + ") " + token + " (" + rightChild.toString()
+    return "Assignation: ("
+        + leftChild.toString()
+        + ") "
+        + token
+        + " ("
+        + rightChild.toString()
         + ") ";
   }
 

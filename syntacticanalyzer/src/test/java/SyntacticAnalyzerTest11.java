@@ -108,8 +108,8 @@ public class SyntacticAnalyzerTest11 {
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
     List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
     Assert.assertEquals("assignation", tree.get(3).getNodeType());
-    Assert.assertEquals("operation", ((ASTNodeAssignation) tree.get(3)).getRightChild()
-        .getNodeType());
+    Assert.assertEquals(
+        "operation", ((ASTNodeAssignation) tree.get(3)).getRightChild().getNodeType());
   }
 
   @Test

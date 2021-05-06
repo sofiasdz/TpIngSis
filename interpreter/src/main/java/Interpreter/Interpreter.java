@@ -1,4 +1,3 @@
 package Interpreter;
 
-public interface Interpreter {
-}
+public interface Interpreter {}

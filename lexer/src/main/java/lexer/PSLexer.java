@@ -37,18 +37,13 @@ public class PSLexer implements Lexer {
         currentWord = "";
         continue;
       }
-      if (isNegativeNumber(list))
-        i = negativeNumberVerification(currentWord, line, i, token, list);
-      else if (isNumber(currentWord))
-        i = numberVerification(currentWord, line, i, token);
-      else if (variableWasDeclared(list))
-        i = identifierVerification(currentWord, line, i, token);
+      if (isNegativeNumber(list)) i = negativeNumberVerification(currentWord, line, i, token, list);
+      else if (isNumber(currentWord)) i = numberVerification(currentWord, line, i, token);
+      else if (variableWasDeclared(list)) i = identifierVerification(currentWord, line, i, token);
       else if (isString(currentWord))
         token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
-      else if (isPrint(currentWord))
-        i = printVerification(currentWord, line, i, token);
-      else
-        token = tokenIdentifier(currentWord, line.getLineNumber(), i);
+      else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
+      else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
       if (token.isPresent()) {
         list.add(token.get());
@@ -56,13 +51,15 @@ public class PSLexer implements Lexer {
       }
     }
     if (!currentWord.isEmpty())
-      throw new RuntimeException("Error at line " + line.getLineNumber()
-          + ": I couldn't proccess that one. Did you correctly declare all variables?");
+      throw new RuntimeException(
+          "Error at line "
+              + line.getLineNumber()
+              + ": I couldn't proccess that one. Did you correctly declare all variables?");
     return list;
   }
 
-  private int negativeNumberVerification(String currentWord, Line line, int i,
-      Optional<Token> token, List<Token> list) {
+  private int negativeNumberVerification(
+      String currentWord, Line line, int i, Optional<Token> token, List<Token> list) {
     if (currentWord.matches("\\d+")) {
       list.remove(list.size() - 1);
       StringBuilder number = new StringBuilder(currentWord);
@@ -77,15 +74,16 @@ public class PSLexer implements Lexer {
       if (isNumber(currentWord))
         token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, "-" + currentWord));
       else
-        token
-            .set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, "-" + currentWord));
+        token.set(
+            PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, "-" + currentWord));
     }
     return i;
   }
 
   private boolean isNegativeNumber(List<Token> list) {
-    return (list.size() > 1 && list.get(list.size() - 1).getType().equals(TokenType.SUBSTRACTION) && list
-        .get(list.size() - 2).getType().equals(TokenType.ASSIGNATION));
+    return (list.size() > 1
+        && list.get(list.size() - 1).getType().equals(TokenType.SUBSTRACTION)
+        && list.get(list.size() - 2).getType().equals(TokenType.ASSIGNATION));
   }
 
   private int numberVerification(String currentWord, Line line, int i, Optional<Token> token) {
@@ -103,8 +101,7 @@ public class PSLexer implements Lexer {
       }
       if (isNumber(currentWord))
         token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
-      else
-        token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
+      else token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
     }
     return i;
   }
@@ -146,7 +143,8 @@ public class PSLexer implements Lexer {
   }
 
   private boolean isString(String currentWord) {
-    return currentWord.length() > 1 && currentWord.charAt(0) == '"'
+    return currentWord.length() > 1
+        && currentWord.charAt(0) == '"'
         && currentWord.charAt(currentWord.length() - 1) == '"';
   }
 
