@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+
 }
 
 group 'org.example'
@@ -59,3 +60,4 @@ check.dependsOn jacocoTestCoverageVerification
 tasks.withType(JavaCompile).each {
     it.options.compilerArgs.add('--enable-preview')
 }
+

@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "nebula.lint" version "16.23.0"
 }
 
 group 'org.example'
@@ -12,4 +13,8 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
+}
+allprojects {
+    apply plugin: 'nebula.lint'
+    gradleLint.rules = ['all-dependency'] // add as many rules here as you'd like
 }
