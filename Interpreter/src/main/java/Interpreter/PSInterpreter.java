@@ -1,3 +1,5 @@
+package Interpreter;
+
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeLiteral;
 import ASTNode.Childless.ASTNodePrint;
@@ -48,17 +50,17 @@ public class PSInterpreter implements Interpreter {
 
   private void nodeExecution(ASTNodePrint node) {
     String val = node.token.getValue();
-    if (val.charAt(0) == '"') prints.add(val.substring(1, val.length() - 1));
-    else if (isNumber(val)) prints.add(val);
-    else if (numberVariables.containsKey(val)) prints.add((numberVariables.get(val)).toString());
-    else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
+    if (val.charAt(0) == '"')
+      prints.add(val.substring(1, val.length() - 1));
+    else if (isNumber(val))
+      prints.add(val);
+    else if (numberVariables.containsKey(val))
+      prints.add((numberVariables.get(val)).toString());
+    else if (stringVariables.containsKey(val))
+      prints.add(stringVariables.get(val));
     else
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": Variable "
-              + val
-              + " was not declared!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine() + ": Variable "
+          + val + " was not declared!");
   }
 
   private boolean isNumber(String string) {
@@ -78,12 +80,8 @@ public class PSInterpreter implements Interpreter {
   private void nodeExecution(ASTNodeDeclaration node) {
     String identifier = node.getRightChild().token.getValue();
     if (stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier))
-      throw new IllegalArgumentException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": Variable "
-              + identifier
-              + " already declared!");
+      throw new IllegalArgumentException("Error at line: " + node.token.getStartingLine()
+          + ": Variable " + identifier + " already declared!");
     if (node.getLeftChild().token.getType().equals(TokenType.STRING_TYPE)) {
       stringVariables.put(identifier, "");
     } else {
@@ -96,12 +94,8 @@ public class PSInterpreter implements Interpreter {
       ASTNodeDeclaration dNode = (ASTNodeDeclaration) node.getLeftChild();
       String identifier = dNode.getRightChild().token.getValue();
       if (stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier))
-        throw new IllegalArgumentException(
-            "Error at line: "
-                + node.token.getStartingLine()
-                + ": Variable "
-                + identifier
-                + " already declared!");
+        throw new IllegalArgumentException("Error at line: " + node.token.getStartingLine()
+            + ": Variable " + identifier + " already declared!");
       if (dNode.getLeftChild().token.getType().equals(TokenType.STRING_TYPE)) {
         String value = stringValueGetter(node.getRightChild());
         stringVariables.put(identifier, value);
@@ -112,8 +106,8 @@ public class PSInterpreter implements Interpreter {
     } else {
       String identifier = node.getLeftChild().token.getValue();
       if (!(stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier)))
-        throw new IllegalArgumentException(
-            "Error at line: " + node.token.getStartingLine() + ": Variable was not declared!");
+        throw new IllegalArgumentException("Error at line: " + node.token.getStartingLine()
+            + ": Variable was not declared!");
       if (stringVariables.containsKey(identifier)) {
         String value = stringValueGetter(node.getRightChild());
         stringVariables.put(identifier, value);
@@ -134,18 +128,14 @@ public class PSInterpreter implements Interpreter {
 
   private Double numberLiteralValidator(ASTNodeLiteral node) {
     if (node.token.getType().equals(TokenType.STRING))
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": You are trying to assign a string to a non-string variable!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": You are trying to assign a string to a non-string variable!");
     String literal = node.token.getValue();
     try {
       return Double.parseDouble(literal);
     } catch (NumberFormatException e) {
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": You are trying to assign a string to a non-string variable!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": You are trying to assign a string to a non-string variable!");
     }
   }
 
@@ -165,10 +155,11 @@ public class PSInterpreter implements Interpreter {
       if (numberVariables.containsKey(node.token.getValue())) {
         return numberVariables.get(node.token.getValue());
       }
-      throw new RuntimeException(
-          "Error at line: " + node.token.getStartingLine() + ": Variable not declared!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": Variable not declared!");
     }
-    if (node.getNodeType().equals("literal")) return Double.parseDouble(node.token.getValue());
+    if (node.getNodeType().equals("literal"))
+      return Double.parseDouble(node.token.getValue());
     return numberOperation((ASTNodeOperation) node);
   }
 
@@ -192,41 +183,41 @@ public class PSInterpreter implements Interpreter {
       ASTNode currentChild = node.getLeftChild();
       if (currentChild.getNodeType().equals("identifier")) {
         value =
-            stringVariables.containsKey(currentChild.token.getValue())
-                ? stringVariables.get(currentChild.token.getValue())
-                : "\"" + numberVariables.get(currentChild.token.getValue()).toString() + "\"";
+            stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables
+                .get(currentChild.token.getValue()) : "\""
+                + numberVariables.get(currentChild.token.getValue()).toString() + "\"";
       } else if (currentChild.getNodeType().equals("literal"))
         value = node.getLeftChild().token.getValue();
-      else value = stringOperation((ASTNodeOperation) currentChild);
+      else
+        value = stringOperation((ASTNodeOperation) currentChild);
       value = value.substring(0, value.length() - 1);
 
       currentChild = node.getRightChild();
       if (currentChild.getNodeType().equals("identifier")) {
         value +=
-            stringVariables.containsKey(currentChild.token.getValue())
-                ? stringVariables.get(currentChild.token.getValue()).substring(1)
-                : numberVariables.get(currentChild.token.getValue()).toString() + "\"";
+            stringVariables.containsKey(currentChild.token.getValue()) ? stringVariables.get(
+                currentChild.token.getValue()).substring(1) : numberVariables.get(
+                currentChild.token.getValue()).toString()
+                + "\"";
       } else if (currentChild.getNodeType().equals("literal"))
         value += currentChild.token.getValue().substring(1);
-      else value += stringOperation((ASTNodeOperation) currentChild).substring(1);
+      else
+        value += stringOperation((ASTNodeOperation) currentChild).substring(1);
 
       return value;
     } else
-      throw new RuntimeException(
-          "Error at line " + node.token.getStartingLine() + ": Strings can only use + operator!");
+      throw new RuntimeException("Error at line " + node.token.getStartingLine()
+          + ": Strings can only use + operator!");
   }
 
   private String stringLiteralValidator(ASTNodeLiteral node) {
     if (!node.token.getType().equals(TokenType.STRING))
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": You are trying to assign a non-string to a string variable!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": You are trying to assign a non-string to a string variable!");
     String literal = node.token.getValue();
-    if (literal.charAt(0) == '"' && literal.charAt(literal.length() - 1) == '"') return literal;
-    throw new RuntimeException(
-        "Error at line: "
-            + node.token.getStartingLine()
-            + ": You are trying to assign a non-string to a string variable!");
+    if (literal.charAt(0) == '"' && literal.charAt(literal.length() - 1) == '"')
+      return literal;
+    throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+        + ": You are trying to assign a non-string to a string variable!");
   }
 }

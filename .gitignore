@@ -189,8 +189,8 @@ hs_err_pid*
 /syntactic_analyzer/build/jacoco/test/html/jacoco-resources/prettify.css
 /interpreter/build/jacoco/test/html/jacoco-resources/prettify.js
 /syntactic_analyzer/build/jacoco/test/html/jacoco-resources/prettify.js
-/interpreter/build/jacoco/test/html/default/PSInterpreter.html
-/interpreter/build/jacoco/test/html/default/PSInterpreter.java.html
+/interpreter/build/jacoco/test/html/default/Interpreter.PSInterpreter.html
+/interpreter/build/jacoco/test/html/default/Interpreter.PSInterpreter.java.html
 /syntactic_analyzer/build/jacoco/test/html/syntactic_analyzer/PSSyntacticAnalyzer.html
 /syntactic_analyzer/build/jacoco/test/html/syntactic_analyzer/PSSyntacticAnalyzer.java.html
 /interpreter/build/jacoco/test/html/jacoco-resources/redbar.gif
@@ -227,3 +227,5 @@ hs_err_pid*
 /syntactic_analyzer/build/reports/tests/test/classes/SyntacticAnalyzerTest11.html
 /syntactic_analyzer/build/test-results/test/TEST-SyntacticAnalyzerTest11.xml
 /SyntacticAnalyzer/build/
+/syntactic_analyzer/
+/ast_node/
