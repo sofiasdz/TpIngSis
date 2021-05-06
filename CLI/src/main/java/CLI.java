@@ -1,7 +1,7 @@
 import ASTNode.ASTNode;
-import java.util.List;
-import lexer.PSLexer;
-import syntactic_analyzer.PSSyntacticAnalyzer;
+import Parser.DebugResult;
+import Parser.PS10Parser;
+import Parser.PS11Parser;
 import token.Token;
 
 public class CLI {
@@ -20,13 +20,27 @@ public class CLI {
     System.out.println();
     int option = Scanner.getInt("ENTER YOUR OPTION: ");
     switch (option) {
-      case 1 -> validatePS();
-      case 2 -> executePS();
-      case 3 -> validatePS11();
-      case 4 -> executePS11();
-      case 5 -> debugPS();
-      case 6 -> debugPS11();
-      default -> System.out.println("I HAVE NO IDEA WHAT THAT MEANS.");
+      case 1:
+        validatePS();
+        break;
+      case 2:
+        executePS();
+        break;
+      case 3:
+        validatePS11();
+        break;
+      case 4:
+        executePS11();
+        break;
+      case 5:
+        debugPS();
+        break;
+      case 6:
+        debugPS11();
+        break;
+      default:
+        System.out.println("I HAVE NO IDEA WHAT THAT MEANS.");
+        break;
     }
     System.out.println();
     System.out.println("HAVE A NICE DAY!");

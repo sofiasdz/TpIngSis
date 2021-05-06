@@ -1,14 +1,17 @@
+package Parser;
+
 import ASTNode.ASTNode;
-import lexer.PSLexer;
-import syntactic_analyzer.PSSyntacticAnalyzer;
+import Interpreter.PS11Interpreter;
+import lexer.PS11Lexer;
+import syntactic_analyzer.PS11SyntacticAnalyzer;
 import token.Token;
 
 import java.util.List;
 
-public class PS10Parser implements Parser {
-    static PSLexer lexer = new PSLexer();
-    static PSSyntacticAnalyzer syntactic = new PSSyntacticAnalyzer();
-    static PSInterpreter interpreter = new PSInterpreter();
+public class PS11Parser implements Parser{
+    static PS11Lexer lexer = new PS11Lexer();
+    static PS11SyntacticAnalyzer syntactic = new PS11SyntacticAnalyzer();
+    static PS11Interpreter interpreter = new PS11Interpreter();
 
     public String validate(String path) {
         List<String> list = FileToString.fileReader(path);

@@ -11,13 +11,9 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    implementation project (':Lexer')
-    implementation project (':Tokens')
-    implementation project (':SyntacticAnalyzer')
-    implementation project (':Interpreter')
-    implementation project (':AstNode')
     implementation project (':Parser')
+    implementation project (':Tokens')
+    implementation project (':AstNode')
 }
 
 
