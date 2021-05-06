@@ -68,16 +68,13 @@ public class CLI {
     System.out.println();
     System.out.println("THE TOKENS ARE: ");
     System.out.println();
-    for (Token t : debug.tokens)
-      System.out.println(t.getType() + " " + t.getValue());
+    for (Token t : debug.tokens) System.out.println(t.getType() + " " + t.getValue());
     System.out.println();
     System.out.println("THE NODES ARE: ");
-    for (ASTNode n : debug.nodes)
-      System.out.println(n.toString());
+    for (ASTNode n : debug.nodes) System.out.println(n.toString());
     System.out.println();
     System.out.println("THE RESULT OF YOUR PROGRAM IS: ");
-    for (String s : debug.prints)
-      System.out.println(s);
+    for (String s : debug.prints) System.out.println(s);
   }
 
   private static void debugPS11() {

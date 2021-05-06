@@ -38,20 +38,15 @@ public class PS11Lexer implements Lexer {
         continue;
       }
       token = tokenIdentifier(currentWord, line.getLineNumber(), i);
-      if (isNegativeNumber(list))
-        i = negativeNumberVerification(currentWord, line, i, token, list);
+      if (isNegativeNumber(list)) i = negativeNumberVerification(currentWord, line, i, token, list);
       else if (isGrEqualSmaEqual(currentWord, line, i))
         i = grEqualsmEqualVerification(currentWord, line, i, token);
-      else if (isNumber(currentWord))
-        i = numberVerification(currentWord, line, i, token);
-      else if (variableWasDeclared(list))
-        i = identifierVerification(currentWord, line, i, token);
+      else if (isNumber(currentWord)) i = numberVerification(currentWord, line, i, token);
+      else if (variableWasDeclared(list)) i = identifierVerification(currentWord, line, i, token);
       else if (isString(currentWord))
         token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
-      else if (isPrint(currentWord))
-        i = printVerification(currentWord, line, i, token);
-      else
-        token = tokenIdentifier(currentWord, line.getLineNumber(), i);
+      else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
+      else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
       if (token.isPresent()) {
         list.add(token.get());
@@ -59,8 +54,10 @@ public class PS11Lexer implements Lexer {
       }
     }
     if (!currentWord.isEmpty())
-      throw new RuntimeException("Error at line " + line.getLineNumber()
-          + ": I couldn't proccess that one. Did you correctly declare all variables?");
+      throw new RuntimeException(
+          "Error at line "
+              + line.getLineNumber()
+              + ": I couldn't proccess that one. Did you correctly declare all variables?");
     return list;
   }
 
@@ -68,14 +65,15 @@ public class PS11Lexer implements Lexer {
     return (currentWord.equals("<") | currentWord.equals(">") && line.get(i + 1).equals("="));
   }
 
-  private int grEqualsmEqualVerification(String currentWord, Line line, int i, Optional<Token> token) {
+  private int grEqualsmEqualVerification(
+      String currentWord, Line line, int i, Optional<Token> token) {
     currentWord = currentWord + line.get(i + 1);
     token.set(tokenIdentifier(currentWord, line.getLineNumber(), i + 1).get());
     return i + 1;
   }
 
-  private int negativeNumberVerification(String currentWord, Line line, int i,
-      Optional<Token> token, List<Token> list) {
+  private int negativeNumberVerification(
+      String currentWord, Line line, int i, Optional<Token> token, List<Token> list) {
     if (currentWord.matches("\\d+")) {
       list.remove(list.size() - 1);
       StringBuilder number = new StringBuilder(currentWord);
@@ -90,15 +88,16 @@ public class PS11Lexer implements Lexer {
       if (isNumber(currentWord))
         token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, "-" + currentWord));
       else
-        token
-            .set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, "-" + currentWord));
+        token.set(
+            PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, "-" + currentWord));
     }
     return i;
   }
 
   private boolean isNegativeNumber(List<Token> list) {
-    return (list.size() > 1 && list.get(list.size() - 1).getType().equals(TokenType.SUBSTRACTION) && list
-        .get(list.size() - 2).getType().equals(TokenType.ASSIGNATION));
+    return (list.size() > 1
+        && list.get(list.size() - 1).getType().equals(TokenType.SUBSTRACTION)
+        && list.get(list.size() - 2).getType().equals(TokenType.ASSIGNATION));
   }
 
   private int numberVerification(String currentWord, Line line, int i, Optional<Token> token) {
@@ -114,8 +113,7 @@ public class PS11Lexer implements Lexer {
       }
       if (isNumber(currentWord))
         token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
-      else
-        token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
+      else token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
     }
     return i;
   }
@@ -157,14 +155,15 @@ public class PS11Lexer implements Lexer {
   }
 
   private boolean isString(String currentWord) {
-    return currentWord.length() > 1 && currentWord.charAt(0) == '"'
+    return currentWord.length() > 1
+        && currentWord.charAt(0) == '"'
         && currentWord.charAt(currentWord.length() - 1) == '"';
   }
 
   private boolean variableWasDeclared(List<Token> list) {
     return !list.isEmpty()
-        && (list.get(list.size() - 1).getValue().equals("let") | list.get(list.size() - 1)
-            .getValue().equals("const"));
+        && (list.get(list.size() - 1).getValue().equals("let")
+            | list.get(list.size() - 1).getValue().equals("const"));
   }
 
   private boolean isNumber(String string) {
