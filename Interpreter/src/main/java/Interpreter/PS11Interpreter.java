@@ -1,3 +1,5 @@
+package Interpreter;
+
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeLiteral;
 import ASTNode.Childless.ASTNodePrint;
