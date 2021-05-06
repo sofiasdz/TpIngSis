@@ -1,7 +1,6 @@
 package syntactic_analyzer;
 
 import ASTNode.ASTNode;
-import ASTNode.Childless.ASTNodeIdentifier;
 import ASTNode.Factory.ASTNodeFactory11;
 import ASTNode.NotChildless.ASTNodeBooleanOperation;
 import ASTNode.TokenGroup.TokenGroup;

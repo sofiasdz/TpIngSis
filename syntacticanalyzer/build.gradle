@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    implementation project (':tokens')
+    implementation project (':token')
     implementation project (':astnode')
     implementation project (':jsonreaderwriter')
 }
