@@ -130,7 +130,6 @@ public class SyntacticAnalyzerTest11 {
     Assert.assertEquals("assignation", tree.get(0).getNodeType());
   }
 
-
   @Test
   public void test021_BooleanVariables() {
     final String testname = folder + "LexerTest_test23_BooleanVariables";
@@ -149,12 +148,13 @@ public class SyntacticAnalyzerTest11 {
     Assert.assertEquals("assignation", tree.get(0).getNodeType());
   }
 
-    @Test
-    public void test016_GivenConstVariableShouldReturnDeclarationNode() {
-      final String testName = folder + "LexerTest_test16_const";
-      List<Token> gF = JSONFileWriter.fileJSONToTokenList(testName);
-      PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
-      List<ASTNode> tree = psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
-      Assert.assertEquals("declaration", tree.get(0).getNodeType());
-    }
+  @Test
+  public void test016_GivenConstVariableShouldReturnDeclarationNode() {
+    final String testName = folder + "LexerTest_test16_const";
+    List<Token> gF = JSONFileWriter.fileJSONToTokenList(testName);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree =
+        psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
+    Assert.assertEquals("declaration", tree.get(0).getNodeType());
+  }
 }

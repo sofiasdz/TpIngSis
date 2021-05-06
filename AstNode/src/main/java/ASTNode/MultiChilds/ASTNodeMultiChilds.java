@@ -2,11 +2,10 @@ package ASTNode.MultiChilds;
 
 import ASTNode.ASTNode;
 import ASTNode.NodeType;
-import token.Token;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import token.Token;
 
 public abstract class ASTNodeMultiChilds extends ASTNode {
   ASTNode leftChild;
@@ -28,7 +27,7 @@ public abstract class ASTNodeMultiChilds extends ASTNode {
     this.rightChild = rightChild;
   }
 
-  public void addRightChild(ASTNode node){
+  public void addRightChild(ASTNode node) {
     rightChild.add(node);
   }
 

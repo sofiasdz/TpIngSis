@@ -1,19 +1,17 @@
 package ASTNode.MultiChilds;
 
 import ASTNode.ASTNode;
-import ASTNode.NotChildless.ASTNodeNotChildless;
-import token.Token;
-
 import java.util.List;
+import token.Token;
 
 public class ASTNodeIfElse extends ASTNodeMultiChilds {
 
   public ASTNodeIfElse(ASTNode leftChild, ASTNode rightChild, Token token) {
-    super(leftChild,rightChild,token);
+    super(leftChild, rightChild, token);
   }
 
   public ASTNodeIfElse(ASTNode leftChild, List<ASTNode> rightChild, Token token) {
-    super(leftChild,rightChild,token);
+    super(leftChild, rightChild, token);
   }
 
   @Override
