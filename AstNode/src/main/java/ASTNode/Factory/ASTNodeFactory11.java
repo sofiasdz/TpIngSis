@@ -90,7 +90,11 @@ public class ASTNodeFactory11 {
                 TokenType.IDENTIFIER,
                 TokenType.FLOATING_POINT,
                 TokenType.INTEGER,
-                TokenType.STRING));
+                TokenType.STRING,
+                    TokenType.ADDITION,
+                    TokenType.SUBSTRACTION,
+                    TokenType.MULTIPLICATION,
+                    TokenType.DIVISION));
     if (tGroup.belongs(token) && cValid.belongs(left.token) && cValid.belongs(right.token))
       return new ASTNodeOperation(left, right, token);
     throw new IllegalArgumentException();
