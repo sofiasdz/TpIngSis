@@ -28,27 +28,59 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
           if(!tokens.get(j).getType().equals(TokenType.OPENING_BRACKETS)){
             tokenList.add(tokens.get(j));
           } else {
-            ArrayList<Token> branch = new ArrayList<>();
-            for (int k = j+1; k < tokens.size(); k++) {
-              if(!tokens.get(k).getType().equals(TokenType.CLOSING_BRACKETS)){
-                branch.add(tokens.get(k));
-              } else {
-                nodes.add(ifNodeBuilder(tokenList,branch));
-                tokenList = new ArrayList<>();
-                i=k;
-                k=tokens.size();
-                j=tokens.size();
-              }
-            }
+           i=bracketResolver(tokens,tokenList,nodes,j);
+           j=tokens.size();
+           tokenList = new ArrayList<>();
+//            ArrayList<Token> branch = new ArrayList<>();
+//            for (int k = j+1; k < tokens.size(); k++) {
+//              if(!tokens.get(k).getType().equals(TokenType.CLOSING_BRACKETS)){
+//                branch.add(tokens.get(k));
+//              } else {
+//                nodes.add(ifNodeBuilder(tokenList,branch));
+//                tokenList = new ArrayList<>();
+//                i=k;
+//                k=tokens.size();
+//                j=tokens.size();
+//              }
+//            }
           }
         }
       }
-      if (tokens.get(i).getType().equals(TokenType.SEMICOLON)) {
+      else if(tokens.get(i).getType().equals(TokenType.ELSE)){
+        for (int j = i+1; j < tokens.size() ; j++) {
+          if(!tokens.get(j).getType().equals(TokenType.OPENING_BRACKETS)){
+            tokenList.add(tokens.get(j));
+          } else {
+            i=bracketResolver(tokens,tokenList,nodes,j);
+            j=tokens.size();
+            tokenList = new ArrayList<>();
+          }
+        }
+      }
+      else if (tokens.get(i).getType().equals(TokenType.SEMICOLON)) {
         nodes.add(tokensToNodeRefactored(tokenList));
         tokenList = new ArrayList<>();
       }
     }
     return nodes;
+  }
+
+  private int bracketResolver(List<Token> tokens, List<Token> tokenList, List<ASTNode> nodes, int j){
+    ArrayList<Token> branch = new ArrayList<>();
+    for (int k = j+1; k < tokens.size(); k++) {
+      if(!tokens.get(k).getType().equals(TokenType.CLOSING_BRACKETS)){
+        branch.add(tokens.get(k));
+      } else {
+        if(tokenList.get(0).getType().equals(TokenType.IF)){
+          nodes.add(ifNodeBuilder(tokenList,branch));
+        }
+        else {
+          nodes.set(nodes.size()-1,elseNodeBuilder(tokenList,branch, nodes.get(nodes.size()-1)));
+        }
+        return k;
+      }
+    }
+    throw new RuntimeException("Error at line "+tokenList.get(0).getStartingLine()+": Invalid brackets block");
   }
 
   private ASTNode ifNodeBuilder(List<Token> ifList, List<Token> branch){
@@ -68,6 +100,16 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       return ASTNodeIdentifier(ifList.get(0),leftChild,branchCode).get();
     } catch (NoSuchElementException e){
       throw new RuntimeException("Error at line "+ifList.get(0).getStartingLine()+": Invalid if declaration");
+    }
+  }
+
+  private ASTNode elseNodeBuilder(List<Token> elseList, List<Token> branch, ASTNode ifNode){
+    try{
+      if(!ifNode.getNodeType().equals("if")) throw new RuntimeException("Error at line "+elseList.get(0).getStartingLine()+": else must go after an if");
+      List<ASTNode> branchCode = this.analyze(branch);
+      return ASTNodeIdentifier(elseList.get(0),ifNode,branchCode).get();
+    } catch (NoSuchElementException e){
+      throw new RuntimeException("Error at line "+elseList.get(0).getStartingLine()+": Invalid else declaration");
     }
   }
 

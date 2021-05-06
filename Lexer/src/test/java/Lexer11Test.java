@@ -194,6 +194,7 @@ public class Lexer11Test {
     String line7 = "printLn(a);";
     goldenFileAsserter(testname,List.of(line1,line2,line3,line4, line5,line6,line7));
   }
+
   @Test
   public void test22_IfStatement(){
     final String testname = "LexerTest_test22_IfStatements";
@@ -220,4 +221,17 @@ public class Lexer11Test {
     goldenFileAsserter(testname,List.of(line1,line2,line3,line4,line5));
   }
 
+  @Test
+  public void test24_IfElseStatement(){
+    final String testname = "LexerTest_test24_IfElseStatements";
+    String line1 = "let a : number = 20;";
+    String line2 = "if(false) {";
+    String line3 = "a = a * 2;";
+    String line4 = "}";
+    String line5 = "else {";
+    String line6 = "a = 5;";
+    String line7 = "}";
+    String line8 = "printLn(a);";
+    goldenFileAsserter(testname,List.of(line1,line2,line3,line4, line5,line6,line7,line8));
+  }
 }
