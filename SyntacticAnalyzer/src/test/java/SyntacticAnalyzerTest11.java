@@ -118,7 +118,7 @@ public class SyntacticAnalyzerTest11 {
     List<Token> gF = JSONFileWriter.fileJSONToTokenList(testName);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
     List<ASTNode> tree =
-            psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
+        psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
     Assert.assertEquals("declaration", tree.get(0).getNodeType());
   }
 
@@ -159,7 +159,7 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test
-  public void test023_NumericalOperatorsPrecedenceTest(){
+  public void test023_NumericalOperatorsPrecedenceTest() {
     final String testname = folder + "LexerTest_test25_NumericalOperators";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
@@ -168,7 +168,7 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test(expected = RuntimeException.class)
-  public void test024_MissingSemiColon(){
+  public void test024_MissingSemiColon() {
     final String testname = folder + "LexerTest_test26_BadSyntax";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
@@ -176,7 +176,7 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test(expected = RuntimeException.class)
-  public void test025_IfElseBadSyntax(){
+  public void test025_IfElseBadSyntax() {
     final String testname = folder + "LexerTest_test27_ifElseBadSyntax";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
@@ -184,7 +184,7 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test(expected = RuntimeException.class)
-  public void test026_IfWithoutClosingBracket(){
+  public void test026_IfWithoutClosingBracket() {
     final String testname = folder + "LexerTest_test28_ifWithoutClosingBracket";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
@@ -192,7 +192,7 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test(expected = RuntimeException.class)
-  public void test027_ElseWithoutIf(){
+  public void test027_ElseWithoutIf() {
     final String testname = folder + "LexerTest_test29_ElseWithoutIf";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
@@ -200,11 +200,10 @@ public class SyntacticAnalyzerTest11 {
   }
 
   @Test(expected = RuntimeException.class)
-  public void test028_StartingWithElse(){
+  public void test028_StartingWithElse() {
     final String testname = folder + "LexerTest_test30_StartingWithElse";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
     List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
   }
-
 }
