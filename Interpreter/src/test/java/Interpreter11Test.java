@@ -183,178 +183,178 @@ public class Interpreter11Test {
     List<String> prints = analyzeFromNode(List.of(nodes.get(0), nodes.get(0)));
   }
 
-   @Test
-   public void test12_BooleanShouldReturnTrue() {
-   String line1 = "let test: boolean = true;";
-   String line2 = "printLn(test);";
-   List<String> prints = analyze((List.of(line1, line2)));
-   Assert.assertEquals("true", prints.get(0));
-   }
+  @Test
+  public void test12_BooleanShouldReturnTrue() {
+    String line1 = "let test: boolean = true;";
+    String line2 = "printLn(test);";
+    List<String> prints = analyze((List.of(line1, line2)));
+    Assert.assertEquals("true", prints.get(0));
+  }
 
-   @Test
-   public void test13_BooleanShouldReturnFalse() {
-   String line1 = "let test: boolean = false;";
-   String line2 = "printLn(test);";
-   List<String> prints = analyze((List.of(line1, line2)));
-   Assert.assertEquals("false", prints.get(0));
-   }
+  @Test
+  public void test13_BooleanShouldReturnFalse() {
+    String line1 = "let test: boolean = false;";
+    String line2 = "printLn(test);";
+    List<String> prints = analyze((List.of(line1, line2)));
+    Assert.assertEquals("false", prints.get(0));
+  }
 
-   @Test
-   public void test14_VariableWithGreaterThan() {
-   String line1 = "let x : number = 3;";
-   String line2 = "let y : number = 6;";
-   String line3 = "let test: boolean = x>y;";
-   String line4 = "printLn(test);";
-   List<String> prints = analyze((List.of(line1, line2,line3,line4)));
-   Assert.assertEquals("false", prints.get(0));
-   }
+  @Test
+  public void test14_VariableWithGreaterThan() {
+    String line1 = "let x : number = 3;";
+    String line2 = "let y : number = 6;";
+    String line3 = "let test: boolean = x>y;";
+    String line4 = "printLn(test);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("false", prints.get(0));
+  }
 
-   @Test
-   public void test15_VariableWithSmallerThan() {
-   String line1 = "let x : number = 3;";
-   String line2 = "let y : number = 6;";
-   String line3 = "let test: boolean = x<y;";
-   String line4 = "printLn(test);";
-   List<String> prints = analyze((List.of(line1, line2,line3,line4)));
-   Assert.assertEquals("true", prints.get(0));
-   }
+  @Test
+  public void test15_VariableWithSmallerThan() {
+    String line1 = "let x : number = 3;";
+    String line2 = "let y : number = 6;";
+    String line3 = "let test: boolean = x<y;";
+    String line4 = "printLn(test);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("true", prints.get(0));
+  }
 
-   @Test
-   public void test16_VariableWithEqualOrGreaterThan() {
-   String line1 = "let x : number = 3;";
-   String line2 = "let y : number = 3;";
-   String line3 = "let test: boolean = x>=y;";
-   String line4 = "printLn(test);";
-   List<String> prints = analyze((List.of(line1, line2,line3,line4)));
-   Assert.assertEquals("true", prints.get(0));
-   }
+  @Test
+  public void test16_VariableWithEqualOrGreaterThan() {
+    String line1 = "let x : number = 3;";
+    String line2 = "let y : number = 3;";
+    String line3 = "let test: boolean = x>=y;";
+    String line4 = "printLn(test);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("true", prints.get(0));
+  }
 
-   @Test
-   public void test17_VariableWithEqualOrSmallerThan() {
-   String line1 = "let x : number = 3;";
-   String line2 = "let y : number = 3;";
-   String line3 = "let test: boolean = x<=y;";
-   String line4 = "printLn(test);";
-   List<String> prints = analyze((List.of(line1, line2,line3,line4)));
-   Assert.assertEquals("true", prints.get(0));
-   }
+  @Test
+  public void test17_VariableWithEqualOrSmallerThan() {
+    String line1 = "let x : number = 3;";
+    String line2 = "let y : number = 3;";
+    String line3 = "let test: boolean = x<=y;";
+    String line4 = "printLn(test);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("true", prints.get(0));
+  }
 
-   @Test
-   public void test18_VariableConst() {
-   String line1 = "const gravity: number = 10 ;";
-   String line2 = "printLn(gravity);";
-   List<String> prints = analyze((List.of(line1, line2)));
-   Assert.assertEquals("10.0", prints.get(0));
-   }
+  @Test
+  public void test18_VariableConst() {
+    String line1 = "const gravity: number = 10 ;";
+    String line2 = "printLn(gravity);";
+    List<String> prints = analyze((List.of(line1, line2)));
+    Assert.assertEquals("10.0", prints.get(0));
+  }
 
-   @Test(expected = RuntimeException.class)
-   public void test19_ChangingAConstShouldThrowException() {
-   String line1 = "const gravity: number = 10 ;";
-   String line2 = "gravity = 9;";
-   List<String> prints = analyze((List.of(line1, line2)));
-   }
+  @Test(expected = RuntimeException.class)
+  public void test19_ChangingAConstShouldThrowException() {
+    String line1 = "const gravity: number = 10 ;";
+    String line2 = "gravity = 9;";
+    List<String> prints = analyze((List.of(line1, line2)));
+  }
 
-   @Test(expected = RuntimeException.class)
-   public void test20_AsingningAStringToABooleanShouldThrowException() {
-   String line1 = "let test: boolean = \"hola\";";
-   List<String> prints = analyze((List.of(line1)));
-   }
+  @Test(expected = RuntimeException.class)
+  public void test20_AsingningAStringToABooleanShouldThrowException() {
+    String line1 = "let test: boolean = \"hola\";";
+    List<String> prints = analyze((List.of(line1)));
+  }
 
-   @Test(expected = RuntimeException.class)
-   public void test21_AsingningANumberToABooleanShouldThrowException() {
-   String line1 = "let test: boolean = 9;";
-   List<String> prints = analyze((List.of(line1)));
-   }
+  @Test(expected = RuntimeException.class)
+  public void test21_AsingningANumberToABooleanShouldThrowException() {
+    String line1 = "let test: boolean = 9;";
+    List<String> prints = analyze((List.of(line1)));
+  }
 
-   @Test
-   public void test22_VariableConstBoolean() {
-   String line1 = "const isOn: boolean = true ;";
-   String line2 = "printLn(isOn);";
-   List<String> prints = analyze((List.of(line1, line2)));
-   Assert.assertEquals("true", prints.get(0));
-   }
+  @Test
+  public void test22_VariableConstBoolean() {
+    String line1 = "const isOn: boolean = true ;";
+    String line2 = "printLn(isOn);";
+    List<String> prints = analyze((List.of(line1, line2)));
+    Assert.assertEquals("true", prints.get(0));
+  }
 
-   @Test
-   public void test23_ConditionalStatement1() {
-   String line1 = "if(true){ let x: number = 1;}";
-   String line2 = "else { let x: number = 2;}";
-   String line3 = "printLn(x);";
-   List<String> prints = analyze((List.of(line1, line2,line3)));
-   Assert.assertEquals("1.0", prints.get(0));
-   }
+  @Test
+  public void test23_ConditionalStatement1() {
+    String line1 = "if(true){ let x: number = 1;}";
+    String line2 = "else { let x: number = 2;}";
+    String line3 = "printLn(x);";
+    List<String> prints = analyze((List.of(line1, line2, line3)));
+    Assert.assertEquals("1.0", prints.get(0));
+  }
 
-   @Test
-   public void test24_ConditionalStatement2() {
-   String line1 = "if(false){ let x: number = 1;}";
-   String line2 = "else { let x: number = 2;}";
-   String line3 = "printLn(x);";
-   List<String> prints = analyze((List.of(line1, line2,line3)));
-   Assert.assertEquals("2.0", prints.get(0));
-   }
+  @Test
+  public void test24_ConditionalStatement2() {
+    String line1 = "if(false){ let x: number = 1;}";
+    String line2 = "else { let x: number = 2;}";
+    String line3 = "printLn(x);";
+    List<String> prints = analyze((List.of(line1, line2, line3)));
+    Assert.assertEquals("2.0", prints.get(0));
+  }
 
-   @Test
-   public void test24_ConditionalStatement3() {
-   String line1 = "let x : number = 3;";
-   String line2 = "let y : number = 6;";
-   String line3 = "if(x>6){ let a: number = 1;}";
-   String line4 = "else { let a: number = 2;}";
-   String line5 = "printLn(a);";
-   List<String> prints = analyze((List.of(line1, line2,line3,line4,line5)));
-   Assert.assertEquals("2.0", prints.get(0));
-   }
+  @Test
+  public void test24_ConditionalStatement3() {
+    String line1 = "let x : number = 3;";
+    String line2 = "let y : number = 6;";
+    String line3 = "if(x>6){ let a: number = 1;}";
+    String line4 = "else { let a: number = 2;}";
+    String line5 = "printLn(a);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4, line5)));
+    Assert.assertEquals("2.0", prints.get(0));
+  }
 
-   @Test
-   public void test24_ConditionalStatement4() {
-   String line1 = "let x : number = 3;";
-   String line2 = "let y : number = 6;";
-   String line3 = "if(x<6){ let a: number = 1;}";
-   String line4 = "else { let a: number = 2;}";
-   String line5 = "printLn(a);";
-   List<String> prints = analyze((List.of(line1, line2,line3,line4,line5)));
-   Assert.assertEquals("1.0", prints.get(0));
-   }
+  @Test
+  public void test24_ConditionalStatement4() {
+    String line1 = "let x : number = 3;";
+    String line2 = "let y : number = 6;";
+    String line3 = "if(x<6){ let a: number = 1;}";
+    String line4 = "else { let a: number = 2;}";
+    String line5 = "printLn(a);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4, line5)));
+    Assert.assertEquals("1.0", prints.get(0));
+  }
 
-   @Test
-   public void test25_MultipleNumberOperation() {
-   String line1 = "let cuenta: number = 5*5-8/4+2;";
-   String line2 = "printLn(cuenta);";
-   List<String> prints = analyze((List.of(line1, line2)));
-   Assert.assertEquals("25.0", prints.get(0));
-   }
+  @Test
+  public void test25_MultipleNumberOperation() {
+    String line1 = "let cuenta: number = 5*5-8/4+2;";
+    String line2 = "printLn(cuenta);";
+    List<String> prints = analyze((List.of(line1, line2)));
+    Assert.assertEquals("25.0", prints.get(0));
+  }
 
-   @Test
-   public void test26_NegativeNumberDeclaration() {
-   String line1 = "let a: number = -5;";
-   String line2 = "printLn(a);";
-   List<String> prints = analyze((List.of(line1, line2)));
-   Assert.assertEquals("-5.0", prints.get(0));
-   }
+  @Test
+  public void test26_NegativeNumberDeclaration() {
+    String line1 = "let a: number = -5;";
+    String line2 = "printLn(a);";
+    List<String> prints = analyze((List.of(line1, line2)));
+    Assert.assertEquals("-5.0", prints.get(0));
+  }
 
-   @Test
-   public void test26_NegativeNumberAsAResult() {
-   String line1 = "let a: number = 3-5;";
-   String line2 = "printLn(a);";
-   List<String> prints = analyze((List.of(line1, line2)));
-   Assert.assertEquals("-2.0", prints.get(0));
-   }
+  @Test
+  public void test26_NegativeNumberAsAResult() {
+    String line1 = "let a: number = 3-5;";
+    String line2 = "printLn(a);";
+    List<String> prints = analyze((List.of(line1, line2)));
+    Assert.assertEquals("-2.0", prints.get(0));
+  }
 
-    @Test
-    public void test27_ConcatenatingStringAndBoolean() {
-        String line1 = "let x: string = \"true is: \";";
-        String line2 = "let y: boolean = true;";
-        String line3 = "let z: string = x + y;";
-        String line4 = "printLn(z);";
-        List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-        Assert.assertEquals("\"true is: true\"", prints.get(0));
-    }
+  @Test
+  public void test27_ConcatenatingStringAndBoolean() {
+    String line1 = "let x: string = \"true is: \";";
+    String line2 = "let y: boolean = true;";
+    String line3 = "let z: string = x + y;";
+    String line4 = "printLn(z);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("\"true is: true\"", prints.get(0));
+  }
 
-    @Test
-    public void test28_ConcatenatingConstVariables() {
-        String line1 = "const x: number = 3;";
-        String line2 = "const y: boolean = true;";
-        String line3 = "const z: string = x + y;";
-        String line4 = "printLn(z);";
-        List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-        Assert.assertEquals("\"3.0true\"", prints.get(0));
-    }
+  @Test
+  public void test28_ConcatenatingConstVariables() {
+    String line1 = "const x: number = 3;";
+    String line2 = "const y: boolean = true;";
+    String line3 = "const z: string = x + y;";
+    String line4 = "printLn(z);";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4)));
+    Assert.assertEquals("\"3.0true\"", prints.get(0));
+  }
 }
