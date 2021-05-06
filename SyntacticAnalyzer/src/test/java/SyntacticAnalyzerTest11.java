@@ -121,14 +121,40 @@ public class SyntacticAnalyzerTest11 {
     Assert.assertEquals("assignation", tree.get(0).getNodeType());
   }
 
-  //  @Test
-  //  public void test016_GivenConstVariableShouldReturnDeclarationNode() {
-  //    final String testName = folder + "LexerTest_test16_const";
-  //    List<Token> gF = JSONFileWriter.fileJSONToTokenList(testName);
-  //    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
-  //    List<ASTNode> tree =
-  //        psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3),
-  // gF.get(6)));
-  //    Assert.assertEquals("declaration", tree.get(0).getNodeType());
-  //  }
+  @Test
+  public void test020_IfStatements() {
+    final String testname = folder + "LexerTest_test22_IfStatements";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+    Assert.assertEquals("assignation", tree.get(0).getNodeType());
+  }
+
+
+  @Test
+  public void test021_BooleanVariables() {
+    final String testname = folder + "LexerTest_test23_BooleanVariables";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+    Assert.assertEquals("assignation", tree.get(0).getNodeType());
+  }
+
+  @Test
+  public void test022_IfElseStatements() {
+    final String testname = folder + "LexerTest_test24_IfElseStatements";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+    Assert.assertEquals("assignation", tree.get(0).getNodeType());
+  }
+
+    @Test
+    public void test016_GivenConstVariableShouldReturnDeclarationNode() {
+      final String testName = folder + "LexerTest_test16_const";
+      List<Token> gF = JSONFileWriter.fileJSONToTokenList(testName);
+      PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+      List<ASTNode> tree = psSyntacticAnalyzer.analyze(List.of(gF.get(0), gF.get(1), gF.get(2), gF.get(3), gF.get(6)));
+      Assert.assertEquals("declaration", tree.get(0).getNodeType());
+    }
 }

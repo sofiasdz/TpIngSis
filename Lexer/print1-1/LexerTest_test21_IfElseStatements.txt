@@ -1,0 +1,242 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "20",
+    "startingColumn": 17,
+    "endingColumn": 18,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 19,
+    "endingColumn": 19,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IF",
+    "value": "if",
+    "startingColumn": 0,
+    "endingColumn": 1,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 2,
+    "endingColumn": 2,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "TRUE",
+    "value": "true",
+    "startingColumn": 3,
+    "endingColumn": 6,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "OPENING_BRACKETS",
+    "value": "{",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 2,
+    "endingColumn": 2,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 8,
+    "endingColumn": 8,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "CLOSING_BRACKETS",
+    "value": "}",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "ELSE",
+    "value": "else",
+    "startingColumn": 2,
+    "endingColumn": 5,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "OPENING_BRACKETS",
+    "value": "{",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 2,
+    "endingColumn": 2,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "DIVISION",
+    "value": "/",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 8,
+    "endingColumn": 8,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "CLOSING_BRACKETS",
+    "value": "}",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 5,
+    "endingLine": 5
+  },
+  {
+    "type": "PRINTLN",
+    "value": "a",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 6,
+    "endingLine": 6
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 6,
+    "endingLine": 6
+  }
+]
