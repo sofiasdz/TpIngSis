@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "nebula.lint" version "16.23.0"
+    id "com.diffplug.spotless" version "5.12.4"
 }
 
 group 'org.example'
@@ -17,4 +18,18 @@ dependencies {
 allprojects {
     apply plugin: 'nebula.lint'
     gradleLint.rules = ['all-dependency'] // add as many rules here as you'd like
+}
+
+spotless {
+    // optional: limit format enforcement to just the files changed by this feature branch
+    java {
+        // don't need to set target, it is inferred from java
+
+        // apply a specific flavor of google-java-format
+        googleJavaFormat('1.8').aosp()
+        // make sure every file has the following copyright header.
+        // optionally, Spotless can set copyright years by digging
+        // through git history (see "license" section below)
+        licenseHeader '/* (C)$YEAR */'
+    }
 }
