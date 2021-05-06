@@ -131,7 +131,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       throw new RuntimeException(
               "Error at line " + tokens.get(0).getStartingLine() + ": missing ;");
     }
-    if (tokens.get(0).getType().equals(TokenType.LET)) {
+    if (tokens.get(0).getType().equals(TokenType.LET) || tokens.get(0).getType().equals(TokenType.CONST)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(1));
       Optional<ASTNode> type = ASTNodeIdentifier(tokens.get(3));
       if (identifier.isEmpty() || type.isEmpty())
