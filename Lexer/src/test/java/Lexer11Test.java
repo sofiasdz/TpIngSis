@@ -209,4 +209,15 @@ public class Lexer11Test {
     goldenFileAsserter(testname,List.of(line1,line2,line3,line4, line5,line6,line7,line8,line9));
   }
 
+  @Test
+  public void test23_BooleanVariables(){
+    final String testname = "LexerTest_test23_BooleanVariables";
+    String line1 = "let a : boolean = true;";
+    String line2 = "a = 23 > 10;";
+    String line3 = "printLn(a);";
+    String line4 = "a = 2 >= 4;";
+    String line5 = "printLn(a);";
+    goldenFileAsserter(testname,List.of(line1,line2,line3,line4,line5));
+  }
+
 }

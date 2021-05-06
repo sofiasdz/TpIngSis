@@ -61,15 +61,11 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       ASTNode leftChild;
       if(ifList.size() == 2) {
         leftChild = ASTNodeIdentifier(ifList.get(1)).get();
-//      if(ifList.get(1).getType().equals(TokenType.IDENTIFIER)){
-//        leftChild = new ASTNodeIdentifier(ifList.get(1));
-//      } else leftChild = new ASTNodeLiteral(ifList.get(1));
       } else {
         leftChild = booleanOperationNodeBuilder(ifList);
       }
       List<ASTNode> branchCode = this.analyze(branch);
       return ASTNodeIdentifier(ifList.get(0),leftChild,branchCode).get();
-//    ASTNodeIf ifNode = new ASTNodeIf(leftChild,branchCode,ifList.get(0));
     } catch (NoSuchElementException e){
       throw new RuntimeException("Error at line "+ifList.get(0).getStartingLine()+": Invalid if declaration");
     }
@@ -125,11 +121,6 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
                 "Error at line " + tokens.get(0).getStartingLine() + ": Invalid print declaration");
       return print.get();
     }
-//    else if (tokens.get(0).getType().equals(TokenType.IF)){
-//      System.out.println("");
-//    } else if (tokens.get(0).getType().equals(TokenType.ELSE)){
-//      System.out.println("");
-//    }
     else {
       throw new RuntimeException(
               "Error at line " + tokens.get(0).getStartingLine() + ": Invalid line start");
@@ -143,7 +134,10 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
                 TokenType.STRING,
                 TokenType.FLOATING_POINT,
                 TokenType.INTEGER,
-                TokenType.IDENTIFIER));
+                TokenType.IDENTIFIER,
+                    TokenType.BOOLEAN_TYPE,
+                    TokenType.TRUE,
+                    TokenType.FALSE));
     if (tokens.size() == 1 && literals.belongs(tokens.get(0)))
       return ASTNodeIdentifier(tokens.get(0)).get();
     Stack<Token> operatorStack = new Stack<>();
@@ -154,14 +148,21 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
                 TokenType.SUBSTRACTION,
                 TokenType.ADDITION,
                 TokenType.DIVISION,
-                TokenType.MULTIPLICATION));
+                TokenType.MULTIPLICATION,
+                    TokenType.GREATER,
+                    TokenType.EQUAL_OR_S,
+                    TokenType.SMALLER,
+                    TokenType.EQUAL_OR_G));
     TokenGroup operands =
         new TokenGroup(
             List.of(
                 TokenType.STRING,
                 TokenType.INTEGER,
                 TokenType.FLOATING_POINT,
-                TokenType.IDENTIFIER));
+                TokenType.IDENTIFIER,
+                    TokenType.BOOLEAN_TYPE,
+                    TokenType.TRUE,
+                    TokenType.FALSE));
     for (int i = 0; i < tokens.size(); i++) {
       if (operands.belongs(tokens.get(i))) {
         outputQueue.add(tokens.get(i));
@@ -205,17 +206,17 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
 
   Optional<ASTNode> ASTNodeIdentifier(Token token) {
     if (token.getType().equals(TokenType.IDENTIFIER)) {
-      return Optional.of(ASTNodeFactory.identifier(token));
+      return Optional.of(ASTNodeFactory11.identifier(token));
     } else if (token.getType().equals(TokenType.NUMBER_TYPE)
         | token.getType().equals(TokenType.STRING_TYPE)
         | token.getType().equals(TokenType.BOOLEAN_TYPE)) {
-      return Optional.of(ASTNodeFactory.variableType(token));
+      return Optional.of(ASTNodeFactory11.variableType(token));
     } else {
       try {
-        return Optional.of(ASTNodeFactory.literal(token));
+        return Optional.of(ASTNodeFactory11.literal(token));
       } catch (IllegalArgumentException e) {
         try {
-          return Optional.of(ASTNodeFactory.print(token));
+          return Optional.of(ASTNodeFactory11.print(token));
         } catch (IllegalArgumentException j) {
           return Optional.empty();
         }
@@ -225,15 +226,19 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
 
   Optional<ASTNode> ASTNodeIdentifier(Token token, ASTNode left, ASTNode right) {
     try {
-      return Optional.of(ASTNodeFactory.assignation(token, left, right));
+      return Optional.of(ASTNodeFactory11.assignation(token, left, right));
     } catch (IllegalArgumentException e) {
       try {
-        return Optional.of(ASTNodeFactory.declaration(token, left, right));
+        return Optional.of(ASTNodeFactory11.declaration(token, left, right));
       } catch (IllegalArgumentException i) {
         try {
-          return Optional.of(ASTNodeFactory.operation(token, left, right));
+          return Optional.of(ASTNodeFactory11.operation(token, left, right));
         } catch (IllegalArgumentException h) {
-          return Optional.empty();
+          try{
+            return Optional.of(ASTNodeFactory11.booleanOperation(token,left,right));
+          } catch (IllegalArgumentException j){
+            return Optional.empty();
+          }
         }
       }
     }

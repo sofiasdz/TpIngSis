@@ -130,6 +130,16 @@ public class SyntacticAnalyzerTest11 {
     Assert.assertEquals("assignation", tree.get(0).getNodeType());
   }
 
+
+  @Test
+  public void test021_BooleanVariables() {
+    final String testname = folder + "LexerTest_test23_BooleanVariables";
+    List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
+    PS11SyntacticAnalyzer psSyntacticAnalyzer = new PS11SyntacticAnalyzer();
+    List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
+    Assert.assertEquals("assignation", tree.get(0).getNodeType());
+  }
+
   //  @Test
   //  public void test016_GivenConstVariableShouldReturnDeclarationNode() {
   //    final String testName = folder + "LexerTest_test16_const";

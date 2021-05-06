@@ -1,0 +1,186 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "BOOLEAN_TYPE",
+    "value": "boolean",
+    "startingColumn": 8,
+    "endingColumn": 14,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 16,
+    "endingColumn": 16,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "TRUE",
+    "value": "true",
+    "startingColumn": 18,
+    "endingColumn": 21,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 22,
+    "endingColumn": 22,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 2,
+    "endingColumn": 2,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "INTEGER",
+    "value": "23",
+    "startingColumn": 4,
+    "endingColumn": 5,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "GREATER",
+    "value": "\u003e",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "INTEGER",
+    "value": "10",
+    "startingColumn": 9,
+    "endingColumn": 10,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 11,
+    "endingColumn": 11,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "PRINTLN",
+    "value": "a",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "a",
+    "startingColumn": 0,
+    "endingColumn": 0,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 2,
+    "endingColumn": 2,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 4,
+    "endingColumn": 4,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "EQUAL_OR_G",
+    "value": "\u003e\u003d",
+    "startingColumn": 6,
+    "endingColumn": 7,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "INTEGER",
+    "value": "4",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "PRINTLN",
+    "value": "a",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 10,
+    "endingColumn": 10,
+    "startingLine": 4,
+    "endingLine": 4
+  }
+]
