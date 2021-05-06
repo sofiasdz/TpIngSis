@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation project (':lexer')
+    implementation project (':tokens')
+    implementation project (':syntacticanalyzer')
+    implementation project (':interpreter')
+    implementation project (':astnode')
+}
+
+
+tasks.withType(JavaCompile).each {
+    it.options.compilerArgs.add('--enable-preview')
+}
