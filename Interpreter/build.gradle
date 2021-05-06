@@ -13,7 +13,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation project (':SyntacticAnalyzer')
-    implementation project (':Tokens')
+    implementation project (':tokens')
     implementation project (':AstNode')
     implementation project (':JSONReaderWriter')
     implementation project (':Lexer')

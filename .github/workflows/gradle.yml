@@ -37,3 +37,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Publish Tokens
+      run: ./gradlew :tokens:publish
+      env:
+        TOKEN: ${{ secrets.TOKEN }}

@@ -29,15 +29,14 @@ public class Token {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
     Token token = (Token) o;
-    return startingColumn == token.startingColumn
-        && endingColumn == token.endingColumn
-        && startingLine == token.startingLine
-        && endingLine == token.endingLine
-        && type == token.type
-        && value.equals(token.value);
+    return startingColumn == token.startingColumn && endingColumn == token.endingColumn
+        && startingLine == token.startingLine && endingLine == token.endingLine
+        && type == token.type && value.equals(token.value);
   }
 
   @Override

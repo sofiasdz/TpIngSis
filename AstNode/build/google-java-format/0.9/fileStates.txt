@@ -1,0 +1,15 @@
+src/main/java/ASTNode/NodeType.java,1618338513803023786,71,FORMATTED
+src/main/java/ASTNode/Factory/ASTNodeFactory11.java,1619117640666409369,3691,FORMATTED
+src/main/java/ASTNode/Childless/ASTNodePrint.java,1619117640624303424,330,FORMATTED
+src/main/java/ASTNode/Childless/ASTNodeChildless.java,1619117640635902222,789,FORMATTED
+src/main/java/ASTNode/NotChildless/ASTNodeOperation.java,1619117640562432385,534,FORMATTED
+src/main/java/ASTNode/Childless/ASTNodeIdentifier.java,1619117640610842629,329,FORMATTED
+src/main/java/ASTNode/ASTNode.java,1619117640595499233,539,FORMATTED
+src/main/java/ASTNode/Childless/ASTNodeLiteral.java,1619117640643931352,317,FORMATTED
+src/main/java/ASTNode/NotChildless/ASTNodeNotChildless.java,1619117640579519526,1331,FORMATTED
+src/main/java/ASTNode/NotChildless/ASTNodeDeclaration.java,1619117640587498246,542,FORMATTED
+src/main/java/ASTNode/Factory/ASTNodeFactory.java,1619117640682407825,3672,FORMATTED
+src/main/java/ASTNode/Childless/ASTNodeVariableType.java,1619117640615989198,332,FORMATTED
+src/main/java/ASTNode/testclass.java,1619117640530512639,262,FORMATTED
+src/main/java/ASTNode/TokenGroup/TokenGroup.java,1619117640604872547,467,FORMATTED
+src/main/java/ASTNode/NotChildless/ASTNodeAssignation.java,1619117640553930936,542,FORMATTED
