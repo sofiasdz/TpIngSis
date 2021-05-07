@@ -20,8 +20,6 @@ ASTNode/Childless/ASTNodePrint.java
  ASTNode.Childless.ASTNodePrint
 ASTNode/NotChildless/ASTNodeAssignation.java
  ASTNode.NotChildless.ASTNodeAssignation
-ASTNode/testclass.java
- ASTNode.testclass
 ASTNode/NodeType.java
  ASTNode.NodeType
 ASTNode/MultiChilds/ASTNodeIfElse.java

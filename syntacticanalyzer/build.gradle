@@ -9,6 +9,15 @@ version '1.5-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Bautista-Baiocchi-lora/PrintScript")
+        credentials {
+            username = project.findProperty("gpr.user") ?: "sofiasdz"
+            password = project.findProperty("gpr.key") ?: "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"
+
+        }
+    }
 }
 
 dependencies {
@@ -16,6 +25,7 @@ dependencies {
     implementation project (':token')
     implementation project (':astnode')
     implementation project (':jsonreaderwriter')
+    compile 'edu.austral.ingsis:lexer:1.0-SNAPSHOT'
 }
 
 jacoco {
@@ -77,6 +87,8 @@ publishing {
         }
     }
 }
+
+
 
 
 

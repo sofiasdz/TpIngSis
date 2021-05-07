@@ -9,6 +9,15 @@ version '1.5-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Bautista-Baiocchi-lora/PrintScript")
+        credentials {
+            username = project.findProperty("gpr.user") ?: "sofiasdz"
+            password = project.findProperty("gpr.key") ?:"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"
+
+        }
+    }
 }
 
 dependencies {
