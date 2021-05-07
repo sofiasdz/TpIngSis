@@ -122,11 +122,11 @@ public class SyntacticAnalyzerTest {
   }
 
   @Test
-  public void test011_OperationInsideAPrint(){
+  public void test011_OperationInsideAPrint() {
     final String testname = folder + "Lexer_tck_printComplexOperation";
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList(testname);
     PSSyntacticAnalyzer psSyntacticAnalyzer = new PSSyntacticAnalyzer();
     List<ASTNode> tree = psSyntacticAnalyzer.analyze(goldenFile);
-    Assert.assertEquals("declaration",tree.get(0).getNodeType());
+    Assert.assertEquals("declaration", tree.get(0).getNodeType());
   }
 }

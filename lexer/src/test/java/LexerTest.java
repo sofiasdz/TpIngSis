@@ -120,11 +120,11 @@ public class LexerTest {
   }
 
   @Test
-  public void testtck_2(){
+  public void testtck_2() {
     final String testname = "Lexer_tck_printComplexOperation";
     String line1 = "let pi: number;";
     String line2 = "pi = 3.14;";
     String line3 = "println(pi / 2);";
-    goldenFileAsserter(testname,List.of(line1,line2, line3));
+    goldenFileAsserter(testname, List.of(line1, line2, line3));
   }
 }

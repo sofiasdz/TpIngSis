@@ -185,11 +185,11 @@ public class InterpreterTest {
   }
 
   @Test
-  public void test16_PrintingAComplexOperation(){
+  public void test16_PrintingAComplexOperation() {
     String line1 = "let pi: number;";
     String line2 = "pi = 3.14;";
     String line3 = "pi = pi / 2;";
     String line4 = "println(pi);";
-    List<String> prints = analyze(List.of(line1,line2,line3, line4));
+    List<String> prints = analyze(List.of(line1, line2, line3, line4));
   }
 }
