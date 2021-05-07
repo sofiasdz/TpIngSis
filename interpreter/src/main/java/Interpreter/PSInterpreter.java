@@ -53,11 +53,11 @@ public class PSInterpreter implements Interpreter {
     if (val.charAt(0) == '"') prints.add(val.substring(1, val.length() - 1));
     else if (isNumber(val)) prints.add(val);
     else if (numberVariables.containsKey(val)) {
-      String value =(numberVariables.get(val)).toString();
-      if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.') value=value.substring(0,value.length()-2);
+      String value = (numberVariables.get(val)).toString();
+      if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.')
+        value = value.substring(0, value.length() - 2);
       prints.add(value);
-    }
-    else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
+    } else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
     else
       throw new RuntimeException(
           "Error at line: "
@@ -222,10 +222,10 @@ public class PSInterpreter implements Interpreter {
           "Error at line " + node.token.getStartingLine() + ": Strings can only use + operator!");
   }
 
-  private String numberVariableToString(String identifier){
+  private String numberVariableToString(String identifier) {
     String value = numberVariables.get(identifier).toString();
-    if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.'){
-      value = value.substring(0,value.length()-2);
+    if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.') {
+      value = value.substring(0, value.length() - 2);
     }
     return value;
   }
