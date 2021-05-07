@@ -1,6 +1,5 @@
 package JSONWriter;
 
-import ASTNode.ASTNode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.*;
@@ -33,5 +32,4 @@ public class JSONFileWriter {
       return new ArrayList<Token>();
     }
   }
-
 }
