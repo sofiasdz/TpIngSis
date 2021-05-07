@@ -101,9 +101,19 @@ public class PS11Interpreter implements Interpreter {
               + ": Variable "
               + val
               + " was not declared!");
-    else if (numberVariables.containsKey(val)) prints.add((numberVariables.get(val)).toString());
+    else if (numberVariables.containsKey(val))
+    {
+      String value =(numberVariables.get(val)).toString();
+      if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.') value=value.substring(0,value.length()-2);
+      prints.add(value);
+    }
     else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
-    else if (numberConst.containsKey(val)) prints.add((numberConst.get(val)).toString());
+    else if (numberConst.containsKey(val))
+    {
+      String value =(numberConst.get(val)).toString();
+      if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.') value=value.substring(0,value.length()-2);
+      prints.add(value);
+    }
     else if (stringConst.containsKey(val)) prints.add(stringConst.get(val));
     else if (booleanVariables.containsKey(val)) prints.add((booleanVariables.get(val)).toString());
     else prints.add(booleanConst.get(val).toString());
@@ -344,13 +354,23 @@ public class PS11Interpreter implements Interpreter {
 
   private String varAsString(String identifier) {
     if (stringVariables.containsKey(identifier)) return stringVariables.get(identifier);
-    if (numberVariables.containsKey(identifier))
-      return ("\"" + numberVariables.get(identifier).toString() + "\"");
+    if (numberVariables.containsKey(identifier)){
+      String value = numberVariables.get(identifier).toString();
+      if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.'){
+        value = value.substring(0,value.length()-2);
+      }
+      return ("\"" + value + "\"");
+    }
     if (booleanVariables.containsKey(identifier))
       return ("\"" + booleanVariables.get(identifier).toString() + "\"");
     if (stringConst.containsKey(identifier)) return stringConst.get(identifier);
-    if (numberConst.containsKey(identifier))
-      return ("\"" + numberConst.get(identifier).toString() + "\"");
+    if (numberConst.containsKey(identifier)){
+      String value = numberConst.get(identifier).toString();
+      if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.'){
+        value = value.substring(0,value.length()-2);
+      }
+      return ("\"" + value + "\"");
+    }
     return ("\"" + booleanConst.get(identifier).toString() + "\"");
   }
 

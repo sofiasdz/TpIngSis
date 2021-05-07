@@ -33,7 +33,7 @@ public class InterpreterTest {
     String line1 = "let x : number = 12 + 2 ;";
     String line2 = "printLn(x) ;";
     List<String> prints = analyze((List.of(line1, line2)));
-    Assert.assertEquals("14.0", prints.get(0));
+    Assert.assertEquals("14", prints.get(0));
   }
 
   @Test
@@ -69,10 +69,10 @@ public class InterpreterTest {
     String line10 = "printLn(divi) ;";
     List<String> prints =
         analyze((List.of(line1, line2, line3, line4, line5, line6, line7, line8, line9, line10)));
-    Assert.assertEquals("6.0", prints.get(0));
-    Assert.assertEquals("8.0", prints.get(1));
-    Assert.assertEquals("2.0", prints.get(2));
-    Assert.assertEquals("2.0", prints.get(3));
+    Assert.assertEquals("6", prints.get(0));
+    Assert.assertEquals("8", prints.get(1));
+    Assert.assertEquals("2", prints.get(2));
+    Assert.assertEquals("2", prints.get(3));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -89,7 +89,7 @@ public class InterpreterTest {
     String line3 = "y = y + 2 ;";
     String line4 = "printLn(y);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-    Assert.assertEquals("4.0", prints.get(0));
+    Assert.assertEquals("4", prints.get(0));
   }
 
   @Test(expected = RuntimeException.class)
@@ -115,7 +115,7 @@ public class InterpreterTest {
     String line5 = "let w : string = z;";
     String line6 = "printLn(w);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4, line5, line6)));
-    Assert.assertEquals("3.0", prints.get(0));
+    Assert.assertEquals("3", prints.get(0));
     Assert.assertEquals("\"hello\"", prints.get(1));
   }
 
@@ -182,5 +182,14 @@ public class InterpreterTest {
     String line1 = "let x:number;";
     List<ASTNode> nodes = getASTNode((List.of(line1)));
     List<String> prints = analyzeFromNode(List.of(nodes.get(0), nodes.get(0)));
+  }
+
+  @Test
+  public void test16_PrintingAComplexOperation(){
+    String line1 = "let pi: number;";
+    String line2 = "pi = 3.14;";
+    String line3 = "pi = pi / 2;";
+    String line4 = "println(pi);";
+    List<String> prints = analyze(List.of(line1,line2,line3, line4));
   }
 }

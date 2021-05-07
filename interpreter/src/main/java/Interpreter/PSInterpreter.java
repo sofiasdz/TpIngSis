@@ -52,7 +52,11 @@ public class PSInterpreter implements Interpreter {
     String val = node.token.getValue();
     if (val.charAt(0) == '"') prints.add(val.substring(1, val.length() - 1));
     else if (isNumber(val)) prints.add(val);
-    else if (numberVariables.containsKey(val)) prints.add((numberVariables.get(val)).toString());
+    else if (numberVariables.containsKey(val)) {
+      String value =(numberVariables.get(val)).toString();
+      if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.') value=value.substring(0,value.length()-2);
+      prints.add(value);
+    }
     else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
     else
       throw new RuntimeException(
@@ -196,7 +200,7 @@ public class PSInterpreter implements Interpreter {
         value =
             stringVariables.containsKey(currentChild.token.getValue())
                 ? stringVariables.get(currentChild.token.getValue())
-                : "\"" + numberVariables.get(currentChild.token.getValue()).toString() + "\"";
+                : "\"" + numberVariableToString(currentChild.token.getValue()) + "\"";
       } else if (currentChild.getNodeType().equals("literal"))
         value = node.getLeftChild().token.getValue();
       else value = stringOperation((ASTNodeOperation) currentChild);
@@ -216,6 +220,14 @@ public class PSInterpreter implements Interpreter {
     } else
       throw new RuntimeException(
           "Error at line " + node.token.getStartingLine() + ": Strings can only use + operator!");
+  }
+
+  private String numberVariableToString(String identifier){
+    String value = numberVariables.get(identifier).toString();
+    if(value.charAt(value.length()-1)=='0' && value.charAt(value.length()-2)=='.'){
+      value = value.substring(0,value.length()-2);
+    }
+    return value;
   }
 
   private String stringLiteralValidator(ASTNodeLiteral node) {

@@ -1,0 +1,90 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "pi",
+    "startingColumn": 4,
+    "endingColumn": 5,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 6,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 14,
+    "endingColumn": 14,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "pi",
+    "startingColumn": 0,
+    "endingColumn": 1,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 3,
+    "endingColumn": 3,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "FLOATING_POINT",
+    "value": "3.14",
+    "startingColumn": 5,
+    "endingColumn": 8,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 9,
+    "endingColumn": 9,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "PRINTLN",
+    "value": "pi / 2",
+    "startingColumn": 9,
+    "endingColumn": 14,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 15,
+    "endingColumn": 15,
+    "startingLine": 2,
+    "endingLine": 2
+  }
+]
