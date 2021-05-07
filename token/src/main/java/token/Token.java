@@ -10,10 +10,10 @@ public class Token {
   int startingLine;
   int endingLine;
 
-  Token(TokenType type, String value, int endingColumn, int startingLine, int endingLine) {
+  Token(TokenType type, String vAlue, int endingColumn, int startingLine, int endingLine) {
     this.type = type;
-    this.value = value;
-    this.startingColumn = endingColumn - value.length() + 1;
+    this.value = vAlue;
+    this.startingColumn = endingColumn - vAlue.length() + 1;
     this.endingColumn = endingColumn;
     this.startingLine = startingLine;
     this.endingLine = endingLine;
@@ -29,15 +29,14 @@ public class Token {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
     Token token = (Token) o;
-    return startingColumn == token.startingColumn
-        && endingColumn == token.endingColumn
-        && startingLine == token.startingLine
-        && endingLine == token.endingLine
-        && type == token.type
-        && value.equals(token.value);
+    return startingColumn == token.startingColumn && endingColumn == token.endingColumn
+        && startingLine == token.startingLine && endingLine == token.endingLine
+        && type == token.type && value.equals(token.value);
   }
 
   @Override
