@@ -112,11 +112,11 @@ public class LexerTest {
   }
 
   @Test
-  public void testtck_1(){
+  public void testtck_1() {
     final String testname = "Lexer_tck_arithmeticOperations";
     String line1 = "let numberResult: number = 5 * 5 - 8;";
     String line2 = "println(numberResult);";
-    goldenFileAsserter(testname,List.of(line1,line2));
+    goldenFileAsserter(testname, List.of(line1, line2));
   }
 
   @Test
