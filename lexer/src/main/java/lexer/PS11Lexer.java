@@ -47,6 +47,9 @@ public class PS11Lexer implements Lexer {
         token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
       else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
       else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
+      if(token.isPresent() && i!=line.size()-1){
+        if(line.get(i).matches("[a-zA-Z]") && line.get(i+1).matches("[a-zA-Z]")) continue;
+      }
 
       if (token.isPresent()) {
         list.add(token.get());

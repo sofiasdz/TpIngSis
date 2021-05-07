@@ -358,4 +358,28 @@ public class Interpreter11Test {
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
     Assert.assertEquals("\"3true\"", prints.get(0));
   }
+
+  @Test
+  public void test29_TCKIf() {
+    String line1 = "const booleanResult: boolean = 5 > 3;";
+    String line2 = "if(booleanResult){";
+    String line3 = "println(\"if statement working correctly\");";
+    String line4 = "}";
+    String line5 = "println(\"outside of conditional\");";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4, line5)));
+    Assert.assertEquals("if statement working correctly", prints.get(0));
+  }
+
+  @Test
+  public void test29_TCKElse() {
+    String line1 = "const booleanResult: boolean = 5 <= 3;";
+    String line2 = "if(booleanResult){";
+    String line3 = "}";
+    String line4 = "else {";
+    String line5 = "println(\"else statement working correctly\");";
+    String line6 = "}";
+    String line7 = "println(\"outside of conditional\");";
+    List<String> prints = analyze((List.of(line1, line2, line3, line4, line5, line6, line7)));
+    Assert.assertEquals("else statement working correctly", prints.get(0));
+  }
 }
