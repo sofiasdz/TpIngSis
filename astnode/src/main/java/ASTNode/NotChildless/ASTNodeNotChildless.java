@@ -21,10 +21,6 @@ public abstract class ASTNodeNotChildless extends ASTNode {
     return rightChild;
   }
 
-  public void setRightChild(ASTNode rightChild) {
-    this.rightChild = rightChild;
-  }
-
   public ASTNodeNotChildless(ASTNode leftChild, ASTNode rightChild, Token token) {
     this.leftChild = leftChild;
     this.token = token;

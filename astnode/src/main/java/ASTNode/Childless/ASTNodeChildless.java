@@ -7,7 +7,6 @@ import java.util.Objects;
 import token.Token;
 
 public abstract class ASTNodeChildless extends ASTNode {
-  TokenGroup tokenGroup;
 
   public ASTNodeChildless(Token token) {
     super.token = token;

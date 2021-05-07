@@ -11,10 +11,6 @@ public class TokenGroup {
     this.tokenTypes = tokenTypes;
   }
 
-  public List<TokenType> getTokens() {
-    return tokenTypes;
-  }
-
   public boolean belongs(Token token) {
     for (TokenType t : tokenTypes) {
       if (t.equals(token.getType())) return true;

@@ -118,13 +118,6 @@ public class ASTNodeFactory11 {
     throw new IllegalArgumentException();
   }
 
-  public static ASTNodeIf ifNode(Token token, ASTNode left, ASTNode right) {
-    if (isValidIf(token, left)) {
-      return new ASTNodeIf(left, right, token);
-    }
-    throw new IllegalArgumentException();
-  }
-
   public static ASTNodeIf ifNode(Token token, ASTNode left, List<ASTNode> right) {
     if (isValidIf(token, left)) {
       return new ASTNodeIf(left, right, token);
@@ -146,13 +139,6 @@ public class ASTNodeFactory11 {
                 TokenType.BOOLEAN_TYPE,
                     TokenType.IDENTIFIER));
     return (tGroup.belongs(token) && lGroup.belongs(left.token));
-  }
-
-  public static ASTNodeIfElse ifElseNode(Token token, ASTNode left, ASTNode right) {
-    if (isValidIfElse(token, left)) {
-      return new ASTNodeIfElse(left, right, token);
-    }
-    throw new IllegalArgumentException();
   }
 
   public static ASTNodeIfElse ifElseNode(Token token, ASTNode left, List<ASTNode> right) {

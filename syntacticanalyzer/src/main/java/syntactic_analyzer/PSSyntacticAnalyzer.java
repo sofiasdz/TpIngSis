@@ -18,14 +18,14 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
     for (int i = 0; i < tokens.size(); i++) {
       tokenList.add(tokens.get(i));
       if (tokens.get(i).getType().equals(TokenType.SEMICOLON)) {
-        nodes.add(tokensToNodeRefactored(tokenList));
+        nodes.add(tokensToNode(tokenList));
         tokenList = new ArrayList<>();
       }
     }
     return nodes;
   }
 
-  public ASTNode tokensToNodeRefactored(List<Token> tokens) {
+  ASTNode tokensToNode(List<Token> tokens) {
     if (tokens.get(tokens.size() - 1).getType().equals(TokenType.SEMICOLON)) {
       tokens.remove(tokens.size() - 1);
     } else {

@@ -23,26 +23,18 @@ public abstract class ASTNodeMultiChilds extends ASTNode {
     return rightChild;
   }
 
-  public void setRightChild(List<ASTNode> rightChild) {
-    this.rightChild = rightChild;
-  }
-
-  public void addRightChild(ASTNode node) {
-    rightChild.add(node);
-  }
-
   public ASTNodeMultiChilds(ASTNode leftChild, List<ASTNode> rightChild, Token token) {
     this.leftChild = leftChild;
     this.token = token;
-    super.nodeType = NodeType.NOTCHILDLESS;
+    super.nodeType = NodeType.MULTICHILDS;
     this.rightChild = rightChild;
   }
 
   public ASTNodeMultiChilds(ASTNode leftChild, ASTNode rightChild, Token token) {
     this.leftChild = leftChild;
     this.token = token;
-    super.nodeType = NodeType.NOTCHILDLESS;
-    this.rightChild = new ArrayList<ASTNode>();
+    super.nodeType = NodeType.MULTICHILDS;
+    this.rightChild = new ArrayList<>();
     this.rightChild.add(rightChild);
   }
 

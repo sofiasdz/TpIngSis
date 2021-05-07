@@ -42,7 +42,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
           }
         }
       } else if (tokens.get(i).getType().equals(TokenType.SEMICOLON)) {
-        nodes.add(tokensToNodeRefactored(tokenList));
+        nodes.add(tokensToNode(tokenList));
         tokenList = new ArrayList<>();
       }
     }
@@ -124,7 +124,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     }
   }
 
-  private ASTNode tokensToNodeRefactored(List<Token> tokens) {
+  private ASTNode tokensToNode(List<Token> tokens) {
     tokens.remove(tokens.size() - 1);
     if (tokens.get(0).getType().equals(TokenType.LET)
         || tokens.get(0).getType().equals(TokenType.CONST)) {
