@@ -136,7 +136,7 @@ public class PS11Lexer implements Lexer {
   }
 
   private boolean isPrint(String currentWord) {
-    return currentWord.equals("printLn(");
+    return currentWord.equals("printLn(") || currentWord.equals("println(");
   }
 
   private int printVerification(String currentWord, Line line, int i, Optional<Token> token) {

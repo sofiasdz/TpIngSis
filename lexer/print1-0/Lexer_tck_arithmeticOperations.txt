@@ -1,0 +1,106 @@
+[
+  {
+    "type": "LET",
+    "value": "let",
+    "startingColumn": 0,
+    "endingColumn": 2,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "numberResult",
+    "startingColumn": 4,
+    "endingColumn": 15,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "COLON",
+    "value": ":",
+    "startingColumn": 16,
+    "endingColumn": 16,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "NUMBER_TYPE",
+    "value": "number",
+    "startingColumn": 18,
+    "endingColumn": 23,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "ASSIGNATION",
+    "value": "\u003d",
+    "startingColumn": 25,
+    "endingColumn": 25,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "5",
+    "startingColumn": 27,
+    "endingColumn": 27,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "MULTIPLICATION",
+    "value": "*",
+    "startingColumn": 29,
+    "endingColumn": 29,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "5",
+    "startingColumn": 31,
+    "endingColumn": 31,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SUBSTRACTION",
+    "value": "-",
+    "startingColumn": 33,
+    "endingColumn": 33,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
+    "value": "8",
+    "startingColumn": 35,
+    "endingColumn": 35,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 36,
+    "endingColumn": 36,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "PRINTLN",
+    "value": "numberResult",
+    "startingColumn": 9,
+    "endingColumn": 20,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "value": ";",
+    "startingColumn": 21,
+    "endingColumn": 21,
+    "startingLine": 1,
+    "endingLine": 1
+  }
+]
