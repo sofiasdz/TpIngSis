@@ -144,7 +144,7 @@ public class ASTNodeFactory11 {
                 TokenType.TRUE,
                 TokenType.FALSE,
                 TokenType.BOOLEAN_TYPE,
-                    TokenType.IDENTIFIER));
+                TokenType.IDENTIFIER));
     return (tGroup.belongs(token) && lGroup.belongs(left.token));
   }
 
