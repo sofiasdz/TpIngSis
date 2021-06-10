@@ -2,9 +2,8 @@ package ASTNode.SingleChild;
 
 import ASTNode.ASTNode;
 import ASTNode.NodeType;
-import token.Token;
-
 import java.util.Objects;
+import token.Token;
 
 public abstract class ASTNodeSingleChild extends ASTNode {
   ASTNode child;
@@ -36,6 +35,6 @@ public abstract class ASTNodeSingleChild extends ASTNode {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), child,  getNodeType());
+    return Objects.hash(super.hashCode(), child, getNodeType());
   }
 }

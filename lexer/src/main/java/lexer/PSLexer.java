@@ -45,7 +45,7 @@ public class PSLexer implements Lexer {
       else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
       if (token.isPresent()) {
-        if(identifierStartsWithReservedWord(currentWord,line,i)) continue;
+        if (identifierStartsWithReservedWord(currentWord, line, i)) continue;
         list.add(token.get());
         currentWord = "";
       }
@@ -55,18 +55,14 @@ public class PSLexer implements Lexer {
           "Error at line "
               + line.getLineNumber()
               + ": I couldn't proccess that one. Did you correctly declare all variables?");
-    if(!list.get(list.size()-1).getValue().equals(";"))
-      throw new RuntimeException(
-              "Error at line"
-              + line.getLineNumber()
-              + ": Missing semicolon!"
-      );
+    if (!list.get(list.size() - 1).getValue().equals(";"))
+      throw new RuntimeException("Error at line" + line.getLineNumber() + ": Missing semicolon!");
     return list;
   }
 
-  private boolean identifierStartsWithReservedWord(String currentWord, Line line, int i){
-    if(line.size()<=1+i) return false;
-    if(currentWord.equals("number") || currentWord.equals("string")){
+  private boolean identifierStartsWithReservedWord(String currentWord, Line line, int i) {
+    if (line.size() <= 1 + i) return false;
+    if (currentWord.equals("number") || currentWord.equals("string")) {
       return line.get(i + 1).matches("[a-zA-Z]");
     }
     return false;
@@ -168,9 +164,10 @@ public class PSLexer implements Lexer {
       case "+" -> Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
       case "/" -> Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
       case "*" -> Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
-      case "println", "printLn" -> Optional.of(PrintScriptTokenFactory.println(lineNumber,columnNumber));
-      case "(" -> Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber,columnNumber));
-      case ")" -> Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber,columnNumber));
+      case "println", "printLn" -> Optional.of(
+          PrintScriptTokenFactory.println(lineNumber, columnNumber));
+      case "(" -> Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber, columnNumber));
+      case ")" -> Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber, columnNumber));
         // Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
         // Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
       default -> identifiersMap.containsKey(token)

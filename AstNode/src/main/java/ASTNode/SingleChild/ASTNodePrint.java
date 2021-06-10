@@ -6,7 +6,7 @@ import token.Token;
 public class ASTNodePrint extends ASTNodeSingleChild {
 
   public ASTNodePrint(Token token, ASTNode child) {
-    super(child,token);
+    super(child, token);
   }
 
   @Override
@@ -18,6 +18,4 @@ public class ASTNodePrint extends ASTNodeSingleChild {
   public String getNodeType() {
     return "print";
   }
-
-
 }

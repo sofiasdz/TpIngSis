@@ -3,11 +3,11 @@ package ASTNode.Factory;
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeIdentifier;
 import ASTNode.Childless.ASTNodeLiteral;
-import ASTNode.SingleChild.ASTNodePrint;
 import ASTNode.Childless.ASTNodeVariableType;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeOperation;
+import ASTNode.SingleChild.ASTNodePrint;
 import ASTNode.TokenGroup.TokenGroup;
 import java.util.List;
 import token.Token;
@@ -90,18 +90,18 @@ public class ASTNodeFactory {
   public static ASTNodePrint print(Token token, ASTNode child) {
     TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.PRINTLN));
     TokenGroup cValid =
-            new TokenGroup(
-                    List.of(
-                            TokenType.IDENTIFIER,
-                            TokenType.FLOATING_POINT,
-                            TokenType.INTEGER,
-                            TokenType.STRING,
-                            TokenType.ADDITION,
-                            TokenType.DIVISION,
-                            TokenType.SUBSTRACTION,
-                            TokenType.MULTIPLICATION));
+        new TokenGroup(
+            List.of(
+                TokenType.IDENTIFIER,
+                TokenType.FLOATING_POINT,
+                TokenType.INTEGER,
+                TokenType.STRING,
+                TokenType.ADDITION,
+                TokenType.DIVISION,
+                TokenType.SUBSTRACTION,
+                TokenType.MULTIPLICATION));
     if (tokenGroup.belongs(token) && cValid.belongs(child.getToken()))
-      return new ASTNodePrint(token,child);
+      return new ASTNodePrint(token, child);
     throw new IllegalArgumentException();
   }
 }

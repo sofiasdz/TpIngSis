@@ -59,14 +59,14 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
       Optional<ASTNode> print = Optional.empty();
-      if(tokens.get(1).getType().equals(TokenType.OPENING_PARENTHESIS)){
+      if (tokens.get(1).getType().equals(TokenType.OPENING_PARENTHESIS)) {
         List<Token> parenthesis = new ArrayList<>();
-        for (int i = 2; i <tokens.size() ; i++) {
-          if(tokens.get(i).getType().equals(TokenType.CLOSING_PARENTHESIS)) break;
+        for (int i = 2; i < tokens.size(); i++) {
+          if (tokens.get(i).getType().equals(TokenType.CLOSING_PARENTHESIS)) break;
           parenthesis.add(tokens.get(i));
         }
         ASTNode printValue = operationResolver(parenthesis);
-        print = printNodeBuilder(tokens.get(0),printValue);
+        print = printNodeBuilder(tokens.get(0), printValue);
       }
       if (print.isEmpty())
         throw new RuntimeException(
@@ -155,7 +155,7 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
       try {
         return Optional.of(ASTNodeFactory.literal(token));
       } catch (IllegalArgumentException e) {
-          return Optional.empty();
+        return Optional.empty();
       }
     }
   }
@@ -176,10 +176,10 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
     }
   }
 
-  Optional<ASTNode> printNodeBuilder(Token token, ASTNode child){
-    try{
-      return Optional.of(ASTNodeFactory.print(token,child));
-    }catch (IllegalArgumentException e){
+  Optional<ASTNode> printNodeBuilder(Token token, ASTNode child) {
+    try {
+      return Optional.of(ASTNodeFactory.print(token, child));
+    } catch (IllegalArgumentException e) {
       return Optional.empty();
     }
   }

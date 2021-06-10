@@ -190,19 +190,19 @@ public class InterpreterTest {
     String line2 = "pi = 3.14;";
     String line4 = "println(pi / 2);";
     List<String> prints = analyze(List.of(line1, line2, line4));
-    Assert.assertEquals("1.57",prints.get(0));
+    Assert.assertEquals("1.57", prints.get(0));
   }
 
   @Test(expected = RuntimeException.class)
-  public void test17_MissingSemiColonShouldFail(){
+  public void test17_MissingSemiColonShouldFail() {
     String line1 = "println(5)";
     List<String> prints = analyze(List.of(line1));
   }
 
   @Test
-  public void test18_PrintingAnOperation(){
+  public void test18_PrintingAnOperation() {
     String line1 = "println(5 + 4);";
     List<String> prints = analyze(List.of(line1));
-    Assert.assertEquals("9.0",prints.get(0));
+    Assert.assertEquals("9.0", prints.get(0));
   }
 }

@@ -1,18 +1,17 @@
 package Interpreter;
 
 import ASTNode.ASTNode;
-import ASTNode.NodeType;
 import ASTNode.Childless.ASTNodeLiteral;
-import ASTNode.NotChildless.ASTNodeNotChildless;
-import ASTNode.SingleChild.ASTNodePrint;
+import ASTNode.NodeType;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
+import ASTNode.NotChildless.ASTNodeNotChildless;
 import ASTNode.NotChildless.ASTNodeOperation;
+import ASTNode.SingleChild.ASTNodePrint;
+import ASTNode.TokenGroup.TokenGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import ASTNode.TokenGroup.TokenGroup;
 import token.TokenType;
 
 public class PSInterpreter implements Interpreter {
@@ -53,38 +52,40 @@ public class PSInterpreter implements Interpreter {
   }
 
   private void nodeExecution(ASTNodePrint node) {
-    TokenGroup tg = new TokenGroup(List.of(TokenType.STRING,TokenType.INTEGER,TokenType.FLOATING_POINT,TokenType.IDENTIFIER));
+    TokenGroup tg =
+        new TokenGroup(
+            List.of(
+                TokenType.STRING,
+                TokenType.INTEGER,
+                TokenType.FLOATING_POINT,
+                TokenType.IDENTIFIER));
     String value = "";
-    if(tg.belongs(node.getChild().getToken())){
-      if(printIsString(node.getChild())){
-        value= stringValueGetter(node.getChild());
-      }
-      else value= numberVariableToString(node.getChild().getToken().getValue());
-    }else {
-      if(printIsString(node.getChild())){
+    if (tg.belongs(node.getChild().getToken())) {
+      if (printIsString(node.getChild())) {
+        value = stringValueGetter(node.getChild());
+      } else value = numberVariableToString(node.getChild().getToken().getValue());
+    } else {
+      if (printIsString(node.getChild())) {
         value = stringOperation((ASTNodeOperation) node.getChild());
-      }
-      else value = numberOperation((ASTNodeOperation) node.getChild()).toString();
+      } else value = numberOperation((ASTNodeOperation) node.getChild()).toString();
     }
-    if(value.isEmpty()) throw new RuntimeException("Error at line "+node.getToken().getStartingLine()+": Error at print statement!");
+    if (value.isEmpty())
+      throw new RuntimeException(
+          "Error at line " + node.getToken().getStartingLine() + ": Error at print statement!");
     prints.add(value);
   }
 
-  private boolean printIsString(ASTNode node){
-    TokenGroup tg = new TokenGroup(List.of(
-            TokenType.STRING,
-            TokenType.STRING_TYPE
-    ));
-    if(node.getTypeEnum().equals(NodeType.CHILDLESS)){
-      if(node.getNodeType().equals("identifier")) return stringVariables.containsKey(node.getToken().getValue());
+  private boolean printIsString(ASTNode node) {
+    TokenGroup tg = new TokenGroup(List.of(TokenType.STRING, TokenType.STRING_TYPE));
+    if (node.getTypeEnum().equals(NodeType.CHILDLESS)) {
+      if (node.getNodeType().equals("identifier"))
+        return stringVariables.containsKey(node.getToken().getValue());
       return tg.belongs(node.getToken());
-    }
-    else {
+    } else {
       ASTNodeNotChildless notChildless = (ASTNodeNotChildless) node;
 
       if (printIsString(notChildless.getRightChild())) return true;
       if (printIsString(notChildless.getLeftChild())) return true;
-
     }
     return false;
   }
