@@ -7,7 +7,7 @@ import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeNotChildless;
 import ASTNode.NotChildless.ASTNodeOperation;
-import ASTNode.SingleChild.ASTNodePrint;
+import ASTNode.SingleChild.ASTNodePrintln;
 import ASTNode.TokenGroup.TokenGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,13 +45,13 @@ public class PSInterpreter implements Interpreter {
         nodeExecution((ASTNodeAssignation) node);
         break;
       case "print":
-        nodeExecution((ASTNodePrint) node);
+        nodeExecution((ASTNodePrintln) node);
       default:
         break;
     }
   }
 
-  private void nodeExecution(ASTNodePrint node) {
+  private void nodeExecution(ASTNodePrintln node) {
     TokenGroup tg =
         new TokenGroup(
             List.of(

@@ -3,9 +3,9 @@ package ASTNode.SingleChild;
 import ASTNode.ASTNode;
 import token.Token;
 
-public class ASTNodePrint extends ASTNodeSingleChild {
+public class ASTNodePrintln extends ASTNodeSingleChild {
 
-  public ASTNodePrint(Token token, ASTNode child) {
+  public ASTNodePrintln(Token token, ASTNode child) {
     super(child, token);
   }
 

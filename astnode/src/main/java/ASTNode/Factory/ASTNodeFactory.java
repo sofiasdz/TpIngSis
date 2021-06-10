@@ -7,7 +7,7 @@ import ASTNode.Childless.ASTNodeVariableType;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeOperation;
-import ASTNode.SingleChild.ASTNodePrint;
+import ASTNode.SingleChild.ASTNodePrintln;
 import ASTNode.TokenGroup.TokenGroup;
 import java.util.List;
 import token.Token;
@@ -87,7 +87,7 @@ public class ASTNodeFactory {
     throw new IllegalArgumentException();
   }
 
-  public static ASTNodePrint print(Token token, ASTNode child) {
+  public static ASTNodePrintln print(Token token, ASTNode child) {
     TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.PRINTLN));
     TokenGroup cValid =
         new TokenGroup(
@@ -101,7 +101,7 @@ public class ASTNodeFactory {
                 TokenType.SUBSTRACTION,
                 TokenType.MULTIPLICATION));
     if (tokenGroup.belongs(token) && cValid.belongs(child.getToken()))
-      return new ASTNodePrint(token, child);
+      return new ASTNodePrintln(token, child);
     throw new IllegalArgumentException();
   }
 }
