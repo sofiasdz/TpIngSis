@@ -153,7 +153,7 @@ public class PS11Lexer implements Lexer {
       variableName.append(line.get(j));
       i = j;
     }
-    token.set(PrintScriptTokenFactory.println(currentWord, line.getLineNumber(), i));
+    token.set(PrintScriptTokenFactory.printlnWithValue(currentWord, line.getLineNumber(), i));
     return i;
   }
 

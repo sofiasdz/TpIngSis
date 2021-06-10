@@ -188,8 +188,21 @@ public class InterpreterTest {
   public void test16_PrintingAComplexOperation() {
     String line1 = "let pi: number;";
     String line2 = "pi = 3.14;";
-    String line3 = "pi = pi / 2;";
-    String line4 = "println(pi);";
-    List<String> prints = analyze(List.of(line1, line2, line3, line4));
+    String line4 = "println(pi / 2);";
+    List<String> prints = analyze(List.of(line1, line2, line4));
+    Assert.assertEquals("1.57",prints.get(0));
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test17_MissingSemiColonShouldFail(){
+    String line1 = "println(5)";
+    List<String> prints = analyze(List.of(line1));
+  }
+
+  @Test
+  public void test18_PrintingAnOperation(){
+    String line1 = "println(5 + 4);";
+    List<String> prints = analyze(List.of(line1));
+    Assert.assertEquals("9.0",prints.get(0));
   }
 }

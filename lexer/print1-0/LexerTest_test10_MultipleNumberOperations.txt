@@ -121,8 +121,32 @@
   },
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
     "value": "cuenta",
-    "startingColumn": 9,
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 14,
     "endingColumn": 14,
     "startingLine": 1,
     "endingLine": 1

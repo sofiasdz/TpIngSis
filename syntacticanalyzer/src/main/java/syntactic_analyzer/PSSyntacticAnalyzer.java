@@ -17,6 +17,23 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
     List<Token> tokenList = new ArrayList<>();
     for (int i = 0; i < tokens.size(); i++) {
       tokenList.add(tokens.get(i));
+//      if(tokens.get(i).getType().equals(TokenType.PRINTLN)){
+//        if(!tokens.get(i+1).getType().equals(TokenType.OPENING_PARENTHESIS))
+//          throw new RuntimeException("Error at line "+tokens.get(i).getStartingLine()+": Invalid println declaration");
+//
+//        for (int j = i+2; j < tokens.size(); j++) {
+//          List<Token> parenthesis = new ArrayList<>();
+//          if (!tokens.get(j).getType().equals(TokenType.CLOSING_PARENTHESIS)) {
+//            parenthesis.add(tokens.get(j));
+//          } else {
+//
+//            i = parenthesisResolver(tokens, tokenList, nodes, j);
+//            j = tokens.size();
+//            tokenList = new ArrayList<>();
+//          }
+//        }
+//
+//      }
       if (tokens.get(i).getType().equals(TokenType.SEMICOLON)) {
         nodes.add(tokensToNode(tokenList));
         tokenList = new ArrayList<>();
@@ -24,6 +41,30 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
     }
     return nodes;
   }
+
+//  private int parenthesisResolver(List<Token> tokens, List<Token> tokenList, List<ASTNode> nodes, int j) {
+//    ArrayList<Token> branch = new ArrayList<>();
+//    for (int k = j + 1; k < tokens.size(); k++) {
+//      if (!tokens.get(k).getType().equals(TokenType.CLOSING_BRACKETS)) {
+//        branch.add(tokens.get(k));
+//      } else {
+//        if (tokenList.get(0).getType().equals(TokenType.IF)) {
+//          nodes.add(ifNodeBuilder(tokenList, branch));
+//        } else {
+//          if (nodes.isEmpty())
+//            throw new RuntimeException(
+//                    "Error at line "
+//                            + tokenList.get(0).getStartingLine()
+//                            + ": code can't start with an else");
+//          nodes.set(
+//                  nodes.size() - 1, elseNodeBuilder(tokenList, branch, nodes.get(nodes.size() - 1)));
+//        }
+//        return k;
+//      }
+//    }
+//    throw new RuntimeException(
+//            "Error at line " + tokenList.get(0).getStartingLine() + ": Invalid brackets block");
+//  }
 
   ASTNode tokensToNode(List<Token> tokens) {
     if (tokens.get(tokens.size() - 1).getType().equals(TokenType.SEMICOLON)) {
@@ -58,7 +99,16 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
       ASTNode result = operationResolver(tokens);
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
-      Optional<ASTNode> print = ASTNodeIdentifier(tokens.get(0));
+      Optional<ASTNode> print = Optional.empty();
+      if(tokens.get(1).getType().equals(TokenType.OPENING_PARENTHESIS)){
+        List<Token> parenthesis = new ArrayList<>();
+        for (int i = 2; i <tokens.size() ; i++) {
+          if(tokens.get(i).getType().equals(TokenType.CLOSING_PARENTHESIS)) break;
+          parenthesis.add(tokens.get(i));
+        }
+        ASTNode printValue = operationResolver(parenthesis);
+        print = printNodeBuilder(tokens.get(0),printValue);
+      }
       if (print.isEmpty())
         throw new RuntimeException(
             "Error at line " + tokens.get(0).getStartingLine() + ": Invalid print declaration");
@@ -146,11 +196,7 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
       try {
         return Optional.of(ASTNodeFactory.literal(token));
       } catch (IllegalArgumentException e) {
-        try {
-          return Optional.of(ASTNodeFactory.print(token));
-        } catch (IllegalArgumentException j) {
           return Optional.empty();
-        }
       }
     }
   }
@@ -168,6 +214,14 @@ public class PSSyntacticAnalyzer implements SyntacticAnalyzer {
           return Optional.empty();
         }
       }
+    }
+  }
+
+  Optional<ASTNode> printNodeBuilder(Token token, ASTNode child){
+    try{
+      return Optional.of(ASTNodeFactory.print(token,child));
+    }catch (IllegalArgumentException e){
+      return Optional.empty();
     }
   }
 }
