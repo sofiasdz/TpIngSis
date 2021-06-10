@@ -104,9 +104,17 @@
     "endingLine": 2
   },
   {
-    "type": "FLOATING_POINT",
-    "value": "2)",
+    "type": "INTEGER",
+    "value": "2",
     "startingColumn": 13,
+    "endingColumn": 13,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 14,
     "endingColumn": 14,
     "startingLine": 2,
     "endingLine": 2

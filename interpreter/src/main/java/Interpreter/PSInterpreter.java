@@ -52,25 +52,6 @@ public class PSInterpreter implements Interpreter {
     }
   }
 
-//  private void nodeExecution(ASTNodePrint node) {
-//    String val = node.token.getValue();
-//    if (val.charAt(0) == '"') prints.add(val.substring(1, val.length() - 1));
-//    else if (isNumber(val)) prints.add(val);
-//    else if (numberVariables.containsKey(val)) {
-//      String value = (numberVariables.get(val)).toString();
-//      if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.')
-//        value = value.substring(0, value.length() - 2);
-//      prints.add(value);
-//    } else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
-//    else
-//      throw new RuntimeException(
-//          "Error at line: "
-//              + node.token.getStartingLine()
-//              + ": Variable "
-//              + val
-//              + " was not declared!");
-//  }
-
   private void nodeExecution(ASTNodePrint node) {
     TokenGroup tg = new TokenGroup(List.of(TokenType.STRING,TokenType.INTEGER,TokenType.FLOATING_POINT,TokenType.IDENTIFIER));
     String value = "";

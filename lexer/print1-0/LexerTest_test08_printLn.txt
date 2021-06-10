@@ -16,9 +16,17 @@
     "endingLine": 0
   },
   {
-    "type": "FLOATING_POINT",
-    "value": "123)",
+    "type": "INTEGER",
+    "value": "123",
     "startingColumn": 8,
+    "endingColumn": 10,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 11,
     "endingColumn": 11,
     "startingLine": 0,
     "endingLine": 0
