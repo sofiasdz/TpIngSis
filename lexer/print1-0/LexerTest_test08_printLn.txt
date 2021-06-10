@@ -1,8 +1,32 @@
 [
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "INTEGER",
     "value": "123",
-    "startingColumn": 9,
+    "startingColumn": 8,
+    "endingColumn": 10,
+    "startingLine": 0,
+    "endingLine": 0
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 11,
     "endingColumn": 11,
     "startingLine": 0,
     "endingLine": 0
@@ -17,8 +41,32 @@
   },
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "STRING",
     "value": "\"holi\"",
-    "startingColumn": 9,
+    "startingColumn": 8,
+    "endingColumn": 13,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 14,
     "endingColumn": 14,
     "startingLine": 1,
     "endingLine": 1
@@ -89,7 +137,31 @@
   },
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "IDENTIFIER",
     "value": "x",
+    "startingColumn": 8,
+    "endingColumn": 8,
+    "startingLine": 3,
+    "endingLine": 3
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
     "startingColumn": 9,
     "endingColumn": 9,
     "startingLine": 3,

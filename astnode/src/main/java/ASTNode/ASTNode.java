@@ -26,6 +26,8 @@ public abstract class ASTNode {
     return token;
   }
 
+  public NodeType getTypeEnum() {return nodeType;}
+
   public void setToken(Token token) {
     this.token = token;
   }

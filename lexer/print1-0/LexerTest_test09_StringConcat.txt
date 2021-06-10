@@ -201,8 +201,32 @@
   },
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "IDENTIFIER",
     "value": "fullName",
-    "startingColumn": 9,
+    "startingColumn": 8,
+    "endingColumn": 15,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 16,
     "endingColumn": 16,
     "startingLine": 4,
     "endingLine": 4

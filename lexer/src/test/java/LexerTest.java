@@ -127,4 +127,11 @@ public class LexerTest {
     String line3 = "println(pi / 2);";
     goldenFileAsserter(testname, List.of(line1, line2, line3));
   }
+
+  @Test(expected = RuntimeException.class)
+  public void test12_PrintWithoutSemicolon() {
+    final String testname = "LexerTest_test12_PrintWithoutSemicolon";
+    String line3 = "println(\"Hola\")";
+    goldenFileAsserter(testname, List.of(line3));
+  }
 }

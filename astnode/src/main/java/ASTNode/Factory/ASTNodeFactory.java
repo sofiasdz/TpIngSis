@@ -3,7 +3,7 @@ package ASTNode.Factory;
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeIdentifier;
 import ASTNode.Childless.ASTNodeLiteral;
-import ASTNode.Childless.ASTNodePrint;
+import ASTNode.SingleChild.ASTNodePrint;
 import ASTNode.Childless.ASTNodeVariableType;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
@@ -87,9 +87,21 @@ public class ASTNodeFactory {
     throw new IllegalArgumentException();
   }
 
-  public static ASTNodePrint print(Token token) {
+  public static ASTNodePrint print(Token token, ASTNode child) {
     TokenGroup tokenGroup = new TokenGroup(List.of(TokenType.PRINTLN));
-    if (tokenGroup.belongs(token)) return new ASTNodePrint(token);
+    TokenGroup cValid =
+            new TokenGroup(
+                    List.of(
+                            TokenType.IDENTIFIER,
+                            TokenType.FLOATING_POINT,
+                            TokenType.INTEGER,
+                            TokenType.STRING,
+                            TokenType.ADDITION,
+                            TokenType.DIVISION,
+                            TokenType.SUBSTRACTION,
+                            TokenType.MULTIPLICATION));
+    if (tokenGroup.belongs(token) && cValid.belongs(child.getToken()))
+      return new ASTNodePrint(token,child);
     throw new IllegalArgumentException();
   }
 }
