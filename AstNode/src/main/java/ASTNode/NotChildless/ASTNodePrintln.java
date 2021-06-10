@@ -1,4 +1,4 @@
-package ASTNode.SingleChild;
+package ASTNode.NotChildless;
 
 import ASTNode.ASTNode;
 import token.Token;

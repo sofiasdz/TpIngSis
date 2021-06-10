@@ -7,7 +7,7 @@ import ASTNode.Childless.ASTNodeVariableType;
 import ASTNode.NotChildless.ASTNodeAssignation;
 import ASTNode.NotChildless.ASTNodeDeclaration;
 import ASTNode.NotChildless.ASTNodeOperation;
-import ASTNode.SingleChild.ASTNodePrintln;
+import ASTNode.NotChildless.ASTNodePrintln;
 import ASTNode.TokenGroup.TokenGroup;
 import java.util.List;
 import token.Token;
