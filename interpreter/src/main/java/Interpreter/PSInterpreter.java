@@ -78,8 +78,8 @@ public class PSInterpreter implements Interpreter {
     prints.add(integerPrettyPrinting(value));
   }
 
-  private String integerPrettyPrinting(String print){
-    return print.replace(".0","");
+  private String integerPrettyPrinting(String print) {
+    return print.replace(".0", "");
   }
 
   private boolean printIsString(ASTNode node) {

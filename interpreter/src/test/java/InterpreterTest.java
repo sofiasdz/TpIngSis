@@ -207,11 +207,11 @@ public class InterpreterTest {
   }
 
   @Test
-  public void test19_StringAndNumberConcat(){
+  public void test19_StringAndNumberConcat() {
     String line1 = "let someNumber: number = 1;";
     String line2 = "let someString: string = \"hello world \";";
     String line3 = "println(someString + someNumber);";
-    List<String> prints = analyze(List.of(line1,line2,line3));
-    Assert.assertEquals("hello world 1",prints.get(0));
+    List<String> prints = analyze(List.of(line1, line2, line3));
+    Assert.assertEquals("hello world 1", prints.get(0));
   }
 }
