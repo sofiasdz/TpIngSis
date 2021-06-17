@@ -4,13 +4,12 @@ import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeLiteral;
 import ASTNode.MultiChilds.ASTNodeIf;
 import ASTNode.MultiChilds.ASTNodeIfElse;
-import ASTNode.NotChildless.*;
 import ASTNode.NodeType;
+import ASTNode.NotChildless.*;
+import ASTNode.TokenGroup.TokenGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import ASTNode.TokenGroup.TokenGroup;
 import token.TokenType;
 
 public class PS11Interpreter implements Interpreter {
@@ -91,40 +90,42 @@ public class PS11Interpreter implements Interpreter {
 
   private void nodeExecution(ASTNodePrintln node) {
     TokenGroup tg =
-            new TokenGroup(
-                    List.of(
-                            TokenType.STRING,
-                            TokenType.INTEGER,
-                            TokenType.FLOATING_POINT,
-                            TokenType.TRUE,
-                            TokenType.BOOLEAN_TYPE,
-                            TokenType.FALSE,
-                            TokenType.IDENTIFIER));
+        new TokenGroup(
+            List.of(
+                TokenType.STRING,
+                TokenType.INTEGER,
+                TokenType.FLOATING_POINT,
+                TokenType.TRUE,
+                TokenType.BOOLEAN_TYPE,
+                TokenType.FALSE,
+                TokenType.IDENTIFIER));
     String value = "";
     if (tg.belongs(node.getChild().getToken())) {
       if (printIsString(node.getChild())) {
         value = stringValueGetter(node.getChild());
-      } else if(printIsBoolean(node.getChild())){
+      } else if (printIsBoolean(node.getChild())) {
         value = booleanValueGetter(node.getChild()).toString();
-      }
-      else value = numberVariableToString(node.getChild().getToken().getValue());
+      } else value = numberVariableToString(node.getChild().getToken().getValue());
     } else {
       if (printIsString(node.getChild())) {
         value = stringOperation((ASTNodeOperation) node.getChild());
-      } else if (printIsBoolean(node.getChild())){
+      } else if (printIsBoolean(node.getChild())) {
         value = booleanOperation((ASTNodeBooleanOperation) node.getChild()).toString();
-      }
-      else value = numberOperation((ASTNodeOperation) node.getChild()).toString();
+      } else value = numberOperation((ASTNodeOperation) node.getChild()).toString();
     }
     if (value.isEmpty())
       throw new RuntimeException(
-              "Error at line " + node.getToken().getStartingLine() + ": Error at print statement!");
-    if (value.charAt(0)=='"' && value.charAt(value.length()-1)=='"') value = value.substring(1,value.length()-1);
+          "Error at line " + node.getToken().getStartingLine() + ": Error at print statement!");
+    if (value.charAt(0) == '"' && value.charAt(value.length() - 1) == '"')
+      value = value.substring(1, value.length() - 1);
     prints.add(value);
   }
 
   private String numberVariableToString(String identifier) {
-    String value = numberVariables.containsKey(identifier)? numberVariables.get(identifier).toString() : numberConst.get(identifier).toString();
+    String value =
+        numberVariables.containsKey(identifier)
+            ? numberVariables.get(identifier).toString()
+            : numberConst.get(identifier).toString();
     if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.') {
       value = value.substring(0, value.length() - 2);
     }
@@ -135,7 +136,8 @@ public class PS11Interpreter implements Interpreter {
     TokenGroup tg = new TokenGroup(List.of(TokenType.STRING, TokenType.STRING_TYPE));
     if (node.getTypeEnum().equals(NodeType.CHILDLESS)) {
       if (node.getNodeType().equals("identifier"))
-        return (stringVariables.containsKey(node.getToken().getValue()) || stringConst.containsKey(node.getToken().getValue()));
+        return (stringVariables.containsKey(node.getToken().getValue())
+            || stringConst.containsKey(node.getToken().getValue()));
       return tg.belongs(node.getToken());
     } else {
       ASTNodeNotChildless notChildless = (ASTNodeNotChildless) node;
@@ -147,10 +149,12 @@ public class PS11Interpreter implements Interpreter {
   }
 
   private boolean printIsBoolean(ASTNode node) {
-    TokenGroup tg = new TokenGroup(List.of(TokenType.TRUE, TokenType.FALSE, TokenType.BOOLEAN_TYPE));
+    TokenGroup tg =
+        new TokenGroup(List.of(TokenType.TRUE, TokenType.FALSE, TokenType.BOOLEAN_TYPE));
     if (node.getTypeEnum().equals(NodeType.CHILDLESS)) {
       if (node.getNodeType().equals("identifier"))
-        return (booleanVariables.containsKey(node.getToken().getValue()) || booleanConst.containsKey(node.getToken().getValue()));
+        return (booleanVariables.containsKey(node.getToken().getValue())
+            || booleanConst.containsKey(node.getToken().getValue()));
       return tg.belongs(node.getToken());
     } else {
       ASTNodeNotChildless notChildless = (ASTNodeNotChildless) node;

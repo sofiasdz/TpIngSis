@@ -45,7 +45,7 @@ public class PS11Lexer implements Lexer {
       else if (variableWasDeclared(list)) i = identifierVerification(currentWord, line, i, token);
       else if (isString(currentWord))
         token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
-//      else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
+      //      else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
       else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
       if (token.isPresent() && i != line.size() - 1) {
         if (line.get(i).matches("[a-zA-Z]") && line.get(i + 1).matches("[a-zA-Z]")) continue;
@@ -192,7 +192,8 @@ public class PS11Lexer implements Lexer {
       case "+" -> Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
       case "/" -> Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
       case "*" -> Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
-      case "println","printLn" -> Optional.of(PrintScriptTokenFactory.println(lineNumber,columnNumber));
+      case "println", "printLn" -> Optional.of(
+          PrintScriptTokenFactory.println(lineNumber, columnNumber));
       case "true" -> Optional.of(PrintScriptTokenFactory.trueValue(lineNumber, columnNumber));
       case "false" -> Optional.of(PrintScriptTokenFactory.falseValue(lineNumber, columnNumber));
       case "boolean" -> Optional.of(PrintScriptTokenFactory.booleanType(lineNumber, columnNumber));

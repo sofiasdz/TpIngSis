@@ -155,7 +155,7 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
       Optional<ASTNode> print = Optional.empty();
-      if(tokens.get(1).getType().equals(TokenType.OPENING_PARENTHESIS)){
+      if (tokens.get(1).getType().equals(TokenType.OPENING_PARENTHESIS)) {
         List<Token> parenthesis = new ArrayList<>();
         for (int i = 2; i < tokens.size(); i++) {
           if (tokens.get(i).getType().equals(TokenType.CLOSING_PARENTHESIS)) break;
