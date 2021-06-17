@@ -1,6 +1,7 @@
 package syntactic_analyzer;
 
 import ASTNode.ASTNode;
+import ASTNode.Factory.ASTNodeFactory;
 import ASTNode.Factory.ASTNodeFactory11;
 import ASTNode.NotChildless.ASTNodeBooleanOperation;
 import ASTNode.TokenGroup.TokenGroup;
@@ -153,7 +154,16 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       ASTNode result = operationResolver(tokens);
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
-      Optional<ASTNode> print = ASTNodeIdentifier(tokens.get(0));
+      Optional<ASTNode> print = Optional.empty();
+      if(tokens.get(1).getType().equals(TokenType.OPENING_PARENTHESIS)){
+        List<Token> parenthesis = new ArrayList<>();
+        for (int i = 2; i < tokens.size(); i++) {
+          if (tokens.get(i).getType().equals(TokenType.CLOSING_PARENTHESIS)) break;
+          parenthesis.add(tokens.get(i));
+        }
+        ASTNode printValue = operationResolver(parenthesis);
+        print = printNodeBuilder(tokens.get(0), printValue);
+      }
       if (print.isEmpty())
         throw new RuntimeException(
             "Error at line " + tokens.get(0).getStartingLine() + ": Invalid print declaration");
@@ -290,6 +300,14 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       } catch (IllegalArgumentException f) {
         return Optional.empty();
       }
+    }
+  }
+
+  Optional<ASTNode> printNodeBuilder(Token token, ASTNode child) {
+    try {
+      return Optional.of(ASTNodeFactory.print(token, child));
+    } catch (IllegalArgumentException e) {
+      return Optional.empty();
     }
   }
 }

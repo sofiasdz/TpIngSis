@@ -2,16 +2,15 @@ package Interpreter;
 
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeLiteral;
-import ASTNode.Childless.ASTNodePrint;
 import ASTNode.MultiChilds.ASTNodeIf;
 import ASTNode.MultiChilds.ASTNodeIfElse;
-import ASTNode.NotChildless.ASTNodeAssignation;
-import ASTNode.NotChildless.ASTNodeBooleanOperation;
-import ASTNode.NotChildless.ASTNodeDeclaration;
-import ASTNode.NotChildless.ASTNodeOperation;
+import ASTNode.NotChildless.*;
+import ASTNode.NodeType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import ASTNode.TokenGroup.TokenGroup;
 import token.TokenType;
 
 public class PS11Interpreter implements Interpreter {
@@ -61,7 +60,7 @@ public class PS11Interpreter implements Interpreter {
         nodeExecution((ASTNodeAssignation) node);
         break;
       case "print":
-        nodeExecution((ASTNodePrint) node);
+        nodeExecution((ASTNodePrintln) node);
         break;
       case "if":
         nodeExecution((ASTNodeIf) node);
@@ -90,43 +89,74 @@ public class PS11Interpreter implements Interpreter {
     }
   }
 
-  private void nodeExecution(ASTNodePrint node) {
-    String val = node.token.getValue();
-    if (val.charAt(0) == '"') prints.add(val.substring(1, val.length() - 1));
-    else if (isNumber(val)) prints.add(val);
-    else if (!identifierExists(val))
+  private void nodeExecution(ASTNodePrintln node) {
+    TokenGroup tg =
+            new TokenGroup(
+                    List.of(
+                            TokenType.STRING,
+                            TokenType.INTEGER,
+                            TokenType.FLOATING_POINT,
+                            TokenType.TRUE,
+                            TokenType.BOOLEAN_TYPE,
+                            TokenType.FALSE,
+                            TokenType.IDENTIFIER));
+    String value = "";
+    if (tg.belongs(node.getChild().getToken())) {
+      if (printIsString(node.getChild())) {
+        value = stringValueGetter(node.getChild());
+      } else if(printIsBoolean(node.getChild())){
+        value = booleanValueGetter(node.getChild()).toString();
+      }
+      else value = numberVariableToString(node.getChild().getToken().getValue());
+    } else {
+      if (printIsString(node.getChild())) {
+        value = stringOperation((ASTNodeOperation) node.getChild());
+      } else if (printIsBoolean(node.getChild())){
+        value = booleanOperation((ASTNodeBooleanOperation) node.getChild()).toString();
+      }
+      else value = numberOperation((ASTNodeOperation) node.getChild()).toString();
+    }
+    if (value.isEmpty())
       throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": Variable "
-              + val
-              + " was not declared!");
-    else if (numberVariables.containsKey(val)) {
-      String value = (numberVariables.get(val)).toString();
-      if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.')
-        value = value.substring(0, value.length() - 2);
-      prints.add(value);
-    } else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
-    else if (numberConst.containsKey(val)) {
-      String value = (numberConst.get(val)).toString();
-      if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.')
-        value = value.substring(0, value.length() - 2);
-      prints.add(value);
-    } else if (stringConst.containsKey(val)) prints.add(stringConst.get(val));
-    else if (booleanVariables.containsKey(val)) prints.add((booleanVariables.get(val)).toString());
-    else prints.add(booleanConst.get(val).toString());
+              "Error at line " + node.getToken().getStartingLine() + ": Error at print statement!");
+    if (value.charAt(0)=='"' && value.charAt(value.length()-1)=='"') value = value.substring(1,value.length()-1);
+    prints.add(value);
   }
 
-  private boolean isNumber(String string) {
-    try {
-      Integer.parseInt(string);
-      return true;
-    } catch (NumberFormatException e) {
-      try {
-        Double.parseDouble(string);
-      } catch (NumberFormatException f) {
-        return false;
-      }
+  private String numberVariableToString(String identifier) {
+    String value = numberVariables.containsKey(identifier)? numberVariables.get(identifier).toString() : numberConst.get(identifier).toString();
+    if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.') {
+      value = value.substring(0, value.length() - 2);
+    }
+    return value;
+  }
+
+  private boolean printIsString(ASTNode node) {
+    TokenGroup tg = new TokenGroup(List.of(TokenType.STRING, TokenType.STRING_TYPE));
+    if (node.getTypeEnum().equals(NodeType.CHILDLESS)) {
+      if (node.getNodeType().equals("identifier"))
+        return (stringVariables.containsKey(node.getToken().getValue()) || stringConst.containsKey(node.getToken().getValue()));
+      return tg.belongs(node.getToken());
+    } else {
+      ASTNodeNotChildless notChildless = (ASTNodeNotChildless) node;
+
+      if (printIsString(notChildless.getRightChild())) return true;
+      if (printIsString(notChildless.getLeftChild())) return true;
+    }
+    return false;
+  }
+
+  private boolean printIsBoolean(ASTNode node) {
+    TokenGroup tg = new TokenGroup(List.of(TokenType.TRUE, TokenType.FALSE, TokenType.BOOLEAN_TYPE));
+    if (node.getTypeEnum().equals(NodeType.CHILDLESS)) {
+      if (node.getNodeType().equals("identifier"))
+        return (booleanVariables.containsKey(node.getToken().getValue()) || booleanConst.containsKey(node.getToken().getValue()));
+      return tg.belongs(node.getToken());
+    } else {
+      ASTNodeNotChildless notChildless = (ASTNodeNotChildless) node;
+
+      if (printIsBoolean(notChildless.getRightChild())) return true;
+      if (printIsBoolean(notChildless.getLeftChild())) return true;
     }
     return false;
   }

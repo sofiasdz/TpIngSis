@@ -105,7 +105,31 @@
   },
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
     "value": "a",
+    "startingColumn": 8,
+    "endingColumn": 8,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
     "startingColumn": 9,
     "endingColumn": 9,
     "startingLine": 2,
@@ -169,7 +193,31 @@
   },
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "IDENTIFIER",
     "value": "a",
+    "startingColumn": 8,
+    "endingColumn": 8,
+    "startingLine": 4,
+    "endingLine": 4
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
     "startingColumn": 9,
     "endingColumn": 9,
     "startingLine": 4,
