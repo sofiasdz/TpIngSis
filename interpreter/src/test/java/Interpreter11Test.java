@@ -41,7 +41,7 @@ public class Interpreter11Test {
     String line1 = "let x : string = \"hello\" + \" world\" ;";
     String line2 = "printLn(x) ;";
     List<String> prints = analyze((List.of(line1, line2)));
-    Assert.assertEquals("\"hello world\"", prints.get(0));
+    Assert.assertEquals("hello world", prints.get(0));
   }
 
   @Test
@@ -52,7 +52,7 @@ public class Interpreter11Test {
     String line4 = "z = x + y ;";
     String line5 = "printLn(z) ;";
     List<String> prints = analyze((List.of(line1, line2, line3, line4, line5)));
-    Assert.assertEquals("\"hello world\"", prints.get(0));
+    Assert.assertEquals("hello world", prints.get(0));
   }
 
   @Test
@@ -116,7 +116,7 @@ public class Interpreter11Test {
     String line6 = "printLn(w);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4, line5, line6)));
     Assert.assertEquals("3", prints.get(0));
-    Assert.assertEquals("\"hello\"", prints.get(1));
+    Assert.assertEquals("hello", prints.get(1));
   }
 
   @Test
@@ -126,7 +126,7 @@ public class Interpreter11Test {
     String line3 = "let z : string = x + y;";
     String line4 = "printLn(z);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-    Assert.assertEquals("\"hello 5\"", prints.get(0));
+    Assert.assertEquals("hello 5", prints.get(0));
   }
 
   @Test
@@ -136,7 +136,7 @@ public class Interpreter11Test {
     String line3 = "let z : string = x + y + \"que tal?\";";
     String line4 = "printLn(z);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-    Assert.assertEquals("\"hello world que tal?\"", prints.get(0));
+    Assert.assertEquals("hello world que tal?", prints.get(0));
   }
 
   @Test(expected = RuntimeException.class)
@@ -346,7 +346,7 @@ public class Interpreter11Test {
     String line3 = "let z: string = x + y;";
     String line4 = "printLn(z);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-    Assert.assertEquals("\"true is: true\"", prints.get(0));
+    Assert.assertEquals("true is: true", prints.get(0));
   }
 
   @Test
@@ -356,7 +356,7 @@ public class Interpreter11Test {
     String line3 = "const z: string = x + y;";
     String line4 = "printLn(z);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-    Assert.assertEquals("\"3true\"", prints.get(0));
+    Assert.assertEquals("3true", prints.get(0));
   }
 
   @Test
@@ -381,5 +381,14 @@ public class Interpreter11Test {
     String line7 = "println(\"outside of conditional\");";
     List<String> prints = analyze((List.of(line1, line2, line3, line4, line5, line6, line7)));
     Assert.assertEquals("else statement working correctly", prints.get(0));
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test30_TCKInvalidIf() {
+    String line1 = "let a: number = 21;";
+    String line2 = "if(a) {";
+    String line3 = "println(\"this should fail, invalid argument in if statement\");";
+    String line4 = "}";
+    List<String> prints = analyze(List.of(line1, line2, line3, line4));
   }
 }

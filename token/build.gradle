@@ -4,7 +4,7 @@ plugins {
 }
 
 
-version '1.6-SNAPSHOT'
+version '2.2-SNAPSHOT'
 
 repositories {
     mavenCentral()

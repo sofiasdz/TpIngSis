@@ -11,8 +11,10 @@ public class LexerTest {
     PSLexer psLexer = new PSLexer();
     List<Token> tokenList = psLexer.identifyTokens(lines);
     List<Token> goldenFile = JSONFileWriter.fileJSONToTokenList("print1-0/" + testName);
-    if (goldenFile.isEmpty()) JSONFileWriter.tokenListToJSON(tokenList, "print1-0/" + testName);
-    else Assert.assertEquals(goldenFile, tokenList);
+    if (goldenFile.isEmpty())
+      JSONFileWriter.tokenListToJSON(tokenList, "print1-0/" + testName);
+    else
+      Assert.assertEquals(goldenFile, tokenList);
   }
 
   @Test
@@ -126,5 +128,12 @@ public class LexerTest {
     String line2 = "pi = 3.14;";
     String line3 = "println(pi / 2);";
     goldenFileAsserter(testname, List.of(line1, line2, line3));
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test12_PrintWithoutSemicolon() {
+    final String testname = "LexerTest_test12_PrintWithoutSemicolon";
+    String line3 = "println(\"Hola\")";
+    goldenFileAsserter(testname, List.of(line3));
   }
 }

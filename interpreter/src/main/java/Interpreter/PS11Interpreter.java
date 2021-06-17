@@ -2,13 +2,11 @@ package Interpreter;
 
 import ASTNode.ASTNode;
 import ASTNode.Childless.ASTNodeLiteral;
-import ASTNode.Childless.ASTNodePrint;
 import ASTNode.MultiChilds.ASTNodeIf;
 import ASTNode.MultiChilds.ASTNodeIfElse;
-import ASTNode.NotChildless.ASTNodeAssignation;
-import ASTNode.NotChildless.ASTNodeBooleanOperation;
-import ASTNode.NotChildless.ASTNodeDeclaration;
-import ASTNode.NotChildless.ASTNodeOperation;
+import ASTNode.NodeType;
+import ASTNode.NotChildless.*;
+import ASTNode.TokenGroup.TokenGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +59,7 @@ public class PS11Interpreter implements Interpreter {
         nodeExecution((ASTNodeAssignation) node);
         break;
       case "print":
-        nodeExecution((ASTNodePrint) node);
+        nodeExecution((ASTNodePrintln) node);
         break;
       case "if":
         nodeExecution((ASTNodeIf) node);
@@ -75,10 +73,25 @@ public class PS11Interpreter implements Interpreter {
   }
 
   private void nodeExecution(ASTNodeIf node) {
+
     ASTNode left = node.getLeftChild();
+    if (!isBoolean(left))
+      throw new RuntimeException("Error at line " + node.getToken().getStartingLine()
+          + ": Invalid argument in if!");
     if (booleanValueGetter(left)) {
       analyzeBranch(node.getRightChild());
     }
+  }
+
+  private boolean isBoolean(ASTNode node) {
+    if (node.getToken().getType().equals(TokenType.IDENTIFIER)) {
+      return (booleanConst.containsKey(node.getToken().getValue()) || booleanVariables
+          .containsKey(node.getToken().getValue()));
+    }
+    TokenGroup tg =
+        new TokenGroup(List.of(TokenType.BOOLEAN_TYPE, TokenType.TRUE, TokenType.FALSE,
+            TokenType.GREATER, TokenType.SMALLER, TokenType.EQUAL_OR_G, TokenType.EQUAL_OR_S));
+    return tg.belongs(node.getToken());
   }
 
   private void nodeExecution(ASTNodeIfElse node) {
@@ -90,43 +103,77 @@ public class PS11Interpreter implements Interpreter {
     }
   }
 
-  private void nodeExecution(ASTNodePrint node) {
-    String val = node.token.getValue();
-    if (val.charAt(0) == '"') prints.add(val.substring(1, val.length() - 1));
-    else if (isNumber(val)) prints.add(val);
-    else if (!identifierExists(val))
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": Variable "
-              + val
-              + " was not declared!");
-    else if (numberVariables.containsKey(val)) {
-      String value = (numberVariables.get(val)).toString();
-      if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.')
-        value = value.substring(0, value.length() - 2);
-      prints.add(value);
-    } else if (stringVariables.containsKey(val)) prints.add(stringVariables.get(val));
-    else if (numberConst.containsKey(val)) {
-      String value = (numberConst.get(val)).toString();
-      if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.')
-        value = value.substring(0, value.length() - 2);
-      prints.add(value);
-    } else if (stringConst.containsKey(val)) prints.add(stringConst.get(val));
-    else if (booleanVariables.containsKey(val)) prints.add((booleanVariables.get(val)).toString());
-    else prints.add(booleanConst.get(val).toString());
+  private void nodeExecution(ASTNodePrintln node) {
+    TokenGroup tg =
+        new TokenGroup(List.of(TokenType.STRING, TokenType.INTEGER, TokenType.FLOATING_POINT,
+            TokenType.TRUE, TokenType.BOOLEAN_TYPE, TokenType.FALSE, TokenType.IDENTIFIER));
+    String value = "";
+    if (tg.belongs(node.getChild().getToken())) {
+      if (printIsString(node.getChild())) {
+        value = stringValueGetter(node.getChild());
+      } else if (printIsBoolean(node.getChild())) {
+        value = booleanValueGetter(node.getChild()).toString();
+      } else
+        value = numberVariableToString(node.getChild().getToken().getValue());
+    } else {
+      if (printIsString(node.getChild())) {
+        value = stringOperation((ASTNodeOperation) node.getChild());
+      } else if (printIsBoolean(node.getChild())) {
+        value = booleanOperation((ASTNodeBooleanOperation) node.getChild()).toString();
+      } else
+        value = numberOperation((ASTNodeOperation) node.getChild()).toString();
+    }
+    if (value.isEmpty())
+      throw new RuntimeException("Error at line " + node.getToken().getStartingLine()
+          + ": Error at print statement!");
+    if (value.charAt(0) == '"' && value.charAt(value.length() - 1) == '"')
+      value = value.substring(1, value.length() - 1);
+    prints.add(value);
   }
 
-  private boolean isNumber(String string) {
-    try {
-      Integer.parseInt(string);
-      return true;
-    } catch (NumberFormatException e) {
-      try {
-        Double.parseDouble(string);
-      } catch (NumberFormatException f) {
-        return false;
-      }
+  private String numberVariableToString(String identifier) {
+    String value =
+        numberVariables.containsKey(identifier) ? numberVariables.get(identifier).toString()
+            : numberConst.get(identifier).toString();
+    if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.') {
+      value = value.substring(0, value.length() - 2);
+    }
+    return value;
+  }
+
+  private boolean printIsString(ASTNode node) {
+    TokenGroup tg = new TokenGroup(List.of(TokenType.STRING, TokenType.STRING_TYPE));
+    if (node.getTypeEnum().equals(NodeType.CHILDLESS)) {
+      if (node.getNodeType().equals("identifier"))
+        return (stringVariables.containsKey(node.getToken().getValue()) || stringConst
+            .containsKey(node.getToken().getValue()));
+      return tg.belongs(node.getToken());
+    } else {
+      ASTNodeNotChildless notChildless = (ASTNodeNotChildless) node;
+
+      if (printIsString(notChildless.getRightChild()))
+        return true;
+      if (printIsString(notChildless.getLeftChild()))
+        return true;
+    }
+    return false;
+  }
+
+  private boolean printIsBoolean(ASTNode node) {
+    TokenGroup tg =
+        new TokenGroup(List.of(TokenType.TRUE, TokenType.FALSE, TokenType.BOOLEAN_TYPE));
+    if (node.getTypeEnum().equals(NodeType.CHILDLESS)) {
+      if (node.getNodeType().equals("identifier"))
+        return (booleanVariables.containsKey(node.getToken().getValue()) || booleanConst
+            .containsKey(node.getToken().getValue()));
+      return tg.belongs(node.getToken());
+    } else {
+      ASTNodeNotChildless notChildless = (ASTNodeNotChildless) node;
+
+      if (printIsBoolean(notChildless.getRightChild()))
+        return true;
+      if (printIsBoolean(notChildless.getLeftChild()))
+        return true;
     }
     return false;
   }
@@ -134,12 +181,8 @@ public class PS11Interpreter implements Interpreter {
   private void nodeExecution(ASTNodeDeclaration node) {
     String identifier = node.getRightChild().token.getValue();
     if (identifierExists(identifier))
-      throw new IllegalArgumentException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": Variable "
-              + identifier
-              + " already declared!");
+      throw new IllegalArgumentException("Error at line: " + node.token.getStartingLine()
+          + ": Variable " + identifier + " already declared!");
     if (node.getToken().equals(TokenType.CONST)) {
       if (node.getLeftChild().token.getType().equals(TokenType.BOOLEAN_TYPE)) {
         booleanConst.put(identifier, false);
@@ -165,12 +208,8 @@ public class PS11Interpreter implements Interpreter {
       ASTNodeDeclaration dNode = (ASTNodeDeclaration) node.getLeftChild();
       String identifier = dNode.getRightChild().token.getValue();
       if (identifierExists(identifier))
-        throw new IllegalArgumentException(
-            "Error at line: "
-                + node.token.getStartingLine()
-                + ": Variable "
-                + identifier
-                + " already declared!");
+        throw new IllegalArgumentException("Error at line: " + node.token.getStartingLine()
+            + ": Variable " + identifier + " already declared!");
       if (dNode.getToken().getType().equals(TokenType.CONST)) {
         if (dNode.getLeftChild().token.getType().equals(TokenType.BOOLEAN_TYPE)) {
           Boolean value = booleanValueGetter(node.getRightChild());
@@ -197,8 +236,8 @@ public class PS11Interpreter implements Interpreter {
     } else {
       String identifier = node.getLeftChild().token.getValue();
       if (!identifierExists(identifier))
-        throw new IllegalArgumentException(
-            "Error at line: " + node.token.getStartingLine() + ": Variable was not declared!");
+        throw new IllegalArgumentException("Error at line: " + node.token.getStartingLine()
+            + ": Variable was not declared!");
       if (constWasDeclared(identifier)) {
         if (uninitializedConst.contains(identifier)) {
           if (booleanConst.containsKey(identifier)) {
@@ -213,10 +252,8 @@ public class PS11Interpreter implements Interpreter {
           }
           uninitializedConst.remove(identifier);
         } else
-          throw new IllegalArgumentException(
-              "Error at line: "
-                  + node.token.getStartingLine()
-                  + ": you can't modify a const's value");
+          throw new IllegalArgumentException("Error at line: " + node.token.getStartingLine()
+              + ": you can't modify a const's value");
       } else {
         if (booleanVariables.containsKey(identifier)) {
           Boolean value = booleanValueGetter(node.getRightChild());
@@ -244,12 +281,12 @@ public class PS11Interpreter implements Interpreter {
 
   private Boolean booleanLiteralParse(ASTNode node) {
     String value = node.getToken().getValue();
-    if (value.equals("true")) return true;
-    if (value.equals("false")) return false;
-    throw new RuntimeException(
-        "Error at line "
-            + node.getToken().getStartingLine()
-            + ": you are trying to assign a non-boolean to a boolean");
+    if (value.equals("true"))
+      return true;
+    if (value.equals("false"))
+      return false;
+    throw new RuntimeException("Error at line " + node.getToken().getStartingLine()
+        + ": you are trying to assign a non-boolean to a boolean");
   }
 
   private Boolean booleanOperation(ASTNodeBooleanOperation node) {
@@ -276,18 +313,14 @@ public class PS11Interpreter implements Interpreter {
   private Double numberLiteralValidator(ASTNodeLiteral node) {
     if (!node.token.getType().equals(TokenType.INTEGER)
         && !node.token.getType().equals(TokenType.FLOATING_POINT))
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": You are trying to assign a non-number to a number variable!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": You are trying to assign a non-number to a number variable!");
     String literal = node.token.getValue();
     try {
       return Double.parseDouble(literal);
     } catch (NumberFormatException e) {
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": You are trying to assign a non-number to a number variable!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": You are trying to assign a non-number to a number variable!");
     }
   }
 
@@ -309,10 +342,11 @@ public class PS11Interpreter implements Interpreter {
       } else if (numberConst.containsKey(node.token.getValue())) {
         return numberConst.get(node.token.getValue());
       }
-      throw new RuntimeException(
-          "Error at line: " + node.token.getStartingLine() + ": Variable not declared!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": Variable not declared!");
     }
-    if (node.getNodeType().equals("literal")) return Double.parseDouble(node.token.getValue());
+    if (node.getNodeType().equals("literal"))
+      return Double.parseDouble(node.token.getValue());
     return numberOperation((ASTNodeOperation) node);
   }
 
@@ -334,7 +368,8 @@ public class PS11Interpreter implements Interpreter {
         value = varAsString(currentChild.token.getValue());
       } else if (currentChild.getNodeType().equals("literal"))
         value = node.getLeftChild().token.getValue();
-      else value = stringOperation((ASTNodeOperation) currentChild);
+      else
+        value = stringOperation((ASTNodeOperation) currentChild);
       value = value.substring(0, value.length() - 1);
 
       currentChild = node.getRightChild();
@@ -342,16 +377,18 @@ public class PS11Interpreter implements Interpreter {
         value += varAsString(currentChild.token.getValue()).substring(1);
       } else if (currentChild.getNodeType().equals("literal"))
         value += currentChild.token.getValue().substring(1);
-      else value += stringOperation((ASTNodeOperation) currentChild).substring(1);
+      else
+        value += stringOperation((ASTNodeOperation) currentChild).substring(1);
 
       return value;
     } else
-      throw new RuntimeException(
-          "Error at line " + node.token.getStartingLine() + ": Strings can only use + operator!");
+      throw new RuntimeException("Error at line " + node.token.getStartingLine()
+          + ": Strings can only use + operator!");
   }
 
   private String varAsString(String identifier) {
-    if (stringVariables.containsKey(identifier)) return stringVariables.get(identifier);
+    if (stringVariables.containsKey(identifier))
+      return stringVariables.get(identifier);
     if (numberVariables.containsKey(identifier)) {
       String value = numberVariables.get(identifier).toString();
       if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.') {
@@ -361,7 +398,8 @@ public class PS11Interpreter implements Interpreter {
     }
     if (booleanVariables.containsKey(identifier))
       return ("\"" + booleanVariables.get(identifier).toString() + "\"");
-    if (stringConst.containsKey(identifier)) return stringConst.get(identifier);
+    if (stringConst.containsKey(identifier))
+      return stringConst.get(identifier);
     if (numberConst.containsKey(identifier)) {
       String value = numberConst.get(identifier).toString();
       if (value.charAt(value.length() - 1) == '0' && value.charAt(value.length() - 2) == '.') {
@@ -374,27 +412,28 @@ public class PS11Interpreter implements Interpreter {
 
   private String stringLiteralValidator(ASTNodeLiteral node) {
     if (!node.token.getType().equals(TokenType.STRING))
-      throw new RuntimeException(
-          "Error at line: "
-              + node.token.getStartingLine()
-              + ": You are trying to assign a non-string to a string variable!");
+      throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+          + ": You are trying to assign a non-string to a string variable!");
     String literal = node.token.getValue();
-    if (literal.charAt(0) == '"' && literal.charAt(literal.length() - 1) == '"') return literal;
-    throw new RuntimeException(
-        "Error at line: "
-            + node.token.getStartingLine()
-            + ": You are trying to assign a non-string to a string variable!");
+    if (literal.charAt(0) == '"' && literal.charAt(literal.length() - 1) == '"')
+      return literal;
+    throw new RuntimeException("Error at line: " + node.token.getStartingLine()
+        + ": You are trying to assign a non-string to a string variable!");
   }
 
   private boolean variableWasDeclared(String identifier) {
-    if (booleanVariables.containsKey(identifier)) return true;
-    if (stringVariables.containsKey(identifier)) return true;
+    if (booleanVariables.containsKey(identifier))
+      return true;
+    if (stringVariables.containsKey(identifier))
+      return true;
     return (numberVariables.containsKey(identifier));
   }
 
   private boolean constWasDeclared(String identifier) {
-    if (booleanConst.containsKey(identifier)) return true;
-    if (stringConst.containsKey(identifier)) return true;
+    if (booleanConst.containsKey(identifier))
+      return true;
+    if (stringConst.containsKey(identifier))
+      return true;
     return (numberConst.containsKey(identifier));
   }
 

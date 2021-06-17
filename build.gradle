@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'org.example'
-version '1.4-SNAPSHOT'
+version '2.2-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -24,15 +24,8 @@ allprojects {
 }
 
 spotless {
-    // optional: limit format enforcement to just the files changed by this feature branch
     java {
-        // don't need to set target, it is inferred from java
-
-        // apply a specific flavor of google-java-format
         googleJavaFormat('1.8').aosp()
-        // make sure every file has the following copyright header.
-        // optionally, Spotless can set copyright years by digging
-        // through git history (see "license" section below)
         licenseHeader '/* (C)$YEAR */'
     }
 
@@ -45,7 +38,6 @@ spotless {
 
         ignoreErrors = true
 
-        // default rules
         spotbugsExclude = "$project.rootProject.projectDir/config/spotbugs/excludeFilter.xml"
         checkstyleRules = 'https://raw.githubusercontent.com/Monits/static-code-analysis-plugin/staging/defaults/checkstyle/checkstyle-cache.xml'
         pmdRules = [ 'https://raw.githubusercontent.com/Monits/static-code-analysis-plugin/staging/defaults/pmd/pmd.xml',
@@ -54,8 +46,7 @@ spotless {
         androidLintConfig = 'https://raw.githubusercontent.com/Monits/static-code-analysis-plugin/staging/defaults/android/android-lint.xml'
 
         sourceSetConfig {
-            test { // or the name of any other sourceset
-                // use a more relaxed ruleset
+            test {
                 checkstyleRules = 'config/checkstyle/test-checkstyle.xml'
                 spotbugsExclude = 'config/spotbugs/test-spotbugs.xml'
                 pmdRules = [ 'config/pmd/test-pmd.xml',

@@ -11,8 +11,10 @@ public abstract class ASTNode {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
     ASTNode astNode = (ASTNode) o;
     return Objects.equals(token, astNode.token) && nodeType == astNode.nodeType;
   }
@@ -24,6 +26,10 @@ public abstract class ASTNode {
 
   public Token getToken() {
     return token;
+  }
+
+  public NodeType getTypeEnum() {
+    return nodeType;
   }
 
   public void setToken(Token token) {

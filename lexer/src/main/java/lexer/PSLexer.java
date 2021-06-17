@@ -37,29 +37,43 @@ public class PSLexer implements Lexer {
         currentWord = "";
         continue;
       }
-      if (isNegativeNumber(list)) i = negativeNumberVerification(currentWord, line, i, token, list);
-      else if (isNumber(currentWord)) i = numberVerification(currentWord, line, i, token);
-      else if (variableWasDeclared(list)) i = identifierVerification(currentWord, line, i, token);
+      if (isNegativeNumber(list))
+        i = negativeNumberVerification(currentWord, line, i, token, list);
+      else if (isNumber(currentWord))
+        i = numberVerification(currentWord, line, i, token);
+      else if (variableWasDeclared(list))
+        i = identifierVerification(currentWord, line, i, token);
       else if (isString(currentWord))
         token = Optional.of(PrintScriptTokenFactory.string(line.getLineNumber(), i, currentWord));
-      else if (isPrint(currentWord)) i = printVerification(currentWord, line, i, token);
-      else token = tokenIdentifier(currentWord, line.getLineNumber(), i);
+      else
+        token = tokenIdentifier(currentWord, line.getLineNumber(), i);
 
       if (token.isPresent()) {
+        if (identifierStartsWithReservedWord(currentWord, line, i))
+          continue;
         list.add(token.get());
         currentWord = "";
       }
     }
     if (!currentWord.isEmpty())
-      throw new RuntimeException(
-          "Error at line "
-              + line.getLineNumber()
-              + ": I couldn't proccess that one. Did you correctly declare all variables?");
+      throw new RuntimeException("Error at line " + line.getLineNumber()
+          + ": I couldn't proccess that one. Did you correctly declare all variables?");
+    if (!list.get(list.size() - 1).getValue().equals(";"))
+      throw new RuntimeException("Error at line" + line.getLineNumber() + ": Missing semicolon!");
     return list;
   }
 
-  private int negativeNumberVerification(
-      String currentWord, Line line, int i, Optional<Token> token, List<Token> list) {
+  private boolean identifierStartsWithReservedWord(String currentWord, Line line, int i) {
+    if (line.size() <= 1 + i)
+      return false;
+    if (currentWord.equals("number") || currentWord.equals("string")) {
+      return line.get(i + 1).matches("[a-zA-Z]");
+    }
+    return false;
+  }
+
+  private int negativeNumberVerification(String currentWord, Line line, int i,
+      Optional<Token> token, List<Token> list) {
     if (currentWord.matches("\\d+")) {
       list.remove(list.size() - 1);
       StringBuilder number = new StringBuilder(currentWord);
@@ -74,16 +88,15 @@ public class PSLexer implements Lexer {
       if (isNumber(currentWord))
         token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, "-" + currentWord));
       else
-        token.set(
-            PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, "-" + currentWord));
+        token
+            .set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, "-" + currentWord));
     }
     return i;
   }
 
   private boolean isNegativeNumber(List<Token> list) {
-    return (list.size() > 1
-        && list.get(list.size() - 1).getType().equals(TokenType.SUBSTRACTION)
-        && list.get(list.size() - 2).getType().equals(TokenType.ASSIGNATION));
+    return (list.size() > 1 && list.get(list.size() - 1).getType().equals(TokenType.SUBSTRACTION) && list
+        .get(list.size() - 2).getType().equals(TokenType.ASSIGNATION));
   }
 
   private int numberVerification(String currentWord, Line line, int i, Optional<Token> token) {
@@ -91,7 +104,7 @@ public class PSLexer implements Lexer {
       StringBuilder number = new StringBuilder(currentWord);
       for (int j = i + 1; j < line.size(); j++) {
         // if (line.get(j).equals(" ") | line.get(j).equals(";")) {
-        String regex = "[+\\-/* ;]";
+        String regex = "[+\\-/* ;)]";
         if (line.get(j).matches(regex)) {
           currentWord = number.toString();
           i = j - 1;
@@ -101,7 +114,8 @@ public class PSLexer implements Lexer {
       }
       if (isNumber(currentWord))
         token.set(PrintScriptTokenFactory.integer(line.getLineNumber(), i, currentWord));
-      else token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
+      else
+        token.set(PrintScriptTokenFactory.floatingPoint(line.getLineNumber(), i, currentWord));
     }
     return i;
   }
@@ -123,28 +137,8 @@ public class PSLexer implements Lexer {
     return i;
   }
 
-  private boolean isPrint(String currentWord) {
-    return currentWord.equals("printLn(") || currentWord.equals("println(");
-  }
-
-  private int printVerification(String currentWord, Line line, int i, Optional<Token> token) {
-    StringBuilder variableName = new StringBuilder();
-    for (int j = i + 1; j < line.size(); j++) {
-      if (line.get(j).matches("[)]")) {
-        currentWord = variableName.toString();
-        i = j;
-        break;
-      }
-      variableName.append(line.get(j));
-      i = j;
-    }
-    token.set(PrintScriptTokenFactory.println(currentWord, line.getLineNumber(), i));
-    return i;
-  }
-
   private boolean isString(String currentWord) {
-    return currentWord.length() > 1
-        && currentWord.charAt(0) == '"'
+    return currentWord.length() > 1 && currentWord.charAt(0) == '"'
         && currentWord.charAt(currentWord.length() - 1) == '"';
   }
 
@@ -173,6 +167,10 @@ public class PSLexer implements Lexer {
       case "+" -> Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
       case "/" -> Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
       case "*" -> Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
+      case "println", "printLn" -> Optional.of(
+          PrintScriptTokenFactory.println(lineNumber, columnNumber));
+      case "(" -> Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber, columnNumber));
+      case ")" -> Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber, columnNumber));
         // Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
         // Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
       default -> identifiersMap.containsKey(token)

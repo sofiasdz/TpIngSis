@@ -57,7 +57,31 @@
   },
   {
     "type": "PRINTLN",
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "IDENTIFIER",
     "value": "a",
+    "startingColumn": 8,
+    "endingColumn": 8,
+    "startingLine": 1,
+    "endingLine": 1
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
     "startingColumn": 9,
     "endingColumn": 9,
     "startingLine": 1,

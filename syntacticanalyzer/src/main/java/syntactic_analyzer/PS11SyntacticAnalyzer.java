@@ -1,6 +1,7 @@
 package syntactic_analyzer;
 
 import ASTNode.ASTNode;
+import ASTNode.Factory.ASTNodeFactory;
 import ASTNode.Factory.ASTNodeFactory11;
 import ASTNode.NotChildless.ASTNodeBooleanOperation;
 import ASTNode.TokenGroup.TokenGroup;
@@ -31,10 +32,8 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       } else if (tokens.get(i).getType().equals(TokenType.ELSE)) {
         for (int j = i + 1; j < tokens.size(); j++) {
           if (!tokens.get(j).getType().equals(TokenType.OPENING_BRACKETS)) {
-            throw new RuntimeException(
-                "Error at line "
-                    + tokens.get(j).getStartingLine()
-                    + ": a brackets block must be created after an else");
+            throw new RuntimeException("Error at line " + tokens.get(j).getStartingLine()
+                + ": a brackets block must be created after an else");
           } else {
             i = bracketResolver(tokens, tokenList, nodes, j);
             j = tokens.size();
@@ -47,13 +46,12 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       }
     }
     if (!tokenList.isEmpty())
-      throw new RuntimeException(
-          "Error at line " + tokenList.get(0).getStartingLine() + ": missing ;");
+      throw new RuntimeException("Error at line " + tokenList.get(0).getStartingLine()
+          + ": missing ;");
     return nodes;
   }
 
-  private int bracketResolver(
-      List<Token> tokens, List<Token> tokenList, List<ASTNode> nodes, int j) {
+  private int bracketResolver(List<Token> tokens, List<Token> tokenList, List<ASTNode> nodes, int j) {
     ArrayList<Token> branch = new ArrayList<>();
     for (int k = j + 1; k < tokens.size(); k++) {
       if (!tokens.get(k).getType().equals(TokenType.CLOSING_BRACKETS)) {
@@ -63,18 +61,16 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
           nodes.add(ifNodeBuilder(tokenList, branch));
         } else {
           if (nodes.isEmpty())
-            throw new RuntimeException(
-                "Error at line "
-                    + tokenList.get(0).getStartingLine()
-                    + ": code can't start with an else");
-          nodes.set(
-              nodes.size() - 1, elseNodeBuilder(tokenList, branch, nodes.get(nodes.size() - 1)));
+            throw new RuntimeException("Error at line " + tokenList.get(0).getStartingLine()
+                + ": code can't start with an else");
+          nodes.set(nodes.size() - 1,
+              elseNodeBuilder(tokenList, branch, nodes.get(nodes.size() - 1)));
         }
         return k;
       }
     }
-    throw new RuntimeException(
-        "Error at line " + tokenList.get(0).getStartingLine() + ": Invalid brackets block");
+    throw new RuntimeException("Error at line " + tokenList.get(0).getStartingLine()
+        + ": Invalid brackets block");
   }
 
   private ASTNode ifNodeBuilder(List<Token> ifList, List<Token> branch) {
@@ -94,21 +90,21 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       List<ASTNode> branchCode = this.analyze(branch);
       return ASTNodeIdentifier(ifList.get(0), leftChild, branchCode).get();
     } catch (NoSuchElementException e) {
-      throw new RuntimeException(
-          "Error at line " + ifList.get(0).getStartingLine() + ": Invalid if declaration");
+      throw new RuntimeException("Error at line " + ifList.get(0).getStartingLine()
+          + ": Invalid if declaration");
     }
   }
 
   private ASTNode elseNodeBuilder(List<Token> elseList, List<Token> branch, ASTNode ifNode) {
     try {
       if (!ifNode.getNodeType().equals("if"))
-        throw new RuntimeException(
-            "Error at line " + elseList.get(0).getStartingLine() + ": else must go after an if");
+        throw new RuntimeException("Error at line " + elseList.get(0).getStartingLine()
+            + ": else must go after an if");
       List<ASTNode> branchCode = this.analyze(branch);
       return ASTNodeIdentifier(elseList.get(0), ifNode, branchCode).get();
     } catch (NoSuchElementException e) {
-      throw new RuntimeException(
-          "Error at line " + elseList.get(0).getStartingLine() + ": Invalid else declaration");
+      throw new RuntimeException("Error at line " + elseList.get(0).getStartingLine()
+          + ": Invalid else declaration");
     }
   }
 
@@ -119,8 +115,8 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       ASTNode right = ASTNodeIdentifier(list.get(3)).get();
       return new ASTNodeBooleanOperation(left, right, opToken);
     } catch (NoSuchElementException e) {
-      throw new RuntimeException(
-          "Error at line " + list.get(0).getStartingLine() + ": Invalid boolean operation");
+      throw new RuntimeException("Error at line " + list.get(0).getStartingLine()
+          + ": Invalid boolean operation");
     }
   }
 
@@ -131,14 +127,15 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(1));
       Optional<ASTNode> type = ASTNodeIdentifier(tokens.get(3));
       if (identifier.isEmpty() || type.isEmpty())
-        throw new RuntimeException(
-            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
+        throw new RuntimeException("Error at line " + tokens.get(0).getStartingLine()
+            + ": Invalid variable declaration");
       Optional<ASTNode> declaration =
           ASTNodeIdentifier(tokens.get(0), type.get(), identifier.get());
       if (declaration.isEmpty())
-        throw new RuntimeException(
-            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
-      if (tokens.size() < 5) return declaration.get();
+        throw new RuntimeException("Error at line " + tokens.get(0).getStartingLine()
+            + ": Invalid variable declaration");
+      if (tokens.size() < 5)
+        return declaration.get();
       Token assignationToken = tokens.get(4);
       tokens.subList(0, 5).clear();
       ASTNode result = operationResolver(tokens);
@@ -146,60 +143,49 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
     } else if (tokens.get(0).getType().equals(TokenType.IDENTIFIER)) {
       Optional<ASTNode> identifier = ASTNodeIdentifier(tokens.get(0));
       if (identifier.isEmpty())
-        throw new RuntimeException(
-            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid variable declaration");
+        throw new RuntimeException("Error at line " + tokens.get(0).getStartingLine()
+            + ": Invalid variable declaration");
       Token assignationToken = tokens.get(1);
       tokens.subList(0, 2).clear();
       ASTNode result = operationResolver(tokens);
       return (ASTNodeIdentifier(assignationToken, identifier.get(), result).get());
     } else if (tokens.get(0).getType().equals(TokenType.PRINTLN)) {
-      Optional<ASTNode> print = ASTNodeIdentifier(tokens.get(0));
+      Optional<ASTNode> print = Optional.empty();
+      if (tokens.get(1).getType().equals(TokenType.OPENING_PARENTHESIS)) {
+        List<Token> parenthesis = new ArrayList<>();
+        for (int i = 2; i < tokens.size(); i++) {
+          if (tokens.get(i).getType().equals(TokenType.CLOSING_PARENTHESIS))
+            break;
+          parenthesis.add(tokens.get(i));
+        }
+        ASTNode printValue = operationResolver(parenthesis);
+        print = printNodeBuilder(tokens.get(0), printValue);
+      }
       if (print.isEmpty())
-        throw new RuntimeException(
-            "Error at line " + tokens.get(0).getStartingLine() + ": Invalid print declaration");
+        throw new RuntimeException("Error at line " + tokens.get(0).getStartingLine()
+            + ": Invalid print declaration");
       return print.get();
     } else {
-      throw new RuntimeException(
-          "Error at line " + tokens.get(0).getStartingLine() + ": Invalid line start");
+      throw new RuntimeException("Error at line " + tokens.get(0).getStartingLine()
+          + ": Invalid line start");
     }
   }
 
   ASTNode operationResolver(List<Token> tokens) {
     TokenGroup literals =
-        new TokenGroup(
-            List.of(
-                TokenType.STRING,
-                TokenType.FLOATING_POINT,
-                TokenType.INTEGER,
-                TokenType.IDENTIFIER,
-                TokenType.BOOLEAN_TYPE,
-                TokenType.TRUE,
-                TokenType.FALSE));
+        new TokenGroup(List.of(TokenType.STRING, TokenType.FLOATING_POINT, TokenType.INTEGER,
+            TokenType.IDENTIFIER, TokenType.BOOLEAN_TYPE, TokenType.TRUE, TokenType.FALSE));
     if (tokens.size() == 1 && literals.belongs(tokens.get(0)))
       return ASTNodeIdentifier(tokens.get(0)).get();
     Stack<Token> operatorStack = new Stack<>();
     Queue<Token> outputQueue = new ArrayDeque<>();
     TokenGroup operators =
-        new TokenGroup(
-            List.of(
-                TokenType.SUBSTRACTION,
-                TokenType.ADDITION,
-                TokenType.DIVISION,
-                TokenType.MULTIPLICATION,
-                TokenType.GREATER,
-                TokenType.EQUAL_OR_S,
-                TokenType.SMALLER,
-                TokenType.EQUAL_OR_G));
+        new TokenGroup(List.of(TokenType.SUBSTRACTION, TokenType.ADDITION, TokenType.DIVISION,
+            TokenType.MULTIPLICATION, TokenType.GREATER, TokenType.EQUAL_OR_S, TokenType.SMALLER,
+            TokenType.EQUAL_OR_G));
     TokenGroup operands =
-        new TokenGroup(
-            List.of(
-                TokenType.STRING,
-                TokenType.INTEGER,
-                TokenType.FLOATING_POINT,
-                TokenType.IDENTIFIER,
-                TokenType.BOOLEAN_TYPE,
-                TokenType.TRUE,
-                TokenType.FALSE));
+        new TokenGroup(List.of(TokenType.STRING, TokenType.INTEGER, TokenType.FLOATING_POINT,
+            TokenType.IDENTIFIER, TokenType.BOOLEAN_TYPE, TokenType.TRUE, TokenType.FALSE));
     for (int i = 0; i < tokens.size(); i++) {
       if (operands.belongs(tokens.get(i))) {
         outputQueue.add(tokens.get(i));
@@ -219,7 +205,8 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
         }
       }
     }
-    while (!operatorStack.isEmpty()) outputQueue.add(operatorStack.pop());
+    while (!operatorStack.isEmpty())
+      outputQueue.add(operatorStack.pop());
     Stack<ASTNode> nodeStack = new Stack<>();
     while (!outputQueue.isEmpty()) {
       if (operands.belongs(outputQueue.peek())) {
@@ -290,6 +277,14 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
       } catch (IllegalArgumentException f) {
         return Optional.empty();
       }
+    }
+  }
+
+  Optional<ASTNode> printNodeBuilder(Token token, ASTNode child) {
+    try {
+      return Optional.of(ASTNodeFactory.print(token, child));
+    } catch (IllegalArgumentException e) {
+      return Optional.empty();
     }
   }
 }

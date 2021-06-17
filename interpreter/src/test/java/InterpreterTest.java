@@ -41,7 +41,7 @@ public class InterpreterTest {
     String line1 = "let x : string = \"hello\" + \" world\" ;";
     String line2 = "printLn(x) ;";
     List<String> prints = analyze((List.of(line1, line2)));
-    Assert.assertEquals("\"hello world\"", prints.get(0));
+    Assert.assertEquals("hello world", prints.get(0));
   }
 
   @Test
@@ -52,7 +52,7 @@ public class InterpreterTest {
     String line4 = "z = x + y ;";
     String line5 = "printLn(z) ;";
     List<String> prints = analyze((List.of(line1, line2, line3, line4, line5)));
-    Assert.assertEquals("\"hello world\"", prints.get(0));
+    Assert.assertEquals("hello world", prints.get(0));
   }
 
   @Test
@@ -116,7 +116,7 @@ public class InterpreterTest {
     String line6 = "printLn(w);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4, line5, line6)));
     Assert.assertEquals("3", prints.get(0));
-    Assert.assertEquals("\"hello\"", prints.get(1));
+    Assert.assertEquals("hello", prints.get(1));
   }
 
   @Test
@@ -126,7 +126,7 @@ public class InterpreterTest {
     String line3 = "let z : string = x + y;";
     String line4 = "printLn(z);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-    Assert.assertEquals("\"hello 5.0\"", prints.get(0));
+    Assert.assertEquals("hello 5", prints.get(0));
   }
 
   @Test
@@ -136,7 +136,7 @@ public class InterpreterTest {
     String line3 = "let z : string = x + y + \"que tal?\";";
     String line4 = "printLn(z);";
     List<String> prints = analyze((List.of(line1, line2, line3, line4)));
-    Assert.assertEquals("\"hello world que tal?\"", prints.get(0));
+    Assert.assertEquals("hello world que tal?", prints.get(0));
   }
 
   @Test(expected = RuntimeException.class)
@@ -188,8 +188,30 @@ public class InterpreterTest {
   public void test16_PrintingAComplexOperation() {
     String line1 = "let pi: number;";
     String line2 = "pi = 3.14;";
-    String line3 = "pi = pi / 2;";
-    String line4 = "println(pi);";
-    List<String> prints = analyze(List.of(line1, line2, line3, line4));
+    String line4 = "println(pi / 2);";
+    List<String> prints = analyze(List.of(line1, line2, line4));
+    Assert.assertEquals("1.57", prints.get(0));
+  }
+
+  @Test(expected = RuntimeException.class)
+  public void test17_MissingSemiColonShouldFail() {
+    String line1 = "println(5)";
+    List<String> prints = analyze(List.of(line1));
+  }
+
+  @Test
+  public void test18_PrintingAnOperation() {
+    String line1 = "println(5 + 4);";
+    List<String> prints = analyze(List.of(line1));
+    Assert.assertEquals("9", prints.get(0));
+  }
+
+  @Test
+  public void test19_StringAndNumberConcat() {
+    String line1 = "let someNumber: number = 1;";
+    String line2 = "let someString: string = \"hello world \";";
+    String line3 = "println(someString + someNumber);";
+    List<String> prints = analyze(List.of(line1, line2, line3));
+    Assert.assertEquals("hello world 1", prints.get(0));
   }
 }

@@ -73,8 +73,48 @@
   },
   {
     "type": "PRINTLN",
-    "value": "pi / 2",
-    "startingColumn": 9,
+    "value": "println",
+    "startingColumn": 0,
+    "endingColumn": 6,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "OPENING_PARENTHESIS",
+    "value": "(",
+    "startingColumn": 7,
+    "endingColumn": 7,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "value": "pi",
+    "startingColumn": 8,
+    "endingColumn": 9,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "DIVISION",
+    "value": "/",
+    "startingColumn": 11,
+    "endingColumn": 11,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "INTEGER",
+    "value": "2",
+    "startingColumn": 13,
+    "endingColumn": 13,
+    "startingLine": 2,
+    "endingLine": 2
+  },
+  {
+    "type": "CLOSING_PARENTHESIS",
+    "value": ")",
+    "startingColumn": 14,
     "endingColumn": 14,
     "startingLine": 2,
     "endingLine": 2
