@@ -72,7 +72,14 @@ public class PSInterpreter implements Interpreter {
     if (value.isEmpty())
       throw new RuntimeException(
           "Error at line " + node.getToken().getStartingLine() + ": Error at print statement!");
-    prints.add(value);
+    if (value.charAt(0) == '"' && value.charAt(value.length() - 1) == '"')
+      value = value.substring(1, value.length() - 1);
+
+    prints.add(integerPrettyPrinting(value));
+  }
+
+  private String integerPrettyPrinting(String print){
+    return print.replace(".0","");
   }
 
   private boolean printIsString(ASTNode node) {
