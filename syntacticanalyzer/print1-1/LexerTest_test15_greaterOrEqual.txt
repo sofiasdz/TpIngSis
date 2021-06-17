@@ -160,8 +160,8 @@
     "endingLine": 2
   },
   {
-    "type": "EQUAL_OR_S",
-    "value": "\u003c\u003d",
+    "type": "EQUAL_OR_G",
+    "value": "\u003e\u003d",
     "startingColumn": 21,
     "endingColumn": 22,
     "startingLine": 2,

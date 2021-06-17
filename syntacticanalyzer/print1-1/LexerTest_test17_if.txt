@@ -9,8 +9,8 @@
   },
   {
     "type": "OPENING_PARENTHESIS",
-    "value": "else",
-    "startingColumn": -1,
+    "value": "(",
+    "startingColumn": 2,
     "endingColumn": 2,
     "startingLine": 0,
     "endingLine": 0
@@ -25,16 +25,16 @@
   },
   {
     "type": "CLOSING_PARENTHESIS",
-    "value": "else",
-    "startingColumn": 4,
+    "value": ")",
+    "startingColumn": 7,
     "endingColumn": 7,
     "startingLine": 0,
     "endingLine": 0
   },
   {
     "type": "OPENING_BRACKETS",
-    "value": "else",
-    "startingColumn": 5,
+    "value": "{",
+    "startingColumn": 8,
     "endingColumn": 8,
     "startingLine": 0,
     "endingLine": 0
@@ -97,8 +97,8 @@
   },
   {
     "type": "CLOSING_BRACKETS",
-    "value": "else",
-    "startingColumn": 25,
+    "value": "}",
+    "startingColumn": 28,
     "endingColumn": 28,
     "startingLine": 0,
     "endingLine": 0

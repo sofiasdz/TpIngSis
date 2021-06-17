@@ -41,7 +41,7 @@
   },
   {
     "type": "FALSE",
-    "value": "False",
+    "value": "false",
     "startingColumn": 20,
     "endingColumn": 24,
     "startingLine": 0,

@@ -90,20 +90,6 @@ public class PSInterpreter implements Interpreter {
     return false;
   }
 
-  private boolean isNumber(String string) {
-    try {
-      Integer.parseInt(string);
-      return true;
-    } catch (NumberFormatException e) {
-      try {
-        Double.parseDouble(string);
-      } catch (NumberFormatException f) {
-        return false;
-      }
-    }
-    return false;
-  }
-
   private void nodeExecution(ASTNodeDeclaration node) {
     String identifier = node.getRightChild().token.getValue();
     if (stringVariables.containsKey(identifier) || numberVariables.containsKey(identifier))
