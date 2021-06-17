@@ -73,10 +73,20 @@ public class PS11Interpreter implements Interpreter {
   }
 
   private void nodeExecution(ASTNodeIf node) {
+
     ASTNode left = node.getLeftChild();
+    if(!isBoolean(left)) throw new RuntimeException("Error at line "+node.getToken().getStartingLine()+": Invalid argument in if!");
     if (booleanValueGetter(left)) {
       analyzeBranch(node.getRightChild());
     }
+  }
+
+  private boolean isBoolean(ASTNode node){
+    if(node.getToken().getType().equals(TokenType.IDENTIFIER)){
+      return (booleanConst.containsKey(node.getToken().getValue()) || booleanVariables.containsKey(node.getToken().getValue()));
+    }
+    TokenGroup tg = new TokenGroup(List.of(TokenType.BOOLEAN_TYPE,TokenType.TRUE,TokenType.FALSE,TokenType.GREATER, TokenType.SMALLER, TokenType.EQUAL_OR_G, TokenType.EQUAL_OR_S));
+    return tg.belongs(node.getToken());
   }
 
   private void nodeExecution(ASTNodeIfElse node) {

@@ -382,4 +382,13 @@ public class Interpreter11Test {
     List<String> prints = analyze((List.of(line1, line2, line3, line4, line5, line6, line7)));
     Assert.assertEquals("else statement working correctly", prints.get(0));
   }
+
+  @Test(expected = RuntimeException.class)
+  public void test30_TCKInvalidIf(){
+    String line1 = "let a: number = 21;";
+    String line2 = "if(a) {";
+    String line3 = "println(\"this should fail, invalid argument in if statement\");";
+    String line4 = "}";
+    List<String> prints = analyze(List.of(line1,line2,line3,line4));
+  }
 }
