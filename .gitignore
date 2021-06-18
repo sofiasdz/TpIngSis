@@ -229,3 +229,13 @@ hs_err_pid*
 /SyntacticAnalyzer/build/
 /syntactic_analyzer/
 /ast_node/
+/astnode/build/reports/checkstyle/main.html
+/astnode/build/reports/checkstyle/main.xml
+/cli/build/reports/checkstyle/main.html
+/cli/build/reports/checkstyle/main.xml
+/jsonreaderwriter/build/reports/checkstyle/main.html
+/jsonreaderwriter/build/reports/checkstyle/main.xml
+/parser/build/reports/checkstyle/main.html
+/parser/build/reports/checkstyle/main.xml
+/token/build/reports/checkstyle/main.html
+/token/build/reports/checkstyle/main.xml
