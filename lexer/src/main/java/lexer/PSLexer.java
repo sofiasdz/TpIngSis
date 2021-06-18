@@ -153,26 +153,41 @@ public class PSLexer implements Lexer {
   }
 
   private Optional<Token> tokenIdentifier(String token, int lineNumber, int columnNumber) {
-    return switch (token) {
-      case "let" -> Optional.of(PrintScriptTokenFactory.let(lineNumber, columnNumber));
-      case "string" -> Optional.of(PrintScriptTokenFactory.stringType(lineNumber, columnNumber));
-      case "number" -> Optional.of(PrintScriptTokenFactory.numberType(lineNumber, columnNumber));
-      case "=" -> Optional.of(PrintScriptTokenFactory.assignation(lineNumber, columnNumber));
-      case ":" -> Optional.of(PrintScriptTokenFactory.colon(lineNumber, columnNumber));
-      case ";" -> Optional.of(PrintScriptTokenFactory.semicolon(lineNumber, columnNumber));
-      case "-" -> Optional.of(PrintScriptTokenFactory.substraction(lineNumber, columnNumber));
-      case "+" -> Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
-      case "/" -> Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
-      case "*" -> Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
-      case "println", "printLn" -> Optional.of(
-          PrintScriptTokenFactory.println(lineNumber, columnNumber));
-      case "(" -> Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber, columnNumber));
-      case ")" -> Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber, columnNumber));
-        // Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
-        // Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
-      default -> identifiersMap.containsKey(token)
-          ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber))
-          : Optional.empty();
-    };
+    // Si no matchea con ningún token, se fija si esta en el mapa de variables declaradas
+    // Si no fué declarada de vuelve el empty, si fué declarada, devuelve el identifier
+    switch (token) {
+      case "let":
+        return Optional.of(PrintScriptTokenFactory.let(lineNumber, columnNumber));
+      case "string":
+        return Optional.of(PrintScriptTokenFactory.stringType(lineNumber, columnNumber));
+      case "number":
+        return Optional.of(PrintScriptTokenFactory.numberType(lineNumber, columnNumber));
+      case "=":
+        return Optional.of(PrintScriptTokenFactory.assignation(lineNumber, columnNumber));
+      case ":":
+        return Optional.of(PrintScriptTokenFactory.colon(lineNumber, columnNumber));
+      case ";":
+        return Optional.of(PrintScriptTokenFactory.semicolon(lineNumber, columnNumber));
+      case "-":
+        return Optional.of(PrintScriptTokenFactory.substraction(lineNumber, columnNumber));
+      case "+":
+        return Optional.of(PrintScriptTokenFactory.addition(lineNumber, columnNumber));
+      case "/":
+        return Optional.of(PrintScriptTokenFactory.division(lineNumber, columnNumber));
+      case "*":
+        return Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
+      case "println":
+      case "printLn":
+        return Optional.of(
+                PrintScriptTokenFactory.println(lineNumber, columnNumber));
+      case "(":
+        return Optional.of(PrintScriptTokenFactory.openingParenthesis(lineNumber, columnNumber));
+      case ")":
+        return Optional.of(PrintScriptTokenFactory.closingParenthesis(lineNumber, columnNumber));
+      default:
+        return identifiersMap.containsKey(token)
+                ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber))
+                : Optional.empty();
+    }
   }
 }

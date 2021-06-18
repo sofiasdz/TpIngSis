@@ -5,7 +5,7 @@ plugins {
 }
 
 
-version '2.2-SNAPSHOT'
+version '2.3-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -74,4 +74,14 @@ publishing {
             from(components.java)
         }
     }
+}
+apply plugin: "checkstyle"
+
+checkstyle {
+    toolVersion = '8.3'
+    configFile = rootProject.file('code_quality/checkstyle/checkstyle.xml')
+    configProperties = [
+            'checkstyle.cache.file': "${buildDir}/checkstyle.cache",
+    ]
+    showViolations = true
 }

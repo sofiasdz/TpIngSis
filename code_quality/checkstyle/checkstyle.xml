@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <module name="NewlineAtEndOfFile"/>
+
+    <module name="TreeWalker">
+        <property name="cacheFile" value="${checkstyle.cache.file}"/>
+
+        <module name="LineLength"> <!-- Si la line tiene más de value chars, F -->
+            <property name="max" value="100"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="MethodLength"> <!-- Si un metodo tiene más de value lines, F -->
+            <property name="max" value="75"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="EmptyStatement"> <!-- Si un if esta vacío, como if(true);, F -->
+            <property name="severity" value="error"/>
+        </module>
+        <module name="OneStatementPerLine"> <!-- Si la line tiene más de una variable declarada, F -->
+            <property name="severity" value="error"/>
+        </module>
+        <module name="DefaultComesLast"> <!-- Si el default de un switch no esta ultimo, F -->
+            <property name="severity" value="error"/>
+        </module>
+        <module name="EmptyBlock"> <!-- Si hay un bloque vacío, como for(...){}, F -->
+            <property name="severity" value="error"/>
+        </module>
+        <module name="SimplifyBooleanExpression"> <!-- Si un boolean puede simplificarse como (a == true), F -->
+            <property name="severity" value="error"/>
+        </module>
+        <module name="TodoComment"> <!-- Si quedó un TODO en el código, F -->
+            <property name="format" value="(TODO)|(FIXME)"/>
+            <property name="severity" value="error"/>
+        </module>
+
+    </module>
+</module>

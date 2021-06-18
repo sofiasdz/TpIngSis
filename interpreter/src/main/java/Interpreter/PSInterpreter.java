@@ -147,11 +147,14 @@ public class PSInterpreter implements Interpreter {
   }
 
   private Double numberValueGetter(ASTNode rightChild) {
-    return switch (rightChild.getNodeType()) {
-      case "literal" -> numberLiteralValidator((ASTNodeLiteral) rightChild);
-      case "identifier" -> numberVariables.get(rightChild.token.getValue());
-      default -> numberOperation((ASTNodeOperation) rightChild);
-    };
+    switch (rightChild.getNodeType()) {
+      case "literal":
+        return numberLiteralValidator((ASTNodeLiteral) rightChild);
+      case "identifier":
+        return numberVariables.get(rightChild.token.getValue());
+      default:
+        return numberOperation((ASTNodeOperation) rightChild);
+    }
   }
 
   private Double numberLiteralValidator(ASTNodeLiteral node) {
@@ -174,12 +177,16 @@ public class PSInterpreter implements Interpreter {
   private Double numberOperation(ASTNodeOperation node) {
     Double leftVal = fetcher(node.getLeftChild());
     Double rightVal = fetcher(node.getRightChild());
-    return switch (node.token.getType()) {
-      case ADDITION -> (leftVal + rightVal);
-      case SUBSTRACTION -> (leftVal - rightVal);
-      case MULTIPLICATION -> (leftVal * rightVal);
-      default -> (leftVal / rightVal);
-    };
+    switch (node.token.getType()) {
+      case ADDITION:
+        return (leftVal + rightVal);
+      case SUBSTRACTION:
+        return (leftVal - rightVal);
+      case MULTIPLICATION:
+        return (leftVal * rightVal);
+      default:
+        return (leftVal / rightVal);
+    }
   }
 
   private Double fetcher(ASTNode node) {
@@ -195,17 +202,21 @@ public class PSInterpreter implements Interpreter {
   }
 
   private String stringValueGetter(ASTNode rightChild) {
-    return switch (rightChild.getNodeType()) {
-      case "literal" -> stringLiteralValidator((ASTNodeLiteral) rightChild);
-      case "identifier" -> stringVariables.get(rightChild.token.getValue());
-      case "operation" -> stringOperation((ASTNodeOperation) rightChild);
-      default -> throw new RuntimeException(
-          "on token: "
-              + rightChild.token.getValue()
-              + " line: "
-              + rightChild.token.getStartingLine()
-              + " Strings can only use + operator!");
-    };
+    switch (rightChild.getNodeType()) {
+      case "literal":
+        return stringLiteralValidator((ASTNodeLiteral) rightChild);
+      case "identifier":
+        return stringVariables.get(rightChild.token.getValue());
+      case "operation":
+        return stringOperation((ASTNodeOperation) rightChild);
+      default:
+        throw new RuntimeException(
+                "on token: "
+                        + rightChild.token.getValue()
+                        + " line: "
+                        + rightChild.token.getStartingLine()
+                        + " Strings can only use + operator!");
+    }
   }
 
   private String stringOperation(ASTNodeOperation node) {
