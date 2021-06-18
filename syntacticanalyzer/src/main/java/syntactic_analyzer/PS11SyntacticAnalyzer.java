@@ -244,11 +244,16 @@ public class PS11SyntacticAnalyzer implements SyntacticAnalyzer {
   }
 
   int operatorPrecedence(Token token) {
-    return switch (token.getType()) {
-      case ADDITION, SUBSTRACTION -> 2;
-      case DIVISION, MULTIPLICATION -> 3;
-      default -> 0;
-    };
+    switch (token.getType()) {
+      case ADDITION:
+      case SUBSTRACTION:
+        return 2;
+      case DIVISION:
+      case MULTIPLICATION:
+        return 3;
+      default:
+        return 0;
+    }
   }
 
   Optional<ASTNode> ASTNodeIdentifier(Token token) {

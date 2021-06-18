@@ -289,13 +289,16 @@ public class PS11Interpreter implements Interpreter {
   }
 
   private Boolean booleanValueGetter(ASTNode rightChild) {
-    return switch (rightChild.getNodeType()) {
-      case "literal" -> booleanLiteralParse(rightChild);
-      case "identifier" -> booleanVariables.containsKey(rightChild.token.getValue())
-          ? booleanVariables.get(rightChild.token.getValue())
-          : booleanConst.get(rightChild.token.getValue());
-      default -> booleanOperation((ASTNodeBooleanOperation) rightChild);
-    };
+    switch (rightChild.getNodeType()) {
+      case "literal":
+        return booleanLiteralParse(rightChild);
+      case "identifier":
+        return booleanVariables.containsKey(rightChild.token.getValue())
+                ? booleanVariables.get(rightChild.token.getValue())
+                : booleanConst.get(rightChild.token.getValue());
+      default:
+        return booleanOperation((ASTNodeBooleanOperation) rightChild);
+    }
   }
 
   private Boolean booleanLiteralParse(ASTNode node) {
@@ -311,22 +314,29 @@ public class PS11Interpreter implements Interpreter {
   private Boolean booleanOperation(ASTNodeBooleanOperation node) {
     Double left = fetcher(node.getLeftChild());
     Double right = fetcher(node.getRightChild());
-    return switch (node.token.getType()) {
-      case GREATER -> (left > right);
-      case SMALLER -> (left < right);
-      case EQUAL_OR_G -> (left >= right);
-      default -> (left <= right);
-    };
+    switch (node.token.getType()) {
+      case GREATER:
+        return (left > right);
+      case SMALLER:
+        return (left < right);
+      case EQUAL_OR_G:
+        return (left >= right);
+      default:
+        return (left <= right);
+    }
   }
 
   private Double numberValueGetter(ASTNode rightChild) {
-    return switch (rightChild.getNodeType()) {
-      case "literal" -> numberLiteralValidator((ASTNodeLiteral) rightChild);
-      case "identifier" -> numberVariables.containsKey(rightChild.token.getValue())
-          ? numberVariables.get(rightChild.token.getValue())
-          : numberConst.get(rightChild.token.getValue());
-      default -> numberOperation((ASTNodeOperation) rightChild);
-    };
+    switch (rightChild.getNodeType()) {
+      case "literal":
+        return numberLiteralValidator((ASTNodeLiteral) rightChild);
+      case "identifier":
+        return numberVariables.containsKey(rightChild.token.getValue())
+                ? numberVariables.get(rightChild.token.getValue())
+                : numberConst.get(rightChild.token.getValue());
+      default:
+        return numberOperation((ASTNodeOperation) rightChild);
+    }
   }
 
   private Double numberLiteralValidator(ASTNodeLiteral node) {
@@ -350,12 +360,16 @@ public class PS11Interpreter implements Interpreter {
   private Double numberOperation(ASTNodeOperation node) {
     Double leftVal = fetcher(node.getLeftChild());
     Double rightVal = fetcher(node.getRightChild());
-    return switch (node.token.getType()) {
-      case ADDITION -> (leftVal + rightVal);
-      case SUBSTRACTION -> (leftVal - rightVal);
-      case MULTIPLICATION -> (leftVal * rightVal);
-      default -> (leftVal / rightVal);
-    };
+    switch (node.token.getType()) {
+      case ADDITION:
+        return (leftVal + rightVal);
+      case SUBSTRACTION:
+        return (leftVal - rightVal);
+      case MULTIPLICATION:
+        return (leftVal * rightVal);
+      default:
+        return (leftVal / rightVal);
+    }
   }
 
   private Double fetcher(ASTNode node) {
@@ -373,13 +387,16 @@ public class PS11Interpreter implements Interpreter {
   }
 
   private String stringValueGetter(ASTNode rightChild) {
-    return switch (rightChild.getNodeType()) {
-      case "literal" -> stringLiteralValidator((ASTNodeLiteral) rightChild);
-      case "identifier" -> stringVariables.containsKey(rightChild.token.getValue())
-          ? stringVariables.get(rightChild.token.getValue())
-          : stringConst.get(rightChild.token.getValue());
-      default -> stringOperation((ASTNodeOperation) rightChild);
-    };
+    switch (rightChild.getNodeType()) {
+      case "literal":
+        return stringLiteralValidator((ASTNodeLiteral) rightChild);
+      case "identifier":
+        return stringVariables.containsKey(rightChild.token.getValue())
+                ? stringVariables.get(rightChild.token.getValue())
+                : stringConst.get(rightChild.token.getValue());
+      default:
+        return stringOperation((ASTNodeOperation) rightChild);
+    }
   }
 
   private String stringOperation(ASTNodeOperation node) {
