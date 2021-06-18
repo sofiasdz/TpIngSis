@@ -1,3 +1,4 @@
 rootProject.name = 'TpIngSis'
 
+
 include 'lexer','token','astnode','syntacticanalyzer', 'jsonreaderwriter', 'cli', 'interpreter', 'parser'

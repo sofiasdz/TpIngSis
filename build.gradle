@@ -3,6 +3,9 @@ plugins {
     id "nebula.lint" version "16.23.0"
     id "com.diffplug.spotless" version "5.12.4"
     id 'com.monits.staticCodeAnalysis' version '3.1.1'
+    id 'checkstyle'
+
+
 
 
 }
@@ -54,5 +57,9 @@ spotless {
             }
         }
     }
+    checkstyle {
+	toolVersion = '7.1'
+    configFile = rootProject.file('checkstyles/checkstyles.xml')
+}
 
 }
