@@ -208,8 +208,7 @@ public class PS11Lexer implements Lexer {
         return Optional.of(PrintScriptTokenFactory.multiplication(lineNumber, columnNumber));
       case "println":
       case "printLn":
-        return Optional.of(
-                PrintScriptTokenFactory.println(lineNumber, columnNumber));
+        return Optional.of(PrintScriptTokenFactory.println(lineNumber, columnNumber));
       case "true":
         return Optional.of(PrintScriptTokenFactory.trueValue(lineNumber, columnNumber));
       case "false":
@@ -236,8 +235,8 @@ public class PS11Lexer implements Lexer {
         return Optional.of(PrintScriptTokenFactory.closingBrackets(lineNumber, columnNumber));
       default:
         return identifiersMap.containsKey(token)
-                ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber))
-                : Optional.empty();
+            ? Optional.of(PrintScriptTokenFactory.identifier(token, lineNumber, columnNumber))
+            : Optional.empty();
     }
   }
 }

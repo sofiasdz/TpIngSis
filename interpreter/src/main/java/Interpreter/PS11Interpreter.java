@@ -294,8 +294,8 @@ public class PS11Interpreter implements Interpreter {
         return booleanLiteralParse(rightChild);
       case "identifier":
         return booleanVariables.containsKey(rightChild.token.getValue())
-                ? booleanVariables.get(rightChild.token.getValue())
-                : booleanConst.get(rightChild.token.getValue());
+            ? booleanVariables.get(rightChild.token.getValue())
+            : booleanConst.get(rightChild.token.getValue());
       default:
         return booleanOperation((ASTNodeBooleanOperation) rightChild);
     }
@@ -332,8 +332,8 @@ public class PS11Interpreter implements Interpreter {
         return numberLiteralValidator((ASTNodeLiteral) rightChild);
       case "identifier":
         return numberVariables.containsKey(rightChild.token.getValue())
-                ? numberVariables.get(rightChild.token.getValue())
-                : numberConst.get(rightChild.token.getValue());
+            ? numberVariables.get(rightChild.token.getValue())
+            : numberConst.get(rightChild.token.getValue());
       default:
         return numberOperation((ASTNodeOperation) rightChild);
     }
@@ -392,8 +392,8 @@ public class PS11Interpreter implements Interpreter {
         return stringLiteralValidator((ASTNodeLiteral) rightChild);
       case "identifier":
         return stringVariables.containsKey(rightChild.token.getValue())
-                ? stringVariables.get(rightChild.token.getValue())
-                : stringConst.get(rightChild.token.getValue());
+            ? stringVariables.get(rightChild.token.getValue())
+            : stringConst.get(rightChild.token.getValue());
       default:
         return stringOperation((ASTNodeOperation) rightChild);
     }

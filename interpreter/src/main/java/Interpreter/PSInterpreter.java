@@ -211,11 +211,11 @@ public class PSInterpreter implements Interpreter {
         return stringOperation((ASTNodeOperation) rightChild);
       default:
         throw new RuntimeException(
-                "on token: "
-                        + rightChild.token.getValue()
-                        + " line: "
-                        + rightChild.token.getStartingLine()
-                        + " Strings can only use + operator!");
+            "on token: "
+                + rightChild.token.getValue()
+                + " line: "
+                + rightChild.token.getStartingLine()
+                + " Strings can only use + operator!");
     }
   }
 
