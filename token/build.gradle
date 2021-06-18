@@ -32,4 +32,8 @@ publishing {
             from(components.java)
         }
     }
+    checkstyle {
+        toolVersion = '7.1'
+        configFile = rootProject.file('checkstyles/checkstyles.xml')
+    }
 }
